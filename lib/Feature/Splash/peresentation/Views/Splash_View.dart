@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:parkify/Feature/Splash/peresentation/Views/Widgets/SplashViewbody.dart';
+import 'package:parkify/constant.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({super.key});
@@ -6,9 +8,6 @@ class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text('omar Khaled'),
-      ),
-    );
+        backgroundColor: kprimaryColor, body: SplashViewbody());
   }
 }
