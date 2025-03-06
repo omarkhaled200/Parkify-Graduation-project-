@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Splash/peresentation/Views/Widgets/CustomPostionCarStack.dart';
 
@@ -48,7 +50,9 @@ class onboardingviewbody3 extends StatelessWidget {
                 backgroundColor: Color(0xff1D5CD1),
                 splashFactory: InkRipple.splashFactory,
               ),
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).push(AppRouter.homePage2);
+              },
               child: Text(
                 'Get Start',
                 style: TextStyle(

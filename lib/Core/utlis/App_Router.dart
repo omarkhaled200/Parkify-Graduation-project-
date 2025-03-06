@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:parkify/Feature/Home/persentation/Views/Home_page2.dart';
 import 'package:parkify/Feature/Splash/peresentation/Views/Onboarding_View1.dart';
 import 'package:parkify/Feature/Splash/peresentation/Views/Onboarding_View2.dart';
 import 'package:parkify/Feature/Splash/peresentation/Views/Splash_View.dart';
@@ -8,6 +9,7 @@ abstract class AppRouter {
   static final onboardinview1 = '/onboarding1';
   static final onboardinview2 = '/onboarding2';
   static final onboardinview3 = '/onboarding3';
+  static final homePage2 = '/homepage2';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -25,6 +27,10 @@ abstract class AppRouter {
       GoRoute(
         path: onboardinview3,
         builder: (context, state) => const OnboardingView3(),
+      ),
+      GoRoute(
+        path: homePage2,
+        builder: (context, state) => const HomePage2(),
       ),
     ],
   );
