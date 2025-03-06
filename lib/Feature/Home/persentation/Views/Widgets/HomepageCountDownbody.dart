@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:parkify/Core/utlis/CustomButton.dart';
 import 'package:parkify/Core/utlis/Icon_All_app.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/CountdownTimerScreen.dart';
@@ -55,6 +56,32 @@ class HomepageCountDownbody extends StatelessWidget {
               height: heaight * 0.03,
             ),
             CountdownTimerScreen(),
+            SizedBox(
+              height: heaight * 0.03,
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: CustomButton(
+                      width: width,
+                      heaight: heaight,
+                      text: 'Blocker ⬇',
+                      onPressed: () {},
+                    )),
+                SizedBox(
+                  width: 5,
+                ),
+                Expanded(
+                    flex: 1,
+                    child: CustomButton(
+                      width: width,
+                      heaight: heaight,
+                      text: 'Cancel',
+                      onPressed: () {},
+                    )),
+              ],
+            )
           ],
         ),
       ),
