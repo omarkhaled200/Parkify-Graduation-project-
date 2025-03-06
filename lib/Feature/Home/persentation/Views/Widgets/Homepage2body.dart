@@ -1,12 +1,10 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:parkify/Core/utlis/assets.dart';
-import 'package:parkify/Feature/Gift/Home/persentation/Views/Gift_view.dart';
+
+import 'package:parkify/Core/utlis/Icon_All_app.dart';
+
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/DisplayMoneyWidget.dart';
-import 'package:parkify/Feature/Payment/Home/persentation/Views/Payment_View.dart';
-import 'package:parkify/Feature/Profile/Home/persentation/Views/Profile_view.dart';
+
 import 'package:parkify/constant.dart';
 
 class Homepage2body extends StatefulWidget {
@@ -28,10 +26,7 @@ class _Homepage2bodyState extends State<Homepage2body> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: kprimaryColor,
-        title: Image.asset(
-          Assets.logopark,
-          width: width * 0.2,
-        ),
+        title: IconApp(width: width),
         actions: [DisplaymoneyWidget(width: width)],
       ),
       body: Center(

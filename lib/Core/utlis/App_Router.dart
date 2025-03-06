@@ -34,10 +34,10 @@ abstract class AppRouter {
         path: bottomNaviagationBar,
         builder: (context, state) => const BottomNaviagationBar(),
       ),
-      GoRoute(
-        path: homePage2,
-        builder: (context, state) => const HomePage2(),
-      ),
+      // GoRoute(
+      //   path: homePage2,
+      //   builder: (context, state) => const HomePage2(),
+      // ),
     ],
   );
 }

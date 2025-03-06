@@ -1,10 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Gift/Home/persentation/Views/Gift_view.dart';
-import 'package:parkify/Feature/Home/persentation/Views/Widgets/DisplayMoneyWidget.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/Homepage2body.dart';
 import 'package:parkify/Feature/Payment/Home/persentation/Views/Payment_View.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Profile_view.dart';
@@ -20,7 +17,7 @@ class BottomNaviagationBar extends StatefulWidget {
 class _Homepage2bodyState extends State<BottomNaviagationBar> {
   int _currentIndex = 0;
 
-  List<Widget> _widgetOptions = <Widget>[
+  final List<Widget> _widgetOptions = const <Widget>[
     Homepage2body(),
     GiftView(),
     PaymentView(),
