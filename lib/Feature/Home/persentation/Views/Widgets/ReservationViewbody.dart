@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:parkify/Core/utlis/Icon_All_app.dart';
 import 'package:parkify/Core/utlis/assets.dart';
+import 'package:parkify/Feature/Home/persentation/Views/Widgets/CustomDrowdown.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/DisplayMoneyWidget.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/ShowtheFreeandOccupiedSpot.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/TheDisplayScreen.dart';
 import 'package:parkify/constant.dart';
 
-class ReservationViewbody extends StatelessWidget {
+class ReservationViewbody extends StatefulWidget {
   const ReservationViewbody({super.key});
 
+  @override
+  State<ReservationViewbody> createState() => _ReservationViewbodyState();
+}
+
+class _ReservationViewbodyState extends State<ReservationViewbody> {
+  List<String> _list = ['Plate1', 'Plate2', 'Plate3', 'Plate4', 'Plate5'];
+  String? _selectedPlate = 'Plate1';
   @override
   Widget build(BuildContext context) {
     var heaight = MediaQuery.of(context).size.height;
@@ -32,6 +40,10 @@ class ReservationViewbody extends StatelessWidget {
                 height: heaight * 0.03,
               ),
               TheDisplayScreen(heaight: heaight, width: width, text: 'Screen'),
+              SizedBox(
+                height: heaight * 0.02,
+              ),
+              CustomDrowdown(list: _list, selectedPlate: _selectedPlate!),
             ],
           ),
         ));
