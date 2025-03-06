@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 
 class CustomReserveNowButton extends StatelessWidget {
@@ -26,7 +28,9 @@ class CustomReserveNowButton extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
               textStyle:
                   const TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-          onPressed: () {},
+          onPressed: () {
+            GoRouter.of(context).push(AppRouter.reservationpage);
+          },
           child: Text(
             'Reserve Now?',
             style: TextStyle(
