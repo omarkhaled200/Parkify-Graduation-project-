@@ -44,8 +44,8 @@ class onboardingviewbody2 extends StatelessWidget {
                 ),
                 maxLines: 3,
               ),
-              const SizedBox(
-                height: 45,
+              SizedBox(
+                height: height * 0.08,
               ),
               Row(
                 children: [
