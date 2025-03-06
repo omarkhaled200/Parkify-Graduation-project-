@@ -20,7 +20,7 @@ class onboardingButton extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        fixedSize: Size(width * 0.42, height * 0.09),
+        fixedSize: Size(width * 0.42, height * 0.07),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         backgroundColor: backgroundcolor,
         splashFactory: InkRipple.splashFactory,

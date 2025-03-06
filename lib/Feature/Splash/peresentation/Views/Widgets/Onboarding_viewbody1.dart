@@ -17,7 +17,7 @@ class onboardingviewbody1 extends StatelessWidget {
       children: [
         CustomCarimageStack(width: width, height: height),
         Padding(
-          padding: const EdgeInsets.only(left: 32.0),
+          padding: const EdgeInsets.only(left: 32.0, right: 32),
           child: Column(
             children: [
               CusotmRowonboarding(
@@ -28,39 +28,46 @@ class onboardingviewbody1 extends StatelessWidget {
                 height: 15,
               ),
               Text(
-                'Find, Park, Relax  The Future of Parking!🏙️🚗',
+                'Find, Park, Relax The Future of Parking!🏙️🚗',
                 style: TextStyle(
                   fontFamily: Assets.textfamily,
                   fontSize: 28,
                 ),
                 maxLines: 3,
               ),
-              const SizedBox(
-                height: 45,
+              SizedBox(
+                height: height * 0.05,
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  onboardingButton(
-                      onPressed: () {
-                        GoRouter.of(context).push(
-                          AppRouter.onboardinview3,
-                        );
-                      },
-                      text: 'Skip',
-                      backgroundcolor: Colors.white,
-                      Textcolor: Colors.black),
-                  SizedBox(
-                    width: 5,
+                  Expanded(
+                    flex: 1,
+                    child: onboardingButton(
+                        onPressed: () {
+                          GoRouter.of(context).push(
+                            AppRouter.onboardinview3,
+                          );
+                        },
+                        text: 'Skip',
+                        backgroundcolor: Colors.white,
+                        Textcolor: Colors.black),
                   ),
-                  onboardingButton(
-                      onPressed: () {
-                        GoRouter.of(context).push(
-                          AppRouter.onboardinview2,
-                        );
-                      },
-                      text: 'Next',
-                      backgroundcolor: Colors.black,
-                      Textcolor: Colors.white),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: onboardingButton(
+                        onPressed: () {
+                          GoRouter.of(context).push(
+                            AppRouter.onboardinview2,
+                          );
+                        },
+                        text: 'Next',
+                        backgroundcolor: Colors.black,
+                        Textcolor: Colors.white),
+                  ),
                 ],
               ),
             ],

@@ -37,12 +37,12 @@ class onboardingviewbody3 extends StatelessWidget {
                   fontSize: 28,
                   fontWeight: FontWeight.bold),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: height * 0.05,
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                fixedSize: Size(width * 0.5, height * 0.09),
+                fixedSize: Size(width * 0.5, height * 0.07),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16)),
                 backgroundColor: Color(0xff1D5CD1),

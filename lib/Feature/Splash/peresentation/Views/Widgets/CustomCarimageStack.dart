@@ -19,7 +19,7 @@ class CustomCarimageStack extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Container(
           width: width,
-          height: height * 0.55,
+          height: height * 0.5,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(

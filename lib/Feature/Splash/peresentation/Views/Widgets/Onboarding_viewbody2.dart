@@ -26,7 +26,7 @@ class onboardingviewbody2 extends StatelessWidget {
           height: 30,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 32.0),
+          padding: const EdgeInsets.only(left: 32.0, right: 32),
           child: Column(
             children: [
               CusotmRowonboarding(
@@ -45,31 +45,37 @@ class onboardingviewbody2 extends StatelessWidget {
                 maxLines: 3,
               ),
               SizedBox(
-                height: height * 0.08,
+                height: height * 0.1,
               ),
               Row(
                 children: [
-                  onboardingButton(
-                      onPressed: () {
-                        GoRouter.of(context).push(
-                          AppRouter.onboardinview3,
-                        );
-                      },
-                      text: 'Skip',
-                      backgroundcolor: Colors.white,
-                      Textcolor: Colors.black),
-                  SizedBox(
-                    width: 5,
+                  Expanded(
+                    flex: 1,
+                    child: onboardingButton(
+                        onPressed: () {
+                          GoRouter.of(context).push(
+                            AppRouter.onboardinview3,
+                          );
+                        },
+                        text: 'Skip',
+                        backgroundcolor: Colors.white,
+                        Textcolor: Colors.black),
                   ),
-                  onboardingButton(
-                      onPressed: () {
-                        GoRouter.of(context).push(
-                          AppRouter.onboardinview3,
-                        );
-                      },
-                      text: 'Next',
-                      backgroundcolor: Colors.black,
-                      Textcolor: Colors.white),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: onboardingButton(
+                        onPressed: () {
+                          GoRouter.of(context).push(
+                            AppRouter.onboardinview3,
+                          );
+                        },
+                        text: 'Next',
+                        backgroundcolor: Colors.black,
+                        Textcolor: Colors.white),
+                  ),
                 ],
               ),
             ],
