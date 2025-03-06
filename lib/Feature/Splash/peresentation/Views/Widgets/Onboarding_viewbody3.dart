@@ -51,7 +51,7 @@ class onboardingviewbody3 extends StatelessWidget {
                 splashFactory: InkRipple.splashFactory,
               ),
               onPressed: () {
-                GoRouter.of(context).push(AppRouter.homePage2);
+                GoRouter.of(context).push(AppRouter.bottomNaviagationBar);
               },
               child: Text(
                 'Get Start',
