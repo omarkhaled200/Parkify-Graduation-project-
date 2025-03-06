@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parkify/Feature/Splash/peresentation/Views/Widgets/Onboarding_viewbody3.dart';
 import 'package:parkify/constant.dart';
 
 class OnboardingView3 extends StatelessWidget {
@@ -6,17 +7,7 @@ class OnboardingView3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const OnboardingView3body();
-  }
-}
-
-class OnboardingView3body extends StatelessWidget {
-  const OnboardingView3body({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kprimaryColor,
-    );
+    return const Scaffold(
+        backgroundColor: kprimaryColor, body: onboardingviewbody3());
   }
 }

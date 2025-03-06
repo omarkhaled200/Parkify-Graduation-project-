@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Splash/peresentation/Views/Widgets/Cusotm_Row_onboarding.dart';
+import 'package:parkify/Feature/Splash/peresentation/Views/Widgets/CustomCarimageStack.dart';
 import 'package:parkify/Feature/Splash/peresentation/Views/Widgets/OnboardingButton.dart';
 
 class onboardingviewbody1 extends StatelessWidget {
@@ -14,14 +15,7 @@ class onboardingviewbody1 extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     return Column(
       children: [
-        Center(
-          child: Image.asset(
-            Assets.onboarding1,
-            height: height * 0.58,
-            width: width,
-            fit: BoxFit.fill,
-          ),
-        ),
+        CustomCarimageStack(width: width, height: height),
         Padding(
           padding: const EdgeInsets.only(left: 32.0),
           child: Column(

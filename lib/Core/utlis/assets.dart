@@ -6,4 +6,6 @@ class Assets {
   static String smallcar = 'assets/Images/car.svg';
   static String Flash = 'assets/Images/flash.svg';
   static String textfamily = 'PlaypenSans';
+  static String car = 'assets/Images/Car.png';
+  static String pcar = 'assets/Images/pcar.png';
 }
