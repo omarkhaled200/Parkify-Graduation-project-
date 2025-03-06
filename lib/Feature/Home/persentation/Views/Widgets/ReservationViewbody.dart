@@ -18,6 +18,14 @@ class ReservationViewbody extends StatefulWidget {
 class _ReservationViewbodyState extends State<ReservationViewbody> {
   List<String> _list = ['Plate1', 'Plate2', 'Plate3', 'Plate4', 'Plate5'];
   String? _selectedPlate = 'Plate1';
+  List<String> _paymentlist = [
+    'payment1',
+    'payment2',
+    'payment3',
+    'payment4',
+    'payment5'
+  ];
+  String? _selectedpayment = 'payment1';
   @override
   Widget build(BuildContext context) {
     var heaight = MediaQuery.of(context).size.height;
@@ -44,11 +52,26 @@ class _ReservationViewbodyState extends State<ReservationViewbody> {
             SizedBox(
               height: heaight * 0.02,
             ),
-            CustomDrowdown(list: _list, selectedPlate: _selectedPlate!),
+            CustomDrowdown(
+              list: _list,
+              selectedPlate: _selectedPlate!,
+              text: 'Select License Plate',
+            ),
             SizedBox(
               height: heaight * 0.02,
             ),
-            CustomTimeOfDay(),
+            const CustomTimeOfDay(),
+            SizedBox(
+              height: heaight * 0.02,
+            ),
+            CustomDrowdown(
+              list: _paymentlist,
+              selectedPlate: _selectedpayment!,
+              text: 'Choose Payment Method',
+            ),
+            SizedBox(
+              height: heaight * 0.02,
+            ),
           ],
         ),
       ),

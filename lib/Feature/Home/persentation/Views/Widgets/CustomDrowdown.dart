@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 
 class CustomDrowdown extends StatefulWidget {
-  CustomDrowdown({super.key, required this.list, required this.selectedPlate});
+  CustomDrowdown(
+      {super.key,
+      required this.list,
+      required this.selectedPlate,
+      required this.text});
 
   String selectedPlate;
 
   final List<String> list;
+  final String text;
   @override
   State<CustomDrowdown> createState() => _CustomDrowdownState();
 }
@@ -16,7 +21,7 @@ class _CustomDrowdownState extends State<CustomDrowdown> {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
       decoration: InputDecoration(
-        labelText: 'Select License Plate',
+        labelText: widget.text,
         labelStyle: TextStyle(
           color: Colors.black,
           fontSize: 18,
