@@ -13,7 +13,9 @@ class sliding_Animation extends StatelessWidget {
     return Center(
         child: ClipRect(
       child: TextLiquidFill(
-        text: 'parkify',
+        waveDuration: const Duration(seconds: 2),
+        loadDuration: const Duration(seconds: 5),
+        text: 'Parkify',
         waveColor: Colors.black,
         boxBackgroundColor: kprimaryColor,
         textStyle: TextStyle(

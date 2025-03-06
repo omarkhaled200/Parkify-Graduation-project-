@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Splash/peresentation/Views/Widgets/sliding_animation.dart';
 
@@ -20,7 +21,7 @@ class _SplashViewBodyState extends State<SplashViewbody>
     super.initState();
     initSlidingAnimation();
 
-    // navigateToHomeViews();
+    navigateToHomeViews();
   }
 
   @override
@@ -58,9 +59,11 @@ class _SplashViewBodyState extends State<SplashViewbody>
     animationController.forward();
   }
 
-  // void navigateToHomeViews() {
-  //   Future.delayed(const Duration(seconds: 2), () {
-  //     GoRouter.of(context).push(AppRouters.kHomeview,);
-  //   });
-  // }
+  void navigateToHomeViews() {
+    Future.delayed(const Duration(seconds: 6), () {
+      GoRouter.of(context).push(
+        AppRouter.onboardinview1,
+      );
+    });
+  }
 }
