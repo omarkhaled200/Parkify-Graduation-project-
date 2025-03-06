@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:parkify/Core/utlis/Icon_All_app.dart';
 import 'package:parkify/Core/utlis/assets.dart';
-import 'package:parkify/Feature/Home/persentation/Views/Widgets/CustomavailabilitySpot.dart';
-
+import 'package:parkify/Feature/Home/persentation/Views/Widgets/CustomReserveNowButton.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/DisplayMoneyWidget.dart';
-
+import 'package:parkify/Feature/Home/persentation/Views/Widgets/ShowtheFreeandOccupiedSpot.dart';
 import 'package:parkify/constant.dart';
 
 class Homepage2body extends StatefulWidget {
@@ -46,25 +44,11 @@ class _Homepage2bodyState extends State<Homepage2body> {
             const SizedBox(
               height: 15,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomavailabilitySpot(
-                  width: width,
-                  heaight: heaight,
-                  text: 'Free',
-                  color: const Color.fromARGB(255, 116, 231, 120),
-                  NumberSpot: 6,
-                ),
-                CustomavailabilitySpot(
-                  width: width,
-                  heaight: heaight,
-                  text: 'Occupied',
-                  color: Colors.red,
-                  NumberSpot: 2,
-                ),
-              ],
-            )
+            ShowtheFreeandOccupiedSpot(width: width, heaight: heaight),
+            const SizedBox(
+              height: 25,
+            ),
+            CustomReserveNowButton(width: width, heaight: heaight)
           ],
         ),
       ),
