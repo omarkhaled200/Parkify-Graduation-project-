@@ -41,7 +41,7 @@ class CustomTextField extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyle(
           fontFamily: Assets.textfamily,
-          fontSize: 22,
+          fontSize: 20,
           fontWeight: FontWeight.w600,
         ),
         enabledBorder: OutlineinputBorder(),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:parkify/Core/utlis/App_Router.dart';
-import 'package:parkify/Feature/Splash/peresentation/Views/Splash_View.dart';
 
 void main() {
   runApp(const Parkify());
