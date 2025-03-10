@@ -28,13 +28,13 @@ class CustomTextField extends StatelessWidget {
         prefixIcon: Icon(
           prefixIcon,
           color: Colors.grey,
-          size: 28,
+          size: 24,
         ),
         suffixIcon: IconButton(
           onPressed: () {},
           icon: Icon(
             suffixIcon,
-            size: 28,
+            size: 24,
           ),
           color: Colors.grey,
         ),

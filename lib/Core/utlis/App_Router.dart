@@ -1,4 +1,6 @@
 import 'package:go_router/go_router.dart';
+import 'package:parkify/Feature/Auth/Presentation/Views/DataEntry1.dart';
+import 'package:parkify/Feature/Auth/Presentation/Views/DataEntry2.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/LoginView.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/SignUpView.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Bottom_Naviagation_bar.dart';
@@ -18,6 +20,8 @@ abstract class AppRouter {
   static final homePageCountdown = '/homePageCountdown';
   static final loginview = '/loginview';
   static final signupview = '/signupview';
+  static final dataentry1view = '/dataentry1view';
+  static final dataentry2view = '/dataentry2view';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -55,6 +59,14 @@ abstract class AppRouter {
       GoRoute(
         path: signupview,
         builder: (context, state) => const Signupview(),
+      ),
+      GoRoute(
+        path: dataentry1view,
+        builder: (context, state) => const Dataentry1(),
+      ),
+      GoRoute(
+        path: dataentry2view,
+        builder: (context, state) => const Dataentry2(),
       ),
     ],
   );

@@ -10,6 +10,7 @@ class Assets {
   static String textfamily = 'PlaypenSans';
   static String car = 'assets/Images/Car.png';
   static String pcar = 'assets/Images/pcar.png';
+  static String licenseplate = 'assets/Images/final.png';
 
   static String Homeicon = 'aassets/Images/home.svg';
   static String gifticon = 'assets/Images/gift.svg';

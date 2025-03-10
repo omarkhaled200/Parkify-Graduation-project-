@@ -21,15 +21,15 @@ class Signupviewbody extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: heaight * 0.05,
+              height: heaight * 0.059,
             ),
             LogoinenteryImage(width: width, heaight: heaight),
             SizedBox(
-              height: heaight * 0.05,
+              height: heaight * 0.059,
             ),
             Container(
               width: width,
-              height: heaight * 0.8,
+              height: heaight * 0.73,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -87,7 +87,9 @@ class Signupviewbody extends StatelessWidget {
                       width: width,
                       heaight: heaight,
                       text: 'Register',
-                      onPressed: () {},
+                      onPressed: () {
+                        GoRouter.of(context).push(AppRouter.dataentry1view);
+                      },
                     ))
                   ],
                 ),
