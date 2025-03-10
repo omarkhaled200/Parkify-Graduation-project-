@@ -65,7 +65,6 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
         backgroundColor: Colors.grey[300]!,
         animateFromLastPercent: true,
         animationDuration: 1,
-        reverse: true,
         circularStrokeCap: CircularStrokeCap.round,
       ),
     );

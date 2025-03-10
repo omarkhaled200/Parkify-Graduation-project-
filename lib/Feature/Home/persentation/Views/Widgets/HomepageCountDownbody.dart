@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:parkify/Core/utlis/CustomButton.dart';
 import 'package:parkify/Core/utlis/Icon_All_app.dart';
@@ -8,7 +6,6 @@ import 'package:parkify/Feature/Home/persentation/Views/Widgets/CountdownTimerSc
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/DisplayMoneyWidget.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/ShowtheFreeandOccupiedSpot.dart';
 import 'package:parkify/constant.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class HomepageCountDownbody extends StatelessWidget {
   const HomepageCountDownbody({super.key});
@@ -69,7 +66,7 @@ class HomepageCountDownbody extends StatelessWidget {
                       text: 'Blocker ⬇',
                       onPressed: () {},
                     )),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 Expanded(
