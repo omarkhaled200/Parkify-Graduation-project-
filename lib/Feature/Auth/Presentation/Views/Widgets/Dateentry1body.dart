@@ -26,7 +26,7 @@ class _Dateentry1bodyState extends State<Dateentry1body> {
   File? _imageFile;
   bool _isChecked = false;
   final ImagePicker _picker = ImagePicker();
-
+  bool isCarPlateConfirmed = false;
   Future<void> _pickImage() async {
     var pickedFile = await _picker.pickImage(source: ImageSource.camera);
 
@@ -110,17 +110,24 @@ class _Dateentry1bodyState extends State<Dateentry1body> {
                     SizedBox(height: heaight * 0.01),
                     CustomDisplayContent(width: width, heaight: heaight),
                     SizedBox(height: heaight * 0.01),
-                    const CustomCheckbox(),
+                    CustomCheckbox(
+                      onChanged: (value) {
+                        setState(() => isCarPlateConfirmed = value);
+                      },
+                    ),
                     SizedBox(height: heaight * 0.01),
                     Center(
-                        child: CustomButton(
-                      width: width,
-                      heaight: heaight,
-                      text: 'Next',
-                      onPressed: () {
-                        GoRouter.of(context).push(AppRouter.dataentry2view);
-                      },
-                    ))
+                      child: CustomButton(
+                        width: width,
+                        heaight: heaight,
+                        text: 'Next',
+                        onPressed: () {
+                          if (isCarPlateConfirmed == true) {
+                            GoRouter.of(context).push(AppRouter.dataentry2view);
+                          }
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),

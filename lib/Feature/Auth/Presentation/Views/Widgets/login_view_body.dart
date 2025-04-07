@@ -75,7 +75,10 @@ class LoginViewBody extends StatelessWidget {
                       width: width,
                       heaight: heaight,
                       text: 'Login',
-                      onPressed: () {},
+                      onPressed: () {
+                        GoRouter.of(context)
+                            .push(AppRouter.bottomNaviagationBar);
+                      },
                     ))
                   ],
                 ),
