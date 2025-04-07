@@ -20,7 +20,7 @@ class _Homepage2bodyState extends State<BottomNaviagationBar> {
   int _currentIndex = 0;
 
   final List<Widget> _widgetOptions = const <Widget>[
-    HomePageCountup(),
+    Homepage1(),
     GiftView(),
     PaymentView(),
     ProfileView(),
