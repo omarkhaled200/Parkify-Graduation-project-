@@ -2,6 +2,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:parkify/Feature/Gift/Home/persentation/Views/Gift_view.dart';
+import 'package:parkify/Feature/Home/persentation/Views/HomePage1.dart';
+import 'package:parkify/Feature/Home/persentation/Views/Home_page_CountUp.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/Homepage1body.dart';
 import 'package:parkify/Feature/Payment/Home/persentation/Views/Payment_View.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Profile_view.dart';
@@ -18,7 +20,7 @@ class _Homepage2bodyState extends State<BottomNaviagationBar> {
   int _currentIndex = 0;
 
   final List<Widget> _widgetOptions = const <Widget>[
-    Homepage1body(),
+    HomePageCountup(),
     GiftView(),
     PaymentView(),
     ProfileView(),
