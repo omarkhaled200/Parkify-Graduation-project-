@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 
 class CustomLogOutbutton extends StatelessWidget {
@@ -12,7 +14,9 @@ class CustomLogOutbutton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {},
+      onTap: () async {
+        GoRouter.of(context).push(AppRouter.loginview);
+      },
       child: Container(
         padding: const EdgeInsets.all(16),
         height: heaight * 0.1,

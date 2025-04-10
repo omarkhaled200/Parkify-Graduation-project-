@@ -31,6 +31,7 @@ abstract class AppRouter {
   static final Editprofile = '/editprofile';
   static final profilepage = '/profilepage';
   static final Historypage = '/historypage';
+  static final loginpage = '/loginpage';
   static final router = GoRouter(
     routes: [
       GoRoute(
