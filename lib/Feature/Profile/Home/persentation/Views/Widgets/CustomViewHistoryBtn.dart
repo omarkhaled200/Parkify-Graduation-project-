@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/constant.dart';
 
@@ -22,7 +24,9 @@ class CustomViewHistoryBtn extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             )),
-        onPressed: () {},
+        onPressed: () {
+          GoRouter.of(context).push(AppRouter.Historypage);
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

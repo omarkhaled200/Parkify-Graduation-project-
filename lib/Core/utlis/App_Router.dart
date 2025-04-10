@@ -8,6 +8,7 @@ import 'package:parkify/Feature/Home/persentation/Views/Home_page2.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Home_page_Countdown.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Reservation_View.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Edit_Profile.dart';
+import 'package:parkify/Feature/Profile/Home/persentation/Views/History_View.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Profile_view.dart';
 
 import 'package:parkify/Feature/Splash/peresentation/Views/Onboarding_View1.dart';
@@ -29,6 +30,7 @@ abstract class AppRouter {
   static final Homepage2 = '/homepage2';
   static final Editprofile = '/editprofile';
   static final profilepage = '/profilepage';
+  static final Historypage = '/historypage';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -86,6 +88,10 @@ abstract class AppRouter {
       GoRoute(
         path: profilepage,
         builder: (context, state) => const ProfileView(),
+      ),
+      GoRoute(
+        path: Historypage,
+        builder: (context, state) => const HistoryView(),
       ),
     ],
   );
