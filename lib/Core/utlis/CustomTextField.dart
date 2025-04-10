@@ -6,12 +6,12 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField(
       {super.key,
       required this.hintText,
-      required this.prefixIcon,
+      this.prefixIcon,
       this.obscureText = false,
       this.suffixIcon});
 
   final String hintText;
-  final IconData prefixIcon;
+  final IconData? prefixIcon;
   final IconData? suffixIcon;
   final bool obscureText;
   @override
@@ -25,19 +25,23 @@ class CustomTextField extends StatelessWidget {
       ),
       obscureText: obscureText,
       decoration: InputDecoration(
-        prefixIcon: Icon(
-          prefixIcon,
-          color: Colors.grey,
-          size: 24,
-        ),
-        suffixIcon: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            suffixIcon,
-            size: 24,
-          ),
-          color: Colors.grey,
-        ),
+        prefixIcon: prefixIcon != null
+            ? Icon(
+                prefixIcon,
+                color: Colors.grey,
+                size: 24,
+              )
+            : null,
+        suffixIcon: suffixIcon != null
+            ? IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  suffixIcon,
+                  size: 24,
+                ),
+                color: Colors.grey,
+              )
+            : null,
         hintText: hintText,
         hintStyle: TextStyle(
           fontFamily: Assets.textfamily,

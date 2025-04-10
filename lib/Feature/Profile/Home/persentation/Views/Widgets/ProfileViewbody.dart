@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/Icon_All_app.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/CustomCircleAvater.dart';
@@ -22,7 +24,9 @@ class ProfileViewbody extends StatelessWidget {
         title: IconApp(width: width),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).push(AppRouter.Editprofile);
+              },
               icon: Icon(
                 FontAwesomeIcons.pencil,
                 color: Colors.black.withOpacity(0.8),
