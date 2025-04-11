@@ -13,6 +13,11 @@ class Assets {
   static String licenseplate = 'assets/Images/final.png';
   static String pointgift = 'assets/Images/point.png';
 
+  static String Visa = 'assets/Images/Visa.png';
+  static String Mastercard = 'assets/Images/MasterCard.png';
+  static String Meza = 'assets/Images/Meeza.png';
+  static String Vector = 'assets/Images/Vector.png';
+
   static String Homeicon = 'aassets/Images/home.svg';
   static String gifticon = 'assets/Images/gift.svg';
   static String paymenticon = 'assets/Images/payment.png';
