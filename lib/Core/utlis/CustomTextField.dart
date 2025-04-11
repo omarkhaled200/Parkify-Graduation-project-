@@ -8,17 +8,22 @@ class CustomTextField extends StatelessWidget {
       required this.hintText,
       this.prefixIcon,
       this.obscureText = false,
-      this.suffixIcon});
+      this.suffixIcon,
+      this.hintcolor,
+      this.textcolor});
 
   final String hintText;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final bool obscureText;
+  final Color? hintcolor;
+  final Color? textcolor;
   @override
   Widget build(BuildContext context) {
     return TextField(
       cursorColor: const Color(0xffA0A0A0),
       style: TextStyle(
+        color: textcolor,
         fontFamily: Assets.textfamily,
         fontSize: 20,
         fontWeight: FontWeight.w500,
@@ -44,6 +49,7 @@ class CustomTextField extends StatelessWidget {
             : null,
         hintText: hintText,
         hintStyle: TextStyle(
+          color: hintcolor,
           fontFamily: Assets.textfamily,
           fontSize: 20,
           fontWeight: FontWeight.w600,

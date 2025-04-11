@@ -1,17 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_flip_card/controllers/flip_card_controllers.dart';
-import 'package:flutter_flip_card/flipcard/flip_card.dart';
-import 'package:flutter_flip_card/modal/flip_side.dart';
 import 'package:parkify/Core/utlis/CustomButton.dart';
 import 'package:parkify/Core/utlis/Icon_All_app.dart';
 import 'package:parkify/Core/utlis/assets.dart';
-import 'package:parkify/Feature/Payment/Home/persentation/Views/Widgets/BackCardPayment.dart';
+import 'package:parkify/Feature/Payment/Home/persentation/Views/Widgets/BottomSheetView.dart';
 import 'package:parkify/Feature/Payment/Home/persentation/Views/Widgets/CustomTransactionHistory.dart';
 import 'package:parkify/Feature/Payment/Home/persentation/Views/Widgets/FlipCardWidget.dart';
-import 'package:parkify/Feature/Payment/Home/persentation/Views/Widgets/FrontCardpayment.dart';
-
 import 'package:parkify/constant.dart';
 
 class PaymentView extends StatelessWidget {
@@ -51,7 +45,14 @@ class PaymentViewbody extends StatelessWidget {
                 width: width,
                 heaight: heaight,
                 text: 'Add Balance',
-                onPressed: () {},
+                onPressed: () {
+                  showModalBottomSheet(
+                      backgroundColor: const Color(0xff434343),
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const BottomSheetView();
+                      });
+                },
               ),
             ),
             SliverToBoxAdapter(

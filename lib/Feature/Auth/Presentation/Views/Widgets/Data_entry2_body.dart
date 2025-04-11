@@ -63,13 +63,11 @@ class Dataentry2body extends StatelessWidget {
                     const CustomTextField(
                       hintText: 'CVC',
                       prefixIcon: Icons.pin,
-                      obscureText: true,
                     ),
                     SizedBox(height: heaight * 0.02),
                     const CustomTextField(
                       hintText: 'Expiration Date',
                       prefixIcon: Icons.date_range_rounded,
-                      obscureText: true,
                     ),
                     SizedBox(height: heaight * 0.1),
                     Center(

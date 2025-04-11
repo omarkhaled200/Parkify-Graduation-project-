@@ -1,13 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/CustomButton.dart';
-import 'package:parkify/Core/utlis/CustomRowAccount(have%20Account).dart';
 import 'package:parkify/Core/utlis/CustomTextField.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/Widgets/CustomCheckbox.dart';
@@ -79,7 +77,6 @@ class _Dateentry1bodyState extends State<Dateentry1body> {
                     const CustomTextField(
                       hintText: 'Phone',
                       prefixIcon: FontAwesomeIcons.phone,
-                      obscureText: true,
                     ),
                     SizedBox(height: heaight * 0.02),
                     Row(

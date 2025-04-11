@@ -8,18 +8,20 @@ class CustomButton extends StatelessWidget {
     required this.heaight,
     this.onPressed,
     required this.text,
+    this.backcolor = Colors.black,
   });
 
   final double width;
   final double heaight;
   final void Function()? onPressed;
   final String text;
+  final Color? backcolor;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.black,
+        backgroundColor: backcolor,
         fixedSize: Size(width * 0.7, heaight * 0.09),
         splashFactory: InkRipple.splashFactory,
         shape: RoundedRectangleBorder(
