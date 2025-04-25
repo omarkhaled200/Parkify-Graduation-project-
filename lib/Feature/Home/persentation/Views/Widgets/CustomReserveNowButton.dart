@@ -24,7 +24,7 @@ class CustomReserveNowButton extends StatelessWidget {
                 width: 2,
                 style: BorderStyle.solid,
               ),
-              fixedSize: Size(width * .8, heaight * 0.45),
+              fixedSize: Size(width * 0.8, heaight * 0.45),
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
               textStyle:
                   const TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
