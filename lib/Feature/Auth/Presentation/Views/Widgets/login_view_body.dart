@@ -51,12 +51,12 @@ class LoginViewBody extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: heaight * 0.05),
-                    const CustomTextField(
+                    CustomTextField(
                       hintText: 'User Name',
                       prefixIcon: Icons.person,
                     ),
                     SizedBox(height: heaight * 0.04),
-                    const CustomTextField(
+                    CustomTextField(
                       hintText: 'PassWord',
                       prefixIcon: Icons.lock_rounded,
                       obscureText: true,

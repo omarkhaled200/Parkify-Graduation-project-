@@ -41,12 +41,23 @@ class _Homepage2bodyState extends State<Homepage2body> {
                 fontFamily: Assets.textfamily,
               ),
             ),
-            const SizedBox(
-              height: 15,
+            SizedBox(
+              height: heaight * 0.01,
             ),
             ShowtheFreeandOccupiedSpot(width: width, heaight: heaight),
-            const SizedBox(
-              height: 25,
+            SizedBox(
+              height: heaight * 0.03,
+            ),
+            Text(
+              'Let’s start our journey together my friend! 🚀',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                fontFamily: Assets.textfamily,
+              ),
+            ),
+            SizedBox(
+              height: heaight * 0.09,
             ),
             CustomReserveNowButton(width: width, heaight: heaight)
           ],

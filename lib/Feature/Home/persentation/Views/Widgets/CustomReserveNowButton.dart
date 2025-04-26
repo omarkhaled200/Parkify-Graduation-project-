@@ -18,21 +18,21 @@ class CustomReserveNowButton extends StatelessWidget {
     return Center(
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-              elevation: 20,
-              side: const BorderSide(
-                color: const Color(0xff2C7DA0),
-                width: 2,
-                style: BorderStyle.solid,
-              ),
-              fixedSize: Size(width * 0.8, heaight * 0.45),
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+            elevation: 20,
+            side: const BorderSide(
+              color: Color(0xff2C7DA0),
+              width: 2,
+              style: BorderStyle.solid,
+            ),
+            fixedSize: Size(width * 0.65, heaight * 0.3),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          ),
           onPressed: () {
             GoRouter.of(context).push(AppRouter.reservationpage);
           },
           child: Text(
             'Reserve Now?',
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,

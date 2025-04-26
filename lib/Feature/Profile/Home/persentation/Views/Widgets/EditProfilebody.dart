@@ -64,7 +64,7 @@ class EditProfilebody extends StatelessWidget {
                         SizedBox(
                           height: heaight * 0.005,
                         ),
-                        const CustomTextField(hintText: 'omar'),
+                        CustomTextField(hintText: 'omar'),
                       ],
                     ),
                   ),
@@ -83,7 +83,7 @@ class EditProfilebody extends StatelessWidget {
                         SizedBox(
                           height: heaight * 0.005,
                         ),
-                        const CustomTextField(hintText: 'Khaled'),
+                        CustomTextField(hintText: 'Khaled'),
                       ],
                     ),
                   ),
@@ -103,7 +103,7 @@ class EditProfilebody extends StatelessWidget {
                   SizedBox(
                     height: heaight * 0.005,
                   ),
-                  const CustomTextField(hintText: 'omarkhaled.6403@gmail.com'),
+                  CustomTextField(hintText: 'omarkhaled.6403@gmail.com'),
                 ],
               ),
               SizedBox(
@@ -120,7 +120,7 @@ class EditProfilebody extends StatelessWidget {
                   SizedBox(
                     height: heaight * 0.005,
                   ),
-                  const CustomTextField(hintText: '20032003om'),
+                  CustomTextField(hintText: '20032003om'),
                 ],
               ),
             ],

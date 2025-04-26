@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/CustomButton.dart';
 import 'package:parkify/Core/utlis/CustomTextField.dart';
@@ -21,6 +23,11 @@ class Dateentry1body extends StatefulWidget {
 }
 
 class _Dateentry1bodyState extends State<Dateentry1body> {
+  String? NationalId;
+  String? Phone;
+  bool isloading = false;
+  GlobalKey<FormState> formkey = GlobalKey();
+
   File? _imageFile;
   bool _isChecked = false;
   final ImagePicker _picker = ImagePicker();
@@ -41,95 +48,140 @@ class _Dateentry1bodyState extends State<Dateentry1body> {
   Widget build(BuildContext context) {
     var heaight = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: kprimaryColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: heaight * 0.059,
-            ),
-            LogoinenteryImage(width: width, heaight: heaight),
-            SizedBox(
-              height: heaight * 0.059,
-            ),
-            Container(
-              width: width,
-              height: heaight * 0.72,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(50),
-                  topLeft: Radius.circular(50),
-                ),
+    return ModalProgressHUD(
+      inAsyncCall: isloading,
+      child: Scaffold(
+        backgroundColor: kprimaryColor,
+        body: Form(
+          key: formkey,
+          child: Column(
+            children: [
+              SizedBox(
+                height: heaight * 0.059,
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 16, left: 16.0, right: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: heaight * 0.02),
-                    const CustomTextField(
-                      hintText: 'National ID',
-                      prefixIcon: FontAwesomeIcons.idCard,
+              LogoinenteryImage(width: width, heaight: heaight),
+              SizedBox(
+                height: heaight * 0.059,
+              ),
+              Expanded(
+                child: Container(
+                  width: width,
+                  height: heaight * 0.72,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(50),
+                      topLeft: Radius.circular(50),
                     ),
-                    SizedBox(height: heaight * 0.02),
-                    const CustomTextField(
-                      hintText: 'Phone',
-                      prefixIcon: FontAwesomeIcons.phone,
-                    ),
-                    SizedBox(height: heaight * 0.02),
-                    Row(
-                      children: [
-                        Image.asset(Assets.licenseplate,
-                            width: 45, height: 30, color: Colors.grey),
-                        const SizedBox(width: 10),
-                        Text(
-                          "License Plate",
-                          style: TextStyle(
-                              fontFamily: Assets.textfamily,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: heaight * 0.01),
-                    Center(
-                      child: IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: _pickImage,
-                        icon: const Icon(
-                          Icons.camera_alt_rounded,
-                          size: 64,
-                        ),
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 16, left: 16.0, right: 16),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: heaight * 0.02),
+                          CustomTextField(
+                            typekeyboard: TextInputType.number,
+                            hintText: 'National ID',
+                            prefixIcon: FontAwesomeIcons.idCard,
+                            onchanged: (data) {
+                              NationalId = data;
+                            },
+                            valdiate: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your National ID';
+                              }
+                              if (value.length != 14) {
+                                return 'National ID must be exactly 14 digits';
+                              }
+                              if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                                return 'National ID must contain only numbers';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: heaight * 0.02),
+                          CustomTextField(
+                            typekeyboard: TextInputType.number,
+                            hintText: 'Phone',
+                            prefixIcon: FontAwesomeIcons.phone,
+                            onchanged: (data) {
+                              Phone = data;
+                            },
+                            valdiate: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your phone number';
+                              }
+                              if (value.length != 11) {
+                                return 'Phone number must be exactly 11 digits';
+                              }
+                              if (!RegExp(r'^01[0-2,5]{1}[0-9]{8}$')
+                                  .hasMatch(value)) {
+                                return 'Please enter a valid Egyptian phone number';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: heaight * 0.02),
+                          Row(
+                            children: [
+                              Image.asset(Assets.licenseplate,
+                                  width: 45, height: 30, color: Colors.grey),
+                              const SizedBox(width: 10),
+                              Text(
+                                "License Plate",
+                                style: TextStyle(
+                                    fontFamily: Assets.textfamily,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: heaight * 0.01),
+                          Center(
+                            child: IconButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: _pickImage,
+                              icon: const Icon(
+                                Icons.camera_alt_rounded,
+                                size: 64,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: heaight * 0.02),
+                          CustomDisplayContent(width: width, heaight: heaight),
+                          SizedBox(height: heaight * 0.02),
+                          CustomCheckbox(
+                            onChanged: (value) {
+                              setState(() => isCarPlateConfirmed = value);
+                            },
+                          ),
+                          SizedBox(height: heaight * 0.03),
+                          Center(
+                            child: CustomButton(
+                              width: width,
+                              heaight: heaight,
+                              text: 'Next',
+                              onPressed: () {
+                                if (formkey.currentState!.validate()) {
+                                  if (isCarPlateConfirmed == true) {
+                                    GoRouter.of(context)
+                                        .push(AppRouter.Homepage2);
+                                  }
+                                }
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(height: heaight * 0.01),
-                    CustomDisplayContent(width: width, heaight: heaight),
-                    SizedBox(height: heaight * 0.01),
-                    CustomCheckbox(
-                      onChanged: (value) {
-                        setState(() => isCarPlateConfirmed = value);
-                      },
-                    ),
-                    SizedBox(height: heaight * 0.01),
-                    Center(
-                      child: CustomButton(
-                        width: width,
-                        heaight: heaight,
-                        text: 'Next',
-                        onPressed: () {
-                          if (isCarPlateConfirmed == true) {
-                            GoRouter.of(context).push(AppRouter.dataentry2view);
-                          }
-                        },
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

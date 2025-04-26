@@ -1,55 +1,89 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 
-class CustomTextField extends StatelessWidget {
-  const CustomTextField(
-      {super.key,
-      required this.hintText,
-      this.prefixIcon,
-      this.obscureText = false,
-      this.suffixIcon,
-      this.hintcolor,
-      this.textcolor});
-
+class CustomTextField extends StatefulWidget {
+  CustomTextField({
+    super.key,
+    required this.hintText,
+    this.prefixIcon,
+    this.obscureText = false,
+    this.suffixIcon,
+    this.hintcolor,
+    this.textcolor,
+    this.valdiate,
+    this.onchanged,
+    this.onpressed,
+    this.typekeyboard,
+  });
+  TextInputType? typekeyboard;
   final String hintText;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final bool obscureText;
   final Color? hintcolor;
   final Color? textcolor;
+  void Function(String)? onchanged;
+  final String? Function(String?)? valdiate;
+  final void Function()? onpressed;
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  late bool isObscure; // متغير داخلي عشان نتحكم في الظهور والاخفاء
+
+  @override
+  void initState() {
+    super.initState();
+    isObscure = widget.obscureText; // أول قيمة من اللي جاية من فوق
+  }
+
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      keyboardType: widget.typekeyboard,
+      validator: widget.valdiate,
+      onChanged: widget.onchanged,
       cursorColor: const Color(0xffA0A0A0),
       style: TextStyle(
-        color: textcolor,
+        color: widget.textcolor,
         fontFamily: Assets.textfamily,
         fontSize: 20,
         fontWeight: FontWeight.w500,
       ),
-      obscureText: obscureText,
+      obscureText: isObscure,
       decoration: InputDecoration(
-        prefixIcon: prefixIcon != null
+        errorStyle: TextStyle(
+          color: Colors.red[900],
+          fontFamily: Assets.textfamily,
+        ),
+        errorMaxLines: 7,
+        prefixIcon: widget.prefixIcon != null
             ? Icon(
-                prefixIcon,
+                widget.prefixIcon,
                 color: Colors.grey,
                 size: 24,
               )
             : null,
-        suffixIcon: suffixIcon != null
+        suffixIcon: widget.suffixIcon != null
             ? IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    isObscure = !isObscure;
+                  });
+                },
                 icon: Icon(
-                  suffixIcon,
+                  widget.suffixIcon,
                   size: 24,
                 ),
                 color: Colors.grey,
               )
             : null,
-        hintText: hintText,
+        hintText: widget.hintText,
         hintStyle: TextStyle(
-          color: hintcolor,
+          color: widget.hintcolor,
           fontFamily: Assets.textfamily,
           fontSize: 20,
           fontWeight: FontWeight.w600,
