@@ -125,7 +125,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                     .push(AppRouter.bottomNaviagationBar);
                               }
                             },
-                          ))
+                          )),
+                          SizedBox(height: heaight * 0.03),
                         ],
                       ),
                     ),

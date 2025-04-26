@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:parkify/Core/utlis/Token_Functions.dart';
 
 class ApiClass {
   final String _baseUrl =
@@ -31,6 +32,7 @@ class ApiClass {
 
   Future<dynamic> get({required String endpoint, String? token}) async {
     try {
+      token ??= await getToken();
       final response = await _dio.get(
         '$_baseUrl$endpoint',
         options: Options(headers: _buildHeaders(token)),
@@ -48,6 +50,7 @@ class ApiClass {
     required dynamic body,
     String? token,
   }) async {
+    token ??= await getToken();
     try {
       final response = await _dio.post(
         '$_baseUrl$endpoint',
@@ -68,6 +71,7 @@ class ApiClass {
     String? token,
   }) async {
     try {
+      token ??= await getToken();
       final response = await _dio.put(
         '$_baseUrl$endpoint',
         data: jsonEncode(body),
@@ -86,6 +90,7 @@ class ApiClass {
     String? token,
   }) async {
     try {
+      token ??= await getToken();
       final response = await _dio.delete(
         '$_baseUrl$endpoint',
         options: Options(headers: _buildHeaders(token)),
