@@ -9,7 +9,7 @@ class UserRegisterNewAccountCubit extends Cubit<UserRegisterNewAccountState> {
   UserRegisterNewAccountCubit(this.homeRepo)
       : super(UserRegisterNewAccountInitial());
   final HomeRepo homeRepo;
-  Future<void> UserLogin(
+  Future<void> UserRegister(
       {required String email,
       required String password,
       required String name,

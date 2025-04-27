@@ -15,17 +15,17 @@ void CustomScaffoldMessenger(context, String text, IconData icon) {
           const SizedBox(
             width: 5,
           ),
-          Text(
-            text,
-            maxLines: 2,
-            softWrap: true,
-            style: TextStyle(
-              fontFamily: Assets.textfamily,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
+          Expanded(
+            child: Text(
+              text,
+              maxLines: 2,
+              style: TextStyle(
+                fontFamily: Assets.textfamily,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+              ),
             ),
-            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),

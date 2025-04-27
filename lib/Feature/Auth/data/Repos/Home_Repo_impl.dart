@@ -13,10 +13,6 @@ class HomeRepoImpl extends HomeRepo {
   Future<Either<Failure, UserData>> postLogin(
       {required String email, required String password}) async {
     try {
-      var dio = Dio();
-      dio.options.followRedirects = true; // تفعيل إعادة التوجيه
-      dio.options.maxRedirects = 5; // تحديد الحد الأقصى لعدد المحاولات
-
       var data = await apiClass.post(
           endpoint: 'user/login', body: {'email': email, 'password': password});
 
