@@ -13,15 +13,26 @@ class HomeRepoImpl extends HomeRepo {
   Future<Either<Failure, UserData>> postLogin(
       {required String email, required String password}) async {
     try {
-      var data = await apiClass.post(
-          endpoint: '/user/login',
-          body: {'email': email, 'password': password});
+      var dio = Dio();
+      dio.options.followRedirects = true; // تفعيل إعادة التوجيه
+      dio.options.maxRedirects = 5; // تحديد الحد الأقصى لعدد المحاولات
 
-      UserData user;
-      String token = data['token'];
-      await saveToken(token);
-      user = UserData.fromJson(data['userData']);
-      return right(user);
+      var data = await apiClass.post(
+          endpoint: 'user/login', body: {'email': email, 'password': password});
+
+      // تحقق إذا كانت البيانات ليست null وأيضاً من نوع Map<String, dynamic>
+      if (data != null && data is Map<String, dynamic>) {
+        if (data.containsKey('token') && data.containsKey('userData')) {
+          String token = data['token'];
+          await saveToken(token);
+          UserData user = UserData.fromJson(data['userData']);
+          return right(user);
+        } else {
+          return left(ServerFailure('Missing token or user data in response'));
+        }
+      } else {
+        return left(ServerFailure('Invalid response from server or null data'));
+      }
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));
@@ -37,7 +48,7 @@ class HomeRepoImpl extends HomeRepo {
       required String password,
       required String ConfirmPassword}) async {
     try {
-      var data = await apiClass.post(endpoint: '/user/register', body: {
+      var data = await apiClass.post(endpoint: 'user/register', body: {
         'name': Name,
         'email': Email,
         'password': password,
@@ -62,7 +73,7 @@ class HomeRepoImpl extends HomeRepo {
       required String phone,
       required String plate}) async {
     try {
-      var data = await apiClass.post(endpoint: '/user/setupUser', body: {
+      var data = await apiClass.post(endpoint: 'user/setupUser', body: {
         'national': national,
         'phone': phone,
         'plate': plate,
@@ -83,7 +94,7 @@ class HomeRepoImpl extends HomeRepo {
   Future<Either<Failure, String>> postlogout() async {
     try {
       var response = await apiClass.post(
-        endpoint: '/user/logout',
+        endpoint: 'user/logout',
         body: {}, // أو ابعته null لو مش محتاج body أصلا
       );
 

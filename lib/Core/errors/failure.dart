@@ -28,14 +28,14 @@ class ServerFailure extends Failure {
         return ServerFailure('NO Internet connection');
       case DioExceptionType.unknown:
         return ServerFailure('Unexpected Error,Please Try again later!');
-      default:
-       return ServerFailure('Oops There Was an Error,Pleas try Again');
+      // default:
+      //   return ServerFailure('Oops There Was an Error,Pleas try Again');
     }
   }
 
   factory ServerFailure.fromResponse(int statuscode, dynamic response) {
-    if (statuscode == 400 || statuscode == 401 || statuscode == 403) {
-      return ServerFailure(response['error']['message']);
+    if (statuscode == 400 || statuscode == 401 || statuscode == 422) {
+      return ServerFailure(response['message']);
     } else if (statuscode == 404) {
       return ServerFailure('Your request not Found,Please try later!');
     } else if (statuscode == 500) {

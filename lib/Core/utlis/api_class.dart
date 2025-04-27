@@ -10,7 +10,10 @@ class ApiClass {
   ApiClass(this._dio);
   //! Handle Headers
   Map<String, String> _buildHeaders(String? token) {
-    final headers = <String, String>{'Content-Type': 'application/json'};
+    final headers = <String, String>{
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
     if (token != null) headers['Authorization'] = 'Bearer $token';
     return headers;
   }
