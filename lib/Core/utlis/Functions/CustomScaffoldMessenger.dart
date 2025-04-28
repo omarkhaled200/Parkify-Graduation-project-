@@ -18,7 +18,7 @@ void CustomScaffoldMessenger(context, String text, IconData icon) {
           Expanded(
             child: Text(
               text,
-              maxLines: 2,
+              maxLines: 5,
               style: TextStyle(
                 fontFamily: Assets.textfamily,
                 fontSize: 16,

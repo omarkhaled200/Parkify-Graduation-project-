@@ -18,7 +18,7 @@ final class UserRegisterNewAccountFailure extends UserRegisterNewAccountState {
 }
 
 final class UserRegisterNewAccountSuccess extends UserRegisterNewAccountState {
-  final UserData user;
+  final UserModel user;
 
-  UserRegisterNewAccountSuccess(this.user);
+  UserRegisterNewAccountSuccess({required this.user});
 }

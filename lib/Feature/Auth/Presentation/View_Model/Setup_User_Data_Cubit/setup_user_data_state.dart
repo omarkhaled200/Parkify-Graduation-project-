@@ -18,7 +18,7 @@ final class SetupUserDataFailure extends SetupUserDataState {
 }
 
 final class SetupUserDataSuccess extends SetupUserDataState {
-  final UserData user;
+  final UserModel user;
 
   SetupUserDataSuccess(this.user);
 }

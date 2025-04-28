@@ -8,13 +8,14 @@ part 'setup_user_data_state.dart';
 class SetupUserDataCubit extends Cubit<SetupUserDataState> {
   SetupUserDataCubit(this.homeRepo) : super(SetupUserDataInitial());
   final HomeRepo homeRepo;
-  Future<void> UserLogin(
+  Future<void> UserSetup(
       {required String National,
       required String Phone,
-      required String plate}) async {
+      required String plate,
+      required String token}) async {
     emit(SetupUserDataLoading());
     var result = await homeRepo.postSetupUser(
-        national: National, phone: Phone, plate: plate);
+        national: National, phone: Phone, plate: plate, token: token);
     result.fold((Failure) {
       emit(SetupUserDataFailure(Failure.errmessage));
     }, (user) {

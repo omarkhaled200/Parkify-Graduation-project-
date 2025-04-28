@@ -14,6 +14,7 @@ import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Auth/Presentation/View_Model/User_Register_New_Account_cubit/user_register_new_account_cubit.dart';
 import 'package:parkify/Feature/Auth/Presentation/View_Model/User_login_toAccount_Cubit/user_login_to_account_cubit.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/Widgets/LogoinenteryImage.dart';
+import 'package:parkify/Feature/Auth/data/Models/user_data/user.dart';
 import 'package:parkify/constant.dart';
 
 class Signupviewbody extends StatefulWidget {
@@ -45,9 +46,12 @@ class _SignupviewbodyState extends State<Signupviewbody> {
           CustomScaffoldMessenger(context, "Error is : ${state.errmessage}",
               FontAwesomeIcons.circleXmark);
         } else if (state is UserRegisterNewAccountSuccess) {
-          CustomScaffoldMessenger(
-              context, 'Success', Icons.check_circle_outline);
-          GoRouter.of(context).push(AppRouter.dataentry1view);
+          if (state.user.userData == null) {
+            CustomScaffoldMessenger(
+                context, "User data is missing", Icons.warning);
+            GoRouter.of(context)
+                .push(AppRouter.dataentry1view, extra: state.user.token);
+          }
         }
       },
       builder: (context, state) {
@@ -186,34 +190,29 @@ class _SignupviewbodyState extends State<Signupviewbody> {
                             ),
                             SizedBox(height: heaight * 0.015),
                             Center(
-                              child: state is UserRegisterNewAccountLoading
-                                  ? const SpinKitFadingCircle(
-                                      color: Colors.black,
-                                    )
-                                  : CustomButton(
-                                      width: width,
-                                      heaight: heaight,
-                                      text: 'Register',
-                                      onPressed: () {
-                                        if (formkey.currentState!.validate()) {
-                                          if (password == confirm_password &&
-                                              valdiate().valdiateemail(
-                                                  email: email) &&
-                                              valdiate().valdiatepassword(
-                                                  password: password)) {
-                                            context
-                                                .read<
-                                                    UserRegisterNewAccountCubit>()
-                                                .UserRegister(
-                                                    email: email!,
-                                                    password: password!,
-                                                    name: fullname!,
-                                                    confirmpassword:
-                                                        confirm_password!);
-                                          }
-                                        }
-                                      },
-                                    ),
+                              child: CustomButton(
+                                width: width,
+                                heaight: heaight,
+                                text: 'Register',
+                                onPressed: () {
+                                  if (formkey.currentState!.validate()) {
+                                    if (password == confirm_password &&
+                                        valdiate()
+                                            .valdiateemail(email: email) &&
+                                        valdiate().valdiatepassword(
+                                            password: password)) {
+                                      context
+                                          .read<UserRegisterNewAccountCubit>()
+                                          .UserRegister(
+                                              email: email!,
+                                              password: password!,
+                                              name: fullname!,
+                                              confirmpassword:
+                                                  confirm_password!);
+                                    }
+                                  }
+                                },
+                              ),
                             ),
                           ],
                         ),

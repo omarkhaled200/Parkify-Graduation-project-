@@ -18,7 +18,7 @@ final class UserLoginToAccountFailure extends UserLoginToAccountState {
 }
 
 final class UserLoginToAccounSuccess extends UserLoginToAccountState {
-  final UserData user;
+  final UserModel user;
 
   UserLoginToAccounSuccess(this.user);
 }

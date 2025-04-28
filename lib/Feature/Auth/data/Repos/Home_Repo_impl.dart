@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:parkify/Core/errors/failure.dart';
 import 'package:parkify/Core/utlis/Token_Functions.dart';
 import 'package:parkify/Core/utlis/api_class.dart';
+import 'package:parkify/Feature/Auth/data/Models/user_data/user.dart';
 import 'package:parkify/Feature/Auth/data/Models/user_data/user_data.dart';
 import 'package:parkify/Feature/Auth/data/Repos/Home_Repo.dart';
 
@@ -10,7 +11,7 @@ class HomeRepoImpl extends HomeRepo {
   final ApiClass apiClass;
   HomeRepoImpl(this.apiClass);
   @override
-  Future<Either<Failure, UserData>> postLogin(
+  Future<Either<Failure, UserModel>> postLogin(
       {required String email, required String password}) async {
     try {
       var data = await apiClass.post(
@@ -21,7 +22,7 @@ class HomeRepoImpl extends HomeRepo {
         if (data.containsKey('token') && data.containsKey('userData')) {
           String token = data['token'];
           await saveToken(token);
-          UserData user = UserData.fromJson(data['userData']);
+          UserModel user = UserModel.fromJson(data['userData']);
           return right(user);
         } else {
           return left(ServerFailure('Missing token or user data in response'));
@@ -38,7 +39,7 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<Failure, UserData>> postRegister(
+  Future<Either<Failure, UserModel>> postRegister(
       {required String Name,
       required String Email,
       required String password,
@@ -50,11 +51,14 @@ class HomeRepoImpl extends HomeRepo {
         'password': password,
         'password_confirmation': ConfirmPassword
       });
-
-      UserData user;
-      String token = data['token'];
-      user = UserData.fromJson(data['userData']);
-      return right(user);
+      UserModel? user;
+      try {
+        user = UserModel.fromJson(data);
+        print(user);
+      } catch (e) {
+        print("Error parsing JSON: $e");
+      }
+      return right(user!);
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));
@@ -64,19 +68,23 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<Failure, UserData>> postSetupUser(
+  Future<Either<Failure, UserModel>> postSetupUser(
       {required String national,
       required String phone,
-      required String plate}) async {
+      required String plate,
+      required String token}) async {
     try {
-      var data = await apiClass.post(endpoint: 'user/setupUser', body: {
-        'national': national,
-        'phone': phone,
-        'plate': plate,
-      });
+      var data = await apiClass.post(
+          endpoint: 'user/setupUser',
+          body: {
+            'national': national,
+            'phone': phone,
+            'plate': plate,
+          },
+          token: token);
 
-      UserData user;
-      user = UserData.fromJson(data['userData']);
+      UserModel user;
+      user = UserModel.fromJson(data);
       return right(user);
     } catch (e) {
       if (e is DioException) {
