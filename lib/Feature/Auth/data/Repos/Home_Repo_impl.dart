@@ -22,7 +22,7 @@ class HomeRepoImpl extends HomeRepo {
         if (data.containsKey('token') && data.containsKey('userData')) {
           String token = data['token'];
           await saveToken(token);
-          UserModel user = UserModel.fromJson(data['userData']);
+          UserModel user = UserModel.fromJson(data);
           return right(user);
         } else {
           return left(ServerFailure('Missing token or user data in response'));

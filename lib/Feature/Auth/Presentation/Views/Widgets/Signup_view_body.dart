@@ -48,7 +48,7 @@ class _SignupviewbodyState extends State<Signupviewbody> {
         } else if (state is UserRegisterNewAccountSuccess) {
           if (state.user.userData == null) {
             CustomScaffoldMessenger(
-                context, "User data is missing", Icons.warning);
+                context, "We need some data Please 🤦‍♂️", Icons.warning);
             GoRouter.of(context)
                 .push(AppRouter.dataentry1view, extra: state.user.token);
           }

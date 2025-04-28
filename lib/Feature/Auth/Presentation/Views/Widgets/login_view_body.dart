@@ -42,9 +42,16 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           CustomScaffoldMessenger(context, "Error is : ${state.errmessage}",
               FontAwesomeIcons.circleXmark);
         } else if (state is UserLoginToAccounSuccess) {
-          CustomScaffoldMessenger(
-              context, 'Success', Icons.check_circle_outline);
-          GoRouter.of(context).push(AppRouter.bottomNaviagationBar);
+          if (state.user.userData == null) {
+            CustomScaffoldMessenger(
+                context, "We need some data Please 🤦‍♂️", Icons.warning);
+            GoRouter.of(context)
+                .push(AppRouter.dataentry1view, extra: state.user.token);
+          } else {
+            CustomScaffoldMessenger(
+                context, 'Success', Icons.check_circle_outline);
+            GoRouter.of(context).push(AppRouter.bottomNaviagationBar);
+          }
         }
       },
       builder: (context, state) {
