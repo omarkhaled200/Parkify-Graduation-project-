@@ -50,7 +50,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           } else {
             CustomScaffoldMessenger(
                 context, 'Success', Icons.check_circle_outline);
-            GoRouter.of(context).push(AppRouter.bottomNaviagationBar);
+            GoRouter.of(context)
+                .push(AppRouter.bottomNaviagationBar, extra: state.user.token);
           }
         }
       },
@@ -124,12 +125,12 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                 if (value == null || value.isEmpty) {
                                   return 'Please  Enter your password';
                                 }
-                                if (!valdiate()
-                                        .valdiatepassword(password: password) ||
-                                    !valdiate()
-                                        .valdiatepassword(password: password)) {
-                                  return 'It must contain at least one uppercase letter (e.g., A, B, C...)\nIt must contain at least one lowercase letter (e.g., a, b, c...) \nIt must contain at least one number (e.g., 0, 1, 2...).\nIt must contain at least one special character (e.g., !, @, #, &, *, ~).\nIt must be at least 8 characters long';
-                                }
+                                // if (!valdiate()
+                                //         .valdiatepassword(password: password) ||
+                                //     !valdiate()
+                                //         .valdiatepassword(password: password)) {
+                                //   return 'It must contain at least one uppercase letter (e.g., A, B, C...)\nIt must contain at least one lowercase letter (e.g., a, b, c...) \nIt must contain at least one number (e.g., 0, 1, 2...).\nIt must contain at least one special character (e.g., !, @, #, &, *, ~).\nIt must be at least 8 characters long';
+                                // }
                               },
                             ),
                             SizedBox(height: heaight * 0.03),
@@ -142,7 +143,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                             SizedBox(height: heaight * 0.03),
                             Center(
                               child: state is UserLoginToAccountLoading
-                                  ? SpinKitFadingCircle(
+                                  ? const SpinKitFadingCircle(
                                       color: Colors.black,
                                     )
                                   : CustomButton(

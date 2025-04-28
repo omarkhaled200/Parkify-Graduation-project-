@@ -1,5 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:parkify/Feature/Gift/Home/persentation/Views/Gift_view.dart';
 import 'package:parkify/Feature/Home/persentation/Views/HomePage1.dart';
 import 'package:parkify/Feature/Payment/Home/persentation/Views/Payment_View.dart';
@@ -16,15 +18,17 @@ class BottomNaviagationBar extends StatefulWidget {
 class _Homepage2bodyState extends State<BottomNaviagationBar> {
   int _currentIndex = 0;
 
-  final List<Widget> _widgetOptions = const <Widget>[
-    Homepage1(),
-    GiftView(),
-    PaymentView(),
-    ProfileView(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final token = GoRouterState.of(context).extra as String?;
+    final List<Widget> _widgetOptions = <Widget>[
+      Homepage1(),
+      GiftView(),
+      PaymentView(
+        token: token!,
+      ),
+      ProfileView(),
+    ];
     return Scaffold(
       body: _widgetOptions.elementAt(_currentIndex),
       bottomNavigationBar: CurvedNavigationBar(

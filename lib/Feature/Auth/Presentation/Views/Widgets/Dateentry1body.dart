@@ -13,7 +13,6 @@ import 'package:parkify/Core/utlis/CustomTextField.dart';
 import 'package:parkify/Core/utlis/Functions/CustomScaffoldMessenger.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Auth/Presentation/View_Model/Setup_User_Data_Cubit/setup_user_data_cubit.dart';
-import 'package:parkify/Feature/Auth/Presentation/View_Model/User_Register_New_Account_cubit/user_register_new_account_cubit.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/Widgets/CustomCheckbox.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/Widgets/CustomDisplayContent.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/Widgets/LogoinenteryImage.dart';
