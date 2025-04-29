@@ -7,7 +7,7 @@ class CustomAmountRickText extends StatelessWidget {
     required this.item,
   });
 
-  final Map<String, String> item;
+  final double item;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class CustomAmountRickText extends StatelessWidget {
         ),
         children: [
           TextSpan(
-            text: item["amount"]!, // Second part (green color)
+            text: '${item}', // Second part (green color)
             style: TextStyle(
               color: Colors.green,
               fontWeight: FontWeight.bold,

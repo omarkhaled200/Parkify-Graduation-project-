@@ -9,7 +9,8 @@ import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/CustomUs
 import 'package:parkify/constant.dart';
 
 class ProfileViewbody extends StatelessWidget {
-  const ProfileViewbody({super.key});
+  const ProfileViewbody({super.key, required this.token});
+  final String token;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +72,11 @@ class ProfileViewbody extends StatelessWidget {
             SizedBox(
               height: heaight * 0.03,
             ),
-            CustomUserInformationSection(width: width, heaight: heaight)
+            CustomUserInformationSection(
+              width: width,
+              heaight: heaight,
+              token: token,
+            )
           ],
         ),
       ),

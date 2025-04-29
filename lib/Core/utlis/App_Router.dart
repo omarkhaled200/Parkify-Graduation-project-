@@ -82,12 +82,8 @@ abstract class AppRouter {
         builder: (context, state) => const EditProfile(),
       ),
       GoRoute(
-        path: profilepage,
-        builder: (context, state) => const ProfileView(),
-      ),
-      GoRoute(
         path: Historypage,
-        builder: (context, state) => const HistoryView(),
+        builder: (context, state) => HistoryView(token: state.extra as String),
       ),
     ],
   );

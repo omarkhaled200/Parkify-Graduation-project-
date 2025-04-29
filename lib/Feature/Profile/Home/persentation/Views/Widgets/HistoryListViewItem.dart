@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parkify/Core/utlis/assets.dart';
+import 'package:parkify/Feature/Profile/Home/data/Model/history_data_modal/history_data_modal.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/CustomAmountRickText.dart';
 import 'package:parkify/constant.dart';
 
@@ -9,7 +10,7 @@ class HistoryListViewItem extends StatelessWidget {
     required this.item,
   });
 
-  final Map<String, String> item;
+  final HistoryDataModal item;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class HistoryListViewItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  item["spot"]!,
+                  'Spot ${item.id}',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -37,9 +38,9 @@ class HistoryListViewItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  item["code"]!,
+                  'License Plate:${item.licensePlate}',
                   style: TextStyle(
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w700,
                     fontFamily: Assets.textfamily,
                     fontSize: 14,
                   ),
@@ -52,27 +53,34 @@ class HistoryListViewItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomAmountRickText(item: item),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Arrival: ${item["arrival"]}",
-                      style: TextStyle(
-                        color: const Color(0xffA0A0A0),
-                        fontFamily: Assets.textfamily,
-                        fontSize: 10,
+                CustomAmountRickText(item: item.invoicePrice!),
+                const SizedBox(
+                  width: 5,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Arrival: ${item.enteredAt}",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: const Color(0xffA0A0A0),
+                          fontFamily: Assets.textfamily,
+                          fontSize: 10,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "Exit: ${item["exit"]}",
-                      style: TextStyle(
-                        color: const Color(0xffA0A0A0),
-                        fontFamily: Assets.textfamily,
-                        fontSize: 10,
+                      Text(
+                        "Exit: ${item.exitedAt}",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: const Color(0xffA0A0A0),
+                          fontFamily: Assets.textfamily,
+                          fontSize: 10,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),

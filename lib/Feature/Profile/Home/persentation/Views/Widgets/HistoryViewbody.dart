@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:parkify/Core/utlis/Icon_All_app.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/CustomTabBar.dart';
-import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/HistoryListView.dart';
+import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/HistoryListViewPublic.dart';
+import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/HistoryListViewReserved.dart';
 import 'package:parkify/constant.dart';
 
 class HistoryViewbody extends StatefulWidget {
-  const HistoryViewbody({super.key});
-
+  const HistoryViewbody({super.key, required this.token});
+  final String token;
   @override
   State<HistoryViewbody> createState() => _HistoryViewbodyState();
 }
@@ -38,7 +39,9 @@ class _HistoryViewbodyState extends State<HistoryViewbody> {
               child: Column(
                 children: [
                   Expanded(
-                    child: HistoryListView(),
+                    child: HistoryListView(
+                      token: widget.token,
+                    ),
                   ),
                 ],
               ),
@@ -46,7 +49,9 @@ class _HistoryViewbodyState extends State<HistoryViewbody> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Expanded(
-                child: HistoryListView(),
+                child: Historylistviewpublic(
+                  token: widget.token,
+                ),
               ),
             ),
           ],

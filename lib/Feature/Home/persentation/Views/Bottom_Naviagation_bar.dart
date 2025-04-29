@@ -27,7 +27,7 @@ class _Homepage2bodyState extends State<BottomNaviagationBar> {
       PaymentView(
         token: token!,
       ),
-      ProfileView(),
+      ProfileView(token: token),
     ];
     return Scaffold(
       body: _widgetOptions.elementAt(_currentIndex),

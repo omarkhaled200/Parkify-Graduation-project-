@@ -11,11 +11,12 @@ class CustomUserInformationSection extends StatelessWidget {
     super.key,
     required this.width,
     required this.heaight,
+    required this.token,
   });
 
   final double width;
   final double heaight;
-
+  final String token;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -31,7 +32,7 @@ class CustomUserInformationSection extends StatelessWidget {
               heaight: heaight,
               text: 'View History',
               onpressed: () {
-                GoRouter.of(context).push(AppRouter.Historypage);
+                GoRouter.of(context).push(AppRouter.Historypage, extra: token);
               },
             ),
             SizedBox(
