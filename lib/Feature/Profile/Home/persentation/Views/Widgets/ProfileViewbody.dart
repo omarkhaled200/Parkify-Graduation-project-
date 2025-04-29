@@ -27,36 +27,54 @@ class ProfileViewbody extends StatelessWidget {
               onPressed: () {
                 GoRouter.of(context).push(AppRouter.Editprofile);
               },
-              icon: Icon(
+              icon: const Icon(
                 FontAwesomeIcons.pencil,
-                color: Colors.black.withOpacity(0.8),
+                color: Colors.black,
                 size: 20,
               ))
         ],
       ),
-      body: Center(
-          child: Column(
-        children: [
-          SizedBox(
-            height: heaight * 0.02,
-          ),
-          CusotmCircleAvater(width: width),
-          SizedBox(
-            height: heaight * 0.01,
-          ),
-          Text(
-            'User Name',
-            style: TextStyle(
-                fontFamily: Assets.textfamily,
-                fontSize: 22,
-                fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: heaight * 0.01,
-          ),
-          CustomUserInformationSection(width: width, heaight: heaight)
-        ],
-      )),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: ListView(
+          children: [
+            SizedBox(
+              height: heaight * 0.02,
+            ),
+            Row(
+              children: [
+                CusotmCircleAvater(width: width),
+                SizedBox(
+                  width: width * 0.03,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Omar khaled',
+                      style: TextStyle(
+                          fontFamily: Assets.textfamily,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Omar@gmail.com',
+                      style: TextStyle(
+                          fontFamily: Assets.textfamily,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: heaight * 0.03,
+            ),
+            CustomUserInformationSection(width: width, heaight: heaight)
+          ],
+        ),
+      ),
     );
   }
 }

@@ -8,9 +8,16 @@ import 'package:parkify/Feature/Payment/Home/persentation/Views/Widgets/CustomTr
 import 'package:parkify/Feature/Payment/Home/persentation/Views/Widgets/FlipCardWidget.dart';
 import 'package:parkify/constant.dart';
 
-class PaymentViewbody extends StatelessWidget {
+class PaymentViewbody extends StatefulWidget {
   const PaymentViewbody({super.key, required this.token});
   final String token;
+
+  @override
+  State<PaymentViewbody> createState() => _PaymentViewbodyState();
+}
+
+class _PaymentViewbodyState extends State<PaymentViewbody> {
+  ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     var heaight = MediaQuery.of(context).size.height;
@@ -27,6 +34,7 @@ class PaymentViewbody extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: CustomScrollView(
+          controller: scrollController,
           slivers: [
             SliverToBoxAdapter(
               child: FlipCardWidget(heaight: heaight, controller: controller),
@@ -42,7 +50,7 @@ class PaymentViewbody extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return BottomSheetView(
-                          token: token,
+                          token: widget.token,
                         );
                       });
                 },
@@ -73,7 +81,20 @@ class PaymentViewbody extends StatelessWidget {
             SliverList.builder(
               itemCount: 10,
               itemBuilder: (context, index) {
-                return CustomTransactionHistory(heaight: heaight, width: width);
+                return AnimatedBuilder(
+                    animation: scrollController,
+                    builder: (context, child) {
+                      double offset = 0;
+                      if (scrollController.hasClients) {
+                        offset = scrollController.offset / 150 - index;
+                      }
+                      offset = offset.clamp(0, 2);
+                      return Transform.scale(
+                        scale: 1 - (offset * 0.2),
+                        child: CustomTransactionHistory(
+                            heaight: heaight, width: width),
+                      );
+                    });
               },
             ),
           ],

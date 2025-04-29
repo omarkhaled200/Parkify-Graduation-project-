@@ -7,9 +7,15 @@ import 'package:parkify/Feature/Home/persentation/Views/Widgets/CustomLocationCa
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/DisplayMoneyWidget.dart';
 import 'package:parkify/constant.dart';
 
-class Homepage1body extends StatelessWidget {
+class Homepage1body extends StatefulWidget {
   const Homepage1body({super.key});
 
+  @override
+  State<Homepage1body> createState() => _Homepage1bodyState();
+}
+
+class _Homepage1bodyState extends State<Homepage1body> {
+  ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     var heaight = MediaQuery.of(context).size.height;
@@ -43,13 +49,28 @@ class Homepage1body extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.builder(
+                    controller: controller,
                     itemCount: 10,
-                    itemBuilder: (context, Index) {
-                      return GestureDetector(
-                          onTap: () {
-                            GoRouter.of(context).push(AppRouter.Homepage2);
-                          },
-                          child: CustomLocationCard());
+                    itemBuilder: (context, index) {
+                      return AnimatedBuilder(
+                        animation: controller,
+                        builder: (context, child) {
+                          double offset = 0;
+                          if (controller.hasClients) {
+                            offset = controller.offset / 65 - index;
+                          }
+                          offset = offset.clamp(0, 3);
+                          return Transform.scale(
+                            scale: 1 - (offset * 0.2),
+                            child: GestureDetector(
+                                onTap: () {
+                                  GoRouter.of(context)
+                                      .push(AppRouter.Homepage2);
+                                },
+                                child: const CustomLocationCard()),
+                          );
+                        },
+                      );
                     }),
               ),
             ],

@@ -12,15 +12,11 @@ class CusotmCircleAvater extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      radius: width * 0.2,
-      backgroundColor: Colors.black,
-      child: CircleAvatar(
-        radius: width * 0.19,
-        backgroundColor: Colors.white,
-        child: Image.asset(
-          Assets.logo,
-          fit: BoxFit.fill,
-        ),
+      radius: width * 0.15,
+      backgroundColor: Colors.white,
+      child: Image.asset(
+        Assets.logo,
+        fit: BoxFit.fill,
       ),
     );
   }

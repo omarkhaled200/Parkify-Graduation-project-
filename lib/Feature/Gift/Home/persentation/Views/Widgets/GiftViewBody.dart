@@ -5,9 +5,15 @@ import 'package:parkify/Feature/Gift/Home/persentation/Views/Widgets/CustomConta
 import 'package:parkify/Feature/Gift/Home/persentation/Views/Widgets/CustomPointGiftSliverGrid.dart';
 import 'package:parkify/constant.dart';
 
-class GiftViewBody extends StatelessWidget {
+class GiftViewBody extends StatefulWidget {
   const GiftViewBody({super.key});
 
+  @override
+  State<GiftViewBody> createState() => _GiftViewBodyState();
+}
+
+class _GiftViewBodyState extends State<GiftViewBody> {
+  ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -31,6 +37,7 @@ class GiftViewBody extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: CustomScrollView(
+          controller: controller,
           slivers: [
             SliverToBoxAdapter(
               child: Column(
@@ -55,7 +62,9 @@ class GiftViewBody extends StatelessWidget {
                 height: height * 0.02,
               ),
             ),
-            const CustomPointGiftSliverGrid(),
+            CustomPointGiftSliverGrid(
+              controller: controller,
+            ),
           ],
         ),
       ),
