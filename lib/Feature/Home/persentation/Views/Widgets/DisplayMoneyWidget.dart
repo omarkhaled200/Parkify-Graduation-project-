@@ -10,33 +10,38 @@ class DisplaymoneyWidget extends StatelessWidget {
   });
 
   final double width;
-  final int price;
+  final double price;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
-      child: Container(
-        width: width * 0.25,
-        height: 30,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-        ),
+      child: Expanded(
         child: Row(
           children: [
-            Image.asset(
-              Assets.gold,
-              width: width * 0.1,
-              fit: BoxFit.fill,
+            Container(
+              height: 30,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Row(
+                children: [
+                  Image.asset(
+                    Assets.gold,
+                    width: width * 0.1,
+                    fit: BoxFit.fill,
+                  ),
+                  Text(
+                    '$price',
+                    style: TextStyle(
+                        fontFamily: Assets.textfamily,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500),
+                  )
+                ],
+              ),
             ),
-            Text(
-              '$price',
-              style: TextStyle(
-                  fontFamily: Assets.textfamily,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500),
-            )
           ],
         ),
       ),

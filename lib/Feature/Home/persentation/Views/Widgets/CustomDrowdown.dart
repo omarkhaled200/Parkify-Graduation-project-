@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 
 class CustomDrowdown extends StatefulWidget {
-  CustomDrowdown(
-      {super.key,
-      required this.list,
-      required this.selectedPlate,
-      required this.text});
+  CustomDrowdown({
+    super.key,
+    required this.list,
+    required this.selectedPlate,
+    required this.text,
+    required this.onChanged, // <-- ✅ أضف ده
+  });
 
   String selectedPlate;
-
   final List<String> list;
   final String text;
+
+  final Function(String) onChanged; // <-- ✅ Define callback
+
   @override
   State<CustomDrowdown> createState() => _CustomDrowdownState();
 }
@@ -43,6 +47,7 @@ class _CustomDrowdownState extends State<CustomDrowdown> {
         setState(() {
           widget.selectedPlate = newvalue!;
         });
+        widget.onChanged(newvalue!); // <-- ✅ استدعي الكولباك هنا
       },
     );
   }
