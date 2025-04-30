@@ -13,8 +13,8 @@ class HomeRepoImpl extends HomeRepo {
   Future<Either<Failure, List<HistoryDataModal>>> getPublicSpotHistory(
       {required String token}) async {
     try {
-      var data = await apiClass.get(
-          endpoint: 'user/getReservableSpotLog', token: token);
+      var data =
+          await apiClass.get(endpoint: 'user/getPublicSpotLog', token: token);
       List<HistoryDataModal> history = [];
       for (var item in data) {
         history.add(HistoryDataModal.fromJson(item));
@@ -32,8 +32,8 @@ class HomeRepoImpl extends HomeRepo {
   Future<Either<Failure, List<HistoryDataModal>>> getReservedSpotHistory(
       {required String token}) async {
     try {
-      var data =
-          await apiClass.get(endpoint: 'user/getPublicSpotLog', token: token);
+      var data = await apiClass.get(
+          endpoint: 'user/getReservableSpotLog', token: token);
       List<HistoryDataModal> history = [];
       for (var item in data) {
         history.add(HistoryDataModal.fromJson(item));

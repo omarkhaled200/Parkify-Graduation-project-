@@ -48,10 +48,14 @@ class _HistoryViewbodyState extends State<HistoryViewbody> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Expanded(
-                child: Historylistviewpublic(
-                  token: widget.token,
-                ),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Historylistviewpublic(
+                      token: widget.token,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

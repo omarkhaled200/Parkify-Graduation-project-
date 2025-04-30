@@ -30,7 +30,7 @@ class HistoryListViewItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Spot ${item.id}',
+                  'Spot:${item.spotcode}',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -38,7 +38,7 @@ class HistoryListViewItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'License Plate:${item.licensePlate}',
+                  'Plate:${item.licensePlate}',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontFamily: Assets.textfamily,

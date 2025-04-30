@@ -19,58 +19,53 @@ class CustomUserInformationSection extends StatelessWidget {
   final String token;
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        width: width,
-        child: Column(
-          children: [
-            SizedBox(
-              height: heaight * 0.01,
-            ),
-            CustomViewHistoryBtn(
-              width: width,
-              heaight: heaight,
-              text: 'View History',
-              onpressed: () {
-                GoRouter.of(context).push(AppRouter.Historypage, extra: token);
-              },
-            ),
-            SizedBox(
-              height: heaight * 0.01,
-            ),
-            CustomViewHistoryBtn(
-              width: width,
-              heaight: heaight,
-              text: 'My Plates',
-              onpressed: () {},
-            ),
-            SizedBox(
-              height: heaight * 0.01,
-            ),
-            CustomViewHistoryBtn(
-              icon: FontAwesomeIcons.language,
-              width: width,
-              heaight: heaight,
-              text: "Language",
-              onpressed: () {},
-            ),
-            SizedBox(
-              height: heaight * 0.01,
-            ),
-            CustomViewHistoryBtn(
-              icon: Icons.info,
-              width: width,
-              heaight: heaight,
-              text: 'About Us',
-              onpressed: () {},
-            ),
-            SizedBox(
-              height: heaight * 0.01,
-            ),
-            CustomLogOutbutton(heaight: heaight),
-          ],
+    return Column(
+      children: [
+        SizedBox(
+          height: heaight * 0.01,
         ),
-      ),
+        CustomViewHistoryBtn(
+          width: width,
+          heaight: heaight,
+          text: 'View History',
+          onpressed: () {
+            GoRouter.of(context).push(AppRouter.Historypage, extra: token);
+          },
+        ),
+        SizedBox(
+          height: heaight * 0.01,
+        ),
+        CustomViewHistoryBtn(
+          width: width,
+          heaight: heaight,
+          text: 'My Plates',
+          onpressed: () {},
+        ),
+        SizedBox(
+          height: heaight * 0.01,
+        ),
+        CustomViewHistoryBtn(
+          icon: FontAwesomeIcons.language,
+          width: width,
+          heaight: heaight,
+          text: "Language",
+          onpressed: () {},
+        ),
+        SizedBox(
+          height: heaight * 0.01,
+        ),
+        CustomViewHistoryBtn(
+          icon: Icons.info,
+          width: width,
+          heaight: heaight,
+          text: 'About Us',
+          onpressed: () {},
+        ),
+        SizedBox(
+          height: heaight * 0.01,
+        ),
+        CustomLogOutbutton(heaight: heaight),
+      ],
     );
   }
 }

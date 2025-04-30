@@ -17,13 +17,6 @@ class HistoryListView extends StatefulWidget {
 
 class _HistoryListViewState extends State<HistoryListView> {
   ScrollController controller = ScrollController();
-  final item = {
-    "spot": "Spot 1",
-    "code": "Code 1",
-    "amount": "\$11.99",
-    "arrival": "2023-10-01 10:00 AM",
-    "exit": "2023-10-01 12:00 PM",
-  };
 
   @override
   Widget build(BuildContext context) {

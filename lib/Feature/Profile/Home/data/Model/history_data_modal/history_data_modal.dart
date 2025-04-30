@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 class HistoryDataModal extends Equatable {
   final int? id;
   final String? licensePlate;
+  final String? spotcode;
   final int? userId;
   final double? invoicePrice;
   final int? isPayed;
@@ -10,6 +11,7 @@ class HistoryDataModal extends Equatable {
   final DateTime? exitedAt;
 
   const HistoryDataModal({
+    this.spotcode,
     this.id,
     this.licensePlate,
     this.userId,
@@ -23,6 +25,7 @@ class HistoryDataModal extends Equatable {
     return HistoryDataModal(
       id: json['id'] as int?,
       licensePlate: json['license_plate'] as String?,
+      spotcode: json['spot_code'] as String?,
       userId: json['user_id'] as int?,
       invoicePrice: (json['invoice_price'] as num?)?.toDouble(),
       isPayed: json['is_payed'] as int?,
@@ -38,6 +41,7 @@ class HistoryDataModal extends Equatable {
   Map<String, dynamic> toJson() => {
         'id': id,
         'license_plate': licensePlate,
+        'spot_code': spotcode,
         'user_id': userId,
         'invoice_price': invoicePrice,
         'is_payed': isPayed,
@@ -50,6 +54,7 @@ class HistoryDataModal extends Equatable {
     return [
       id,
       licensePlate,
+      spotcode,
       userId,
       invoicePrice,
       isPayed,

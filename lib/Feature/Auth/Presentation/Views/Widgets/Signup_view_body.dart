@@ -185,7 +185,7 @@ class _SignupviewbodyState extends State<Signupviewbody> {
                             CustomRowAccount(
                               text: 'Sign in',
                               onPressed: () {
-                                GoRouter.of(context).push(AppRouter.loginview);
+                                GoRouter.of(context).pop();
                               },
                             ),
                             SizedBox(height: heaight * 0.015),
