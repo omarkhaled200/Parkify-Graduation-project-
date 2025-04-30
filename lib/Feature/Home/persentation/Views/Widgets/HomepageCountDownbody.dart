@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:parkify/Core/utlis/CustomButton.dart';
+import 'package:parkify/Core/utlis/Functions/CustomScaffoldMessenger.dart';
 import 'package:parkify/Core/utlis/Icon_All_app.dart';
 import 'package:parkify/Core/utlis/assets.dart';
+import 'package:parkify/Feature/Home/persentation/View_Model/Cancel%20Reserve%20Cubit/cancel_reserve_cubit.dart';
+import 'package:parkify/Feature/Home/persentation/View_Model/Deactivate_Blocker_Cubit/deactivate_blocker_cubit.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/CountdownTimerScreen.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/DisplayMoneyWidget.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/ShowtheFreeandOccupiedSpot.dart';
@@ -65,22 +70,61 @@ class HomepageCountDownbody extends StatelessWidget {
               children: [
                 Expanded(
                     flex: 1,
-                    child: CustomButton(
-                      width: width,
-                      heaight: heaight,
-                      text: 'Blocker ⬇',
-                      onPressed: () {},
+                    child: BlocConsumer<DeactivateBlockerCubit,
+                        DeactivateBlockerState>(
+                      listener: (context, state) {
+                        if (state is DeactivateBlockerFailure) {
+                          CustomScaffoldMessenger(
+                              context,
+                              "Error is : ${state.errmessage}",
+                              FontAwesomeIcons.circleXmark);
+                        } else if (state is DeactivateBlockerSuccess) {
+                          CustomScaffoldMessenger(context, state.output,
+                              Icons.check_circle_outline);
+                        }
+                      },
+                      builder: (context, state) {
+                        return CustomButton(
+                          width: width,
+                          heaight: heaight,
+                          text: 'Blocker ⬇',
+                          onPressed: () {
+                            context
+                                .read<DeactivateBlockerCubit>()
+                                .deactivateReservationBlocker(token: 'Token');
+                          },
+                        );
+                      },
                     )),
                 const SizedBox(
                   width: 5,
                 ),
                 Expanded(
                     flex: 1,
-                    child: CustomButton(
-                      width: width,
-                      heaight: heaight,
-                      text: 'Cancel',
-                      onPressed: () {},
+                    child: BlocConsumer<CancelReserveCubit, CancelReserveState>(
+                      listener: (context, state) {
+                        if (state is CancelReserveFailure) {
+                          CustomScaffoldMessenger(
+                              context,
+                              "Error is : ${state.errmessage}",
+                              FontAwesomeIcons.circleXmark);
+                        } else if (state is CancelReserveSuccess) {
+                          CustomScaffoldMessenger(context, state.reserve,
+                              Icons.check_circle_outline);
+                        }
+                      },
+                      builder: (context, state) {
+                        return CustomButton(
+                          width: width,
+                          heaight: heaight,
+                          text: 'Cancel',
+                          onPressed: () {
+                            context
+                                .read<CancelReserveCubit>()
+                                .cancelReservation(token: "token");
+                          },
+                        );
+                      },
                     )),
               ],
             )
