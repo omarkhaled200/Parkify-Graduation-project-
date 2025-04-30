@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:parkify/Core/errors/failure.dart';
 import 'package:parkify/Core/utlis/Token_Functions.dart';
 import 'package:parkify/Core/utlis/api_class.dart';
-import 'package:parkify/Feature/Auth/data/Models/user_data/user.dart';
-import 'package:parkify/Feature/Auth/data/Models/user_data/user_data.dart';
+import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
+
 import 'package:parkify/Feature/Auth/data/Repos/Home_Repo.dart';
 
 class HomeRepoImpl extends HomeRepo {

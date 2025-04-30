@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:parkify/Core/errors/failure.dart';
-import 'package:parkify/Feature/Auth/data/Models/user_data/user_data.dart';
+import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
 
 abstract class HomeRepo {
   Future<Either<Failure, UserModel>> postLogin(

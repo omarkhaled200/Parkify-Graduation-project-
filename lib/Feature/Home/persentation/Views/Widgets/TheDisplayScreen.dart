@@ -24,12 +24,14 @@ class TheDisplayScreen extends StatelessWidget {
         color: kprimaryColor,
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          fontFamily: Assets.textfamily,
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            fontFamily: Assets.textfamily,
+          ),
         ),
       ),
     );

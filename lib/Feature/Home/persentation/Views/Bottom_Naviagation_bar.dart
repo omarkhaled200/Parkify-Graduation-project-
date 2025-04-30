@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
 import 'package:parkify/Feature/Gift/Home/persentation/Views/Gift_view.dart';
 import 'package:parkify/Feature/Home/persentation/Views/HomePage1.dart';
 import 'package:parkify/Feature/Payment/Home/persentation/Views/Payment_View.dart';
@@ -20,14 +21,16 @@ class _Homepage2bodyState extends State<BottomNaviagationBar> {
 
   @override
   Widget build(BuildContext context) {
-    final token = GoRouterState.of(context).extra as String?;
+    final userdate = GoRouterState.of(context).extra as UserModel?;
     final List<Widget> _widgetOptions = <Widget>[
-      Homepage1(),
+      Homepage1(
+        userdata: userdate!,
+      ),
       GiftView(),
       PaymentView(
-        token: token!,
+        token: userdate.token!,
       ),
-      ProfileView(token: token),
+      ProfileView(token: userdate.token!),
     ];
     return Scaffold(
       body: _widgetOptions.elementAt(_currentIndex),

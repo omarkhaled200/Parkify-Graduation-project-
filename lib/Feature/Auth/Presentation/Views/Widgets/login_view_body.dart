@@ -51,7 +51,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             CustomScaffoldMessenger(
                 context, 'Success', Icons.check_circle_outline);
             GoRouter.of(context)
-                .push(AppRouter.bottomNaviagationBar, extra: state.user.token);
+                .push(AppRouter.bottomNaviagationBar, extra: state.user);
           }
         }
       },

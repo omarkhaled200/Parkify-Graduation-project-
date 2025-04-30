@@ -19,7 +19,12 @@ class HomepageCountDownbody extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: kprimaryColor,
         title: IconApp(width: width),
-        actions: [DisplaymoneyWidget(width: width)],
+        actions: [
+          DisplaymoneyWidget(
+            width: width,
+            price: 200,
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 8.0, right: 8),

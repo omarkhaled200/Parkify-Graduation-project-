@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/assets.dart';
+import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
 
 class CustomReserveNowButton extends StatelessWidget {
   const CustomReserveNowButton({
     super.key,
     required this.width,
     required this.heaight,
+    required this.userdata,
   });
 
   final double width;
   final double heaight;
-
+  final UserModel userdata;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -28,7 +30,8 @@ class CustomReserveNowButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           ),
           onPressed: () {
-            GoRouter.of(context).push(AppRouter.reservationpage);
+            GoRouter.of(context)
+                .push(AppRouter.reservationpage, extra: userdata);
           },
           child: Text(
             'Reserve Now?',

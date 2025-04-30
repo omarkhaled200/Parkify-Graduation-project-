@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/CustomButton.dart';
 import 'package:parkify/Core/utlis/Icon_All_app.dart';
+import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/CustomDrowdown.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/CustomTimeOfDay.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/DisplayMoneyWidget.dart';
@@ -11,8 +12,8 @@ import 'package:parkify/Feature/Home/persentation/Views/Widgets/TheDisplayScreen
 import 'package:parkify/constant.dart';
 
 class ReservationViewbody extends StatefulWidget {
-  const ReservationViewbody({super.key});
-
+  const ReservationViewbody({super.key, required this.userData});
+  final UserModel userData;
   @override
   State<ReservationViewbody> createState() => _ReservationViewbodyState();
 }
@@ -20,14 +21,7 @@ class ReservationViewbody extends StatefulWidget {
 class _ReservationViewbodyState extends State<ReservationViewbody> {
   List<String> _list = ['Plate1', 'Plate2', 'Plate3', 'Plate4', 'Plate5'];
   String? _selectedPlate = 'Plate1';
-  List<String> _paymentlist = [
-    'payment1',
-    'payment2',
-    'payment3',
-    'payment4',
-    'payment5'
-  ];
-  String? _selectedpayment = 'payment1';
+
   @override
   Widget build(BuildContext context) {
     var heaight = MediaQuery.of(context).size.height;
@@ -37,7 +31,12 @@ class _ReservationViewbodyState extends State<ReservationViewbody> {
         automaticallyImplyLeading: false,
         backgroundColor: kprimaryColor,
         title: IconApp(width: width),
-        actions: [DisplaymoneyWidget(width: width)],
+        actions: [
+          DisplaymoneyWidget(
+            width: width,
+            price: widget.userData.userData!.balance!,
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 16),
@@ -52,7 +51,7 @@ class _ReservationViewbodyState extends State<ReservationViewbody> {
             ),
             TheDisplayScreen(heaight: heaight, width: width, text: 'Screen'),
             SizedBox(
-              height: heaight * 0.02,
+              height: heaight * 0.05,
             ),
             CustomDrowdown(
               list: _list,
@@ -60,19 +59,11 @@ class _ReservationViewbodyState extends State<ReservationViewbody> {
               text: 'Select License Plate',
             ),
             SizedBox(
-              height: heaight * 0.02,
+              height: heaight * 0.03,
             ),
             const CustomTimeOfDay(),
             SizedBox(
-              height: heaight * 0.02,
-            ),
-            CustomDrowdown(
-              list: _paymentlist,
-              selectedPlate: _selectedpayment!,
-              text: 'Choose Payment Method',
-            ),
-            SizedBox(
-              height: heaight * 0.02,
+              height: heaight * 0.05,
             ),
             CustomButton(
               width: width,

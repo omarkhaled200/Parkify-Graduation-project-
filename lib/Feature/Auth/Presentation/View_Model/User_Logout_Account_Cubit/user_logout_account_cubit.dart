@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:parkify/Core/utlis/Token_Functions.dart';
-import 'package:parkify/Feature/Auth/data/Models/user_data/user_data.dart';
+
 import 'package:parkify/Feature/Auth/data/Repos/Home_Repo.dart';
 
 part 'user_logout_account_state.dart';

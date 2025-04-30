@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:parkify/Feature/Auth/data/Models/user_data/user_data.dart';
+import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
+
 import 'package:parkify/Feature/Auth/data/Repos/Home_Repo.dart';
 
 part 'setup_user_data_state.dart';

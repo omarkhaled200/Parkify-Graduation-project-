@@ -6,9 +6,11 @@ class DisplaymoneyWidget extends StatelessWidget {
   const DisplaymoneyWidget({
     super.key,
     required this.width,
+    required this.price,
   });
 
   final double width;
+  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class DisplaymoneyWidget extends StatelessWidget {
               fit: BoxFit.fill,
             ),
             Text(
-              '200',
+              '$price',
               style: TextStyle(
                   fontFamily: Assets.textfamily,
                   fontSize: 18,

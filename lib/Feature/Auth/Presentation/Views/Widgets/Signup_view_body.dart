@@ -14,7 +14,6 @@ import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Auth/Presentation/View_Model/User_Register_New_Account_cubit/user_register_new_account_cubit.dart';
 import 'package:parkify/Feature/Auth/Presentation/View_Model/User_login_toAccount_Cubit/user_login_to_account_cubit.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/Widgets/LogoinenteryImage.dart';
-import 'package:parkify/Feature/Auth/data/Models/user_data/user.dart';
 import 'package:parkify/constant.dart';
 
 class Signupviewbody extends StatefulWidget {
