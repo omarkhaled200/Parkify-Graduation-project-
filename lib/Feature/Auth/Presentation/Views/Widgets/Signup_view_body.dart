@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/CustomButton.dart';
 import 'package:parkify/Core/utlis/CustomRowAccount(have%20Account).dart';
@@ -12,7 +10,6 @@ import 'package:parkify/Core/utlis/Functions/CustomScaffoldMessenger.dart';
 import 'package:parkify/Core/utlis/Valdiater.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Auth/Presentation/View_Model/User_Register_New_Account_cubit/user_register_new_account_cubit.dart';
-import 'package:parkify/Feature/Auth/Presentation/View_Model/User_login_toAccount_Cubit/user_login_to_account_cubit.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/Widgets/LogoinenteryImage.dart';
 import 'package:parkify/constant.dart';
 
@@ -43,13 +40,13 @@ class _SignupviewbodyState extends State<Signupviewbody> {
       listener: (context, state) {
         if (state is UserRegisterNewAccountFailure) {
           CustomScaffoldMessenger(context, "Error is : ${state.errmessage}",
-              FontAwesomeIcons.circleXmark);
+              FontAwesomeIcons.circleXmark, Colors.red);
         } else if (state is UserRegisterNewAccountSuccess) {
           if (state.user.userData == null) {
-            CustomScaffoldMessenger(
-                context, "We need some data Please 🤦‍♂️", Icons.warning);
-            GoRouter.of(context)
-                .push(AppRouter.dataentry1view, extra: state.user.token);
+            CustomScaffoldMessenger(context, "We need some data Please 🤦‍♂️",
+                Icons.warning, Colors.red);
+            GoRouter.of(context).push(AppRouter.dataentry1view,
+                extra: {'userdata': state.user.token, 'location': null});
           }
         }
       },

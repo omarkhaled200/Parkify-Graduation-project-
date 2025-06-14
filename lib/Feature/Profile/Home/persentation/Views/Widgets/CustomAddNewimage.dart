@@ -31,7 +31,6 @@ class _CustomAddNewimageState extends State<CustomAddNewimage> {
   @override
   Widget build(BuildContext context) {
     var heaight = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
     return Center(
       child: Stack(
         alignment: Alignment.bottomRight,

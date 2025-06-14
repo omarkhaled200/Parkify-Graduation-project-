@@ -13,15 +13,15 @@ Future<void> customLaunchUrl(BuildContext context, String? url) async {
           mode: LaunchMode.externalApplication, // هنا أضفنا المود
         );
       } else {
-        CustomScaffoldMessenger(
-            context, 'Cannot launch $url', FontAwesomeIcons.circleXmark);
+        CustomScaffoldMessenger(context, 'Cannot launch $url',
+            FontAwesomeIcons.circleXmark, Colors.red);
       }
     } catch (e) {
-      CustomScaffoldMessenger(
-          context, 'An error occurred: $e', FontAwesomeIcons.circleXmark);
+      CustomScaffoldMessenger(context, 'An error occurred: $e',
+          FontAwesomeIcons.circleXmark, Colors.red);
     }
   } else {
     CustomScaffoldMessenger(
-        context, 'URL is invalid', FontAwesomeIcons.circleXmark);
+        context, 'URL is invalid', FontAwesomeIcons.circleXmark, Colors.red);
   }
 }

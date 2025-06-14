@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/DataEntry1.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/LoginView.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/SignUpView.dart';
+import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
+import 'package:parkify/Feature/Home/data/Model/location_model/location_model.dart';
+import 'package:parkify/Feature/Home/persentation/View_Model/Manage_Page/manage_page_cubit.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Bottom_Naviagation_bar.dart';
+import 'package:parkify/Feature/Home/persentation/Views/HomePage1.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Home_page2.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Home_page_Countdown.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Reservation_View.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Edit_Profile.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/History_View.dart';
-import 'package:parkify/Feature/Profile/Home/persentation/Views/Profile_view.dart';
+import 'package:parkify/Feature/Profile/Home/persentation/Views/Language_Page.dart';
+import 'package:parkify/Feature/Profile/Home/persentation/Views/Plates_View.dart';
 
 import 'package:parkify/Feature/Splash/peresentation/Views/Onboarding_View1.dart';
 import 'package:parkify/Feature/Splash/peresentation/Views/Onboarding_View2.dart';
@@ -31,7 +38,10 @@ abstract class AppRouter {
   static final Editprofile = '/editprofile';
   static final profilepage = '/profilepage';
   static final Historypage = '/historypage';
+  static final platespage = '/platespage';
   static final loginpage = '/loginpage';
+  static final languagepage = '/languagepage';
+  static final homepage1 = '/homepage1';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -40,6 +50,69 @@ abstract class AppRouter {
           return CustomTransitionPage(
             key: state.pageKey,
             child: const SplashView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+          path: homepage1,
+          pageBuilder: (context, state) {
+            final extra = state.extra as UserModel;
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: Homepage1(userdata: extra),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            );
+          }),
+      GoRoute(
+          path: homePageCountdown,
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: HomePageCountdown(user: state.extra as UserModel),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            );
+          }),
+      GoRoute(
+        path: platespage,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const PlatesView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: languagepage,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const LanguagePage(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(
@@ -100,19 +173,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: bottomNaviagationBar,
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
-            key: state.pageKey,
-            child: const BottomNaviagationBar(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
+        builder: (context, state) => const CustomBottomNavigationBar(),
       ),
       GoRoute(
         path: reservationpage,
@@ -120,22 +181,6 @@ abstract class AppRouter {
           return CustomTransitionPage(
             key: state.pageKey,
             child: const ReservationView(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: homePageCountdown,
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
-            key: state.pageKey,
-            child: const HomePageCountdown(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(

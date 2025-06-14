@@ -45,7 +45,9 @@ class _HistoryListViewState extends State<HistoryListView> {
             },
           );
         } else if (state is GetReservedSpotHistoryFailure) {
-          CustomScaffoldMessenger(context, state.errmessage, Icons.error);
+          // CustomScaffoldMessenger(
+          //     context, state.errmessage, Icons.error, Colors.red);
+          print('the error messege is : ${state.errmessage}');
           return const SizedBox.shrink();
         } else {
           return const SpinKitFadingCircle(

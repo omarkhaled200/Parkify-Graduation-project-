@@ -1,17 +1,24 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:parkify/Core/utlis/Icon_All_app.dart';
-import 'package:parkify/Core/utlis/assets.dart';
-import 'package:parkify/Feature/Gift/Home/persentation/Views/Widgets/CustomContainerGiftPoint.dart';
-import 'package:parkify/Feature/Gift/Home/persentation/Views/Widgets/CustomPointGiftSliverGrid.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:parkify/Core/Get%20user%20point%20and%20balance/User_Balance_Point_Cubit/user_balance_point_cubit.dart';
+import 'package:parkify/Core/Get%20user%20point%20and%20balance/User_Balance_point_Repo/User_Balance_Point_Home_Repo_impl.dart';
+import 'package:parkify/Core/utlis/api_class.dart';
+import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
 import 'package:parkify/Feature/Gift/Home/persentation/Views/Widgets/GiftViewBody.dart';
-import 'package:parkify/Feature/Home/persentation/Views/Widgets/DisplayMoneyWidget.dart';
-import 'package:parkify/constant.dart';
 
 class GiftView extends StatelessWidget {
-  const GiftView({super.key});
-
+  const GiftView({super.key, required this.userdata});
+  final UserModel userdata;
   @override
   Widget build(BuildContext context) {
-    return const GiftViewBody();
+    return BlocProvider(
+      create: (context) =>
+          UserBalancePointCubit(UserBalancePointHomeRepoImpl(ApiClass(Dio())))
+            ..getbalanceandpoints(token: userdata.token!),
+      child: GiftViewBody(
+        user: userdata,
+      ),
+    );
   }
 }

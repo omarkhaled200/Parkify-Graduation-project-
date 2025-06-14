@@ -16,9 +16,9 @@ class LogoinenteryImage extends StatelessWidget {
     return Center(
       child: Image.asset(
         Assets.logo,
-        width: width * 0.35,
-        height: heaight * 0.15,
-        fit: BoxFit.fill,
+        width: width * 0.4,
+        height: heaight * 0.2,
+        fit: BoxFit.contain,
       ),
     );
   }

@@ -14,7 +14,6 @@ class Custom_user_data_details extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var heaight = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Container(
       padding: const EdgeInsets.only(left: 8),

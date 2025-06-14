@@ -59,10 +59,10 @@ class _Dateentry1bodyState extends State<Dateentry1body> {
       listener: (context, state) async {
         if (state is SetupUserDataFailure) {
           CustomScaffoldMessenger(context, "Error is : ${state.errmessage}",
-              FontAwesomeIcons.circleXmark);
+              FontAwesomeIcons.circleXmark, Colors.red);
         } else if (state is SetupUserDataSuccess) {
           CustomScaffoldMessenger(
-              context, 'Success', Icons.check_circle_outline);
+              context, 'Success', Icons.check_circle_outline, Colors.green);
           GoRouter.of(context).push(AppRouter.bottomNaviagationBar);
         }
       },

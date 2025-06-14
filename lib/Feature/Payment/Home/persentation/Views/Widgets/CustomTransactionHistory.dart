@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:parkify/Core/utlis/assets.dart';
+import 'package:parkify/Feature/Payment/Home/data/Model/transaction_history/transaction_history.dart';
 
 class CustomTransactionHistory extends StatelessWidget {
   const CustomTransactionHistory({
     super.key,
     required this.heaight,
     required this.width,
+    required this.history,
   });
 
   final double heaight;
   final double width;
+  final TransactionHistory history;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class CustomTransactionHistory extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Mar. 17',
+                    '${history.completedAt}',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -32,42 +36,28 @@ class CustomTransactionHistory extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: width * 0.05,
+                    width: width * 0.04,
                   ),
-                  Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: Color(0xffD9D9D9),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                  Icon(
+                    FontAwesomeIcons.solidCircleCheck,
+                    color: Colors.green,
                   ),
                   SizedBox(
-                    width: width * 0.05,
+                    width: width * 0.04,
                   ),
-                  Text(
-                    'The top-up was successful,\n and the amount of  \$1000 \n is now in his account.',
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: Assets.textfamily,
+                  Expanded(
+                    child: Text(
+                      '${history.message}',
+                      maxLines: 4,
+                      // overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: Assets.textfamily,
+                      ),
                     ),
                   ),
                 ],
-              ),
-              Positioned(
-                top: heaight * 0.062,
-                left: width * 0.203,
-                child: const SizedBox(
-                  height: 70,
-                  child: VerticalDivider(
-                    indent: 2,
-                    color: Colors.black,
-                    thickness: 1.5,
-                  ),
-                ),
               ),
             ],
           ),

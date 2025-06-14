@@ -31,7 +31,7 @@ class UserData extends Equatable {
         phone: json['phone'] as String?,
         address: json['address'] as dynamic,
         isActive: json['is_active'] as int?,
-        balance: json['balance'] as double?,
+        balance: (json['balance'] as num?)?.toDouble(),
         points: json['points'] as int?,
         userId: json['user_id'] as int?,
         createdAt: json['created_at'] == null

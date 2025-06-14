@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/CustomLogOutbutton.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/CustomViewHistoryBtn.dart';
-import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/Custom_user_data_details.dart';
 
 class CustomUserInformationSection extends StatelessWidget {
   const CustomUserInformationSection({
@@ -39,7 +38,9 @@ class CustomUserInformationSection extends StatelessWidget {
           width: width,
           heaight: heaight,
           text: 'My Plates',
-          onpressed: () {},
+          onpressed: () {
+            GoRouter.of(context).push(AppRouter.platespage, extra: token);
+          },
         ),
         SizedBox(
           height: heaight * 0.01,
@@ -49,7 +50,9 @@ class CustomUserInformationSection extends StatelessWidget {
           width: width,
           heaight: heaight,
           text: "Language",
-          onpressed: () {},
+          onpressed: () {
+            GoRouter.of(context).push(AppRouter.languagepage, extra: token);
+          },
         ),
         SizedBox(
           height: heaight * 0.01,

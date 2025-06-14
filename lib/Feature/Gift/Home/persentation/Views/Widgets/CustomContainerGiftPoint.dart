@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parkify/Core/utlis/assets.dart';
+
 import 'package:parkify/constant.dart';
 
 class CustomContainerGiftPoint extends StatelessWidget {
@@ -7,11 +8,12 @@ class CustomContainerGiftPoint extends StatelessWidget {
     super.key,
     required this.heaight,
     required this.width,
+    required this.Points,
   });
 
   final double heaight;
   final double width;
-
+  final double Points;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -41,7 +43,7 @@ class CustomContainerGiftPoint extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '500Pts',
+                    '${Points}Pts',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

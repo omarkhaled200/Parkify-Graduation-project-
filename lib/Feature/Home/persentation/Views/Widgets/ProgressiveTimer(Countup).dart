@@ -6,6 +6,15 @@ import 'package:parkify/constant.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class ProgressiveTimer extends StatefulWidget {
+  const ProgressiveTimer(
+      {super.key,
+      required this.second,
+      required this.minute,
+      required this.hour});
+  final int second;
+  final int minute;
+  final int hour;
+
   @override
   _ProgressiveTimerState createState() => _ProgressiveTimerState();
 }
@@ -23,6 +32,9 @@ class _ProgressiveTimerState extends State<ProgressiveTimer> {
   @override
   void initState() {
     super.initState();
+    seconds = widget.second;
+    minutes = widget.minute;
+    hours = widget.hour;
     startTimer();
   }
 
@@ -52,7 +64,7 @@ class _ProgressiveTimerState extends State<ProgressiveTimer> {
   }
 
   String getFormattedTime() {
-    return "$days d\n$hours h : $minutes m : $seconds s";
+    return "$hours h : $minutes m : $seconds s";
   }
 
   @override
@@ -65,7 +77,7 @@ class _ProgressiveTimerState extends State<ProgressiveTimer> {
   Widget build(BuildContext context) {
     return Center(
       child: CircularPercentIndicator(
-        radius: 110.0,
+        radius: 120.0,
         lineWidth: 15.0,
         percent: progressPercent,
         progressColor: kprimaryColor,

@@ -3,8 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:parkify/Core/utlis/Token_Functions.dart';
 
 class ApiClass {
-  final String _baseUrl =
-      'https://graduation-parkify-production.up.railway.app/api/';
+  final String _baseUrl = 'https://parkify-octane-docker.up.railway.app/api/';
   final Dio _dio;
 
   ApiClass(this._dio);

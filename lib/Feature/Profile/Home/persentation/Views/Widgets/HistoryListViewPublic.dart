@@ -44,7 +44,8 @@ class _HistoryListViewState extends State<Historylistviewpublic> {
             },
           );
         } else if (state is GetPublicSpotHistoryFailure) {
-          CustomScaffoldMessenger(context, state.errmessage, Icons.error);
+          CustomScaffoldMessenger(
+              context, state.errmessage, Icons.error, Colors.red);
           return const SizedBox.shrink();
         } else {
           return const SpinKitFadingCircle(

@@ -1,23 +1,18 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/CustomButton.dart';
 import 'package:parkify/Core/utlis/CustomRowAccount(have%20Account).dart';
 import 'package:parkify/Core/utlis/CustomTextField.dart';
 import 'package:parkify/Core/utlis/Functions/CustomScaffoldMessenger.dart';
 import 'package:parkify/Core/utlis/Valdiater.dart';
-import 'package:parkify/Core/utlis/api_class.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Auth/Presentation/View_Model/User_login_toAccount_Cubit/user_login_to_account_cubit.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/Widgets/LogoinenteryImage.dart';
-import 'package:parkify/Feature/Auth/data/Repos/Home_Repo_impl.dart';
 import 'package:parkify/constant.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -40,18 +35,18 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       listener: (context, state) {
         if (state is UserLoginToAccountFailure) {
           CustomScaffoldMessenger(context, "Error is : ${state.errmessage}",
-              FontAwesomeIcons.circleXmark);
+              FontAwesomeIcons.circleXmark, Colors.red);
         } else if (state is UserLoginToAccounSuccess) {
           if (state.user.userData == null) {
-            CustomScaffoldMessenger(
-                context, "We need some data Please 🤦‍♂️", Icons.warning);
+            CustomScaffoldMessenger(context, "We need some data Please 🤦‍♂️",
+                Icons.warning, Colors.red);
             GoRouter.of(context)
                 .push(AppRouter.dataentry1view, extra: state.user.token);
           } else {
             CustomScaffoldMessenger(
-                context, 'Success', Icons.check_circle_outline);
-            GoRouter.of(context)
-                .push(AppRouter.bottomNaviagationBar, extra: state.user);
+                context, 'Success', Icons.check_circle_outline, Colors.green);
+            GoRouter.of(context).push(AppRouter.bottomNaviagationBar,
+                extra: {'userdata': state.user, 'location': null});
           }
         }
       },
@@ -63,11 +58,11 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             child: Column(
               children: [
                 SizedBox(
-                  height: heaight * 0.08,
+                  height: heaight * 0.07,
                 ),
                 LogoinenteryImage(width: width, heaight: heaight),
                 SizedBox(
-                  height: heaight * 0.08,
+                  height: heaight * 0.07,
                 ),
                 Expanded(
                   child: Container(

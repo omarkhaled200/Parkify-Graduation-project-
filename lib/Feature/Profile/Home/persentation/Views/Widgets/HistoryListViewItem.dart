@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parkify/Core/utlis/assets.dart';
-import 'package:parkify/Feature/Profile/Home/data/Model/history_data_modal/history_data_modal.dart';
+import 'package:parkify/Feature/Profile/Home/data/History_model/history_data_modal/history_data_modal.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/CustomAmountRickText.dart';
 import 'package:parkify/constant.dart';
 
@@ -15,7 +15,6 @@ class HistoryListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var heaight = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
     return Card(
       color: kprimaryColor,
       shape: RoundedRectangleBorder(
@@ -57,30 +56,28 @@ class HistoryListViewItem extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Arrival: ${item.enteredAt}",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: const Color(0xffA0A0A0),
-                          fontFamily: Assets.textfamily,
-                          fontSize: 10,
-                        ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Arrival: ${item.enteredAt}",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: const Color(0xffA0A0A0),
+                        fontFamily: Assets.textfamily,
+                        fontSize: 10,
                       ),
-                      Text(
-                        "Exit: ${item.exitedAt}",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: const Color(0xffA0A0A0),
-                          fontFamily: Assets.textfamily,
-                          fontSize: 10,
-                        ),
+                    ),
+                    Text(
+                      "Exit: ${item.exitedAt}",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: const Color(0xffA0A0A0),
+                        fontFamily: Assets.textfamily,
+                        fontSize: 10,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),

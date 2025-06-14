@@ -1,43 +1,52 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parkify/Core/utlis/assets.dart';
+import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
+
+import 'package:parkify/Feature/Home/persentation/View_Model/Get%20Count%20down%20data/get_count_down_data_cubit.dart';
+import 'package:parkify/Feature/Home/persentation/View_Model/Manage_Page/manage_page_cubit.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class CountdownTimerScreen extends StatefulWidget {
+  const CountdownTimerScreen({Key? key, required this.user}) : super(key: key);
+
+  final UserModel user;
   @override
   _CountdownTimerScreenState createState() => _CountdownTimerScreenState();
 }
 
 class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
-  int _totalTime = 3600; // 1 ساعة (بالثواني)
-  int _remainingTime = 3600;
   Timer? _timer;
-  double percent = 1.0; // يبدأ فارغًا
+  double percent = 0.0;
+  int _remainingTime = 0;
+  int _totalTime = 1;
 
   @override
   void initState() {
     super.initState();
-    startTimer();
+    context
+        .read<GetCountDownDataCubit>()
+        .getCountDowndata(token: widget.user.token!);
   }
 
-  void startTimer() {
+  void startTimer(int totalTime, int remainingTime) {
+    _timer?.cancel();
+    _totalTime = totalTime;
+    _remainingTime = remainingTime;
+
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (_remainingTime > 0) {
         setState(() {
           _remainingTime--;
-          percent = 1 - (_remainingTime / _totalTime); // زيادة تدريجية
+          percent = 1 - (_remainingTime / _totalTime);
         });
       } else {
         timer.cancel();
+        context.read<ManagePageCubit>().countdownFinished();
       }
     });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
   }
 
   String formatTime(int seconds) {
@@ -50,23 +59,49 @@ class _CountdownTimerScreenState extends State<CountdownTimerScreen> {
   }
 
   @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: CircularPercentIndicator(
-        radius: 120.0,
-        lineWidth: 20.0,
-        percent: percent,
-        center: Text(formatTime(_remainingTime),
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontFamily: Assets.textfamily)),
-        progressColor: Color.fromARGB(255, 140, 180, 193),
-        backgroundColor: Colors.grey[300]!,
-        animateFromLastPercent: true,
-        animationDuration: 1,
-        circularStrokeCap: CircularStrokeCap.round,
-      ),
+    return BlocBuilder<GetCountDownDataCubit, GetCountDownDataState>(
+      builder: (context, state) {
+        if (state is GetCountDownDataLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is GetCountDownDataFailure) {
+          return Center(child: Text("Error: ${state.errmessage}"));
+        } else if (state is GetCountDownDataSuccess) {
+          final data = state.countdowndata;
+
+          if (_timer == null) {
+            startTimer(data.reservationDifference!, data.countdown!);
+          }
+
+          return Center(
+            child: CircularPercentIndicator(
+              radius: 120.0,
+              lineWidth: 15.0,
+              percent: percent.clamp(0.0, 1.0),
+              center: Text(
+                formatTime(_remainingTime),
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: Assets.textfamily),
+              ),
+              progressColor: const Color.fromARGB(255, 140, 180, 193),
+              backgroundColor: Colors.grey[300]!,
+              animateFromLastPercent: true,
+              animationDuration: 1,
+              circularStrokeCap: CircularStrokeCap.round,
+            ),
+          );
+        } else {
+          return const SizedBox();
+        }
+      },
     );
   }
 }

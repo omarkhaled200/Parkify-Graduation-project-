@@ -7,8 +7,8 @@ class HistoryDataModal extends Equatable {
   final int? userId;
   final double? invoicePrice;
   final int? isPayed;
-  final DateTime? enteredAt;
-  final DateTime? exitedAt;
+  final String? enteredAt;
+  final String? exitedAt;
 
   const HistoryDataModal({
     this.spotcode,
@@ -29,12 +29,9 @@ class HistoryDataModal extends Equatable {
       userId: json['user_id'] as int?,
       invoicePrice: (json['invoice_price'] as num?)?.toDouble(),
       isPayed: json['is_payed'] as int?,
-      enteredAt: json['entered_at'] == null
-          ? null
-          : DateTime.parse(json['entered_at'] as String),
-      exitedAt: json['exited_at'] == null
-          ? null
-          : DateTime.parse(json['exited_at'] as String),
+      enteredAt:
+          json['entered_at'] == null ? null : json['entered_at'] as String?,
+      exitedAt: json['exited_at'] == null ? null : json['exited_at'] as String?,
     );
   }
 
@@ -45,8 +42,8 @@ class HistoryDataModal extends Equatable {
         'user_id': userId,
         'invoice_price': invoicePrice,
         'is_payed': isPayed,
-        'entered_at': enteredAt?.toIso8601String(),
-        'exited_at': exitedAt?.toIso8601String(),
+        'entered_at': enteredAt,
+        'exited_at': exitedAt,
       };
 
   @override

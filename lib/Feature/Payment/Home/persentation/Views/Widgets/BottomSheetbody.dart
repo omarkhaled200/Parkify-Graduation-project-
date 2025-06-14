@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:parkify/Core/Get%20user%20point%20and%20balance/User_Balance_Point_Cubit/user_balance_point_cubit.dart';
 import 'package:parkify/Core/utlis/CustomButton.dart';
 import 'package:parkify/Core/utlis/CustomTextField.dart';
 import 'package:parkify/Core/utlis/Functions/CustomScaffoldMessenger.dart';
 import 'package:parkify/Core/utlis/Functions/custom_lunch_url.dart';
 import 'package:parkify/Core/utlis/assets.dart';
-import 'package:parkify/Feature/Payment/Home/data/Model/payment_model.dart';
+import 'package:parkify/Feature/Payment/Home/persentation/View_Model/Get_Transaction_History/get_transaction_history_cubit.dart';
 import 'package:parkify/Feature/Payment/Home/persentation/View_Model/Post_Payment_Cubit/post_payment_cubit.dart';
 
 class BottomSheetbody extends StatefulWidget {
@@ -16,9 +18,35 @@ class BottomSheetbody extends StatefulWidget {
   State<BottomSheetbody> createState() => _BottomSheetbodyState();
 }
 
-class _BottomSheetbodyState extends State<BottomSheetbody> {
+class _BottomSheetbodyState extends State<BottomSheetbody>
+    with WidgetsBindingObserver {
   String? amount;
   GlobalKey<FormState> formkey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      context
+          .read<GetTransactionHistoryCubit>()
+          .getTransactionHistory(token: widget.token);
+      context
+          .read<UserBalancePointCubit>()
+          .getbalanceandpoints(token: widget.token);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var heaight = MediaQuery.of(context).size.height;
@@ -27,9 +55,10 @@ class _BottomSheetbodyState extends State<BottomSheetbody> {
       listener: (context, state) {
         if (state is PostPaymentFailure) {
           CustomScaffoldMessenger(context, "Error is : ${state.errmessage}",
-              FontAwesomeIcons.circleXmark);
+              FontAwesomeIcons.circleXmark, Colors.red);
         } else if (state is PostPaymentSuccess) {
           customLaunchUrl(context, state.payment.paymentUrl);
+          didChangeAppLifecycleState;
         }
       },
       builder: (context, state) {

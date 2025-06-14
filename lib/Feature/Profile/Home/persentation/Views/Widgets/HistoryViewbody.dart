@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:parkify/Core/utlis/Icon_All_app.dart';
-import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/CustomTabBar.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/HistoryListViewPublic.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/HistoryListViewReserved.dart';
@@ -23,7 +22,7 @@ class _HistoryViewbodyState extends State<HistoryViewbody> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           backgroundColor: kprimaryColor,
           title: IconApp(width: width),
           centerTitle: true,

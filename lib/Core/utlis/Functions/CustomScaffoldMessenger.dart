@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:parkify/Core/utlis/assets.dart';
-import 'package:parkify/constant.dart';
 
-void CustomScaffoldMessenger(context, String text, IconData icon) {
+void CustomScaffoldMessenger(context, String text, IconData icon, Color color) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       backgroundColor: Colors.black,
@@ -10,7 +9,7 @@ void CustomScaffoldMessenger(context, String text, IconData icon) {
         children: [
           Icon(
             icon,
-            color: Colors.red,
+            color: color,
           ),
           const SizedBox(
             width: 5,

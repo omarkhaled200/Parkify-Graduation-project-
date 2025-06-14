@@ -38,11 +38,11 @@ class _SplashViewBodyState extends State<SplashViewbody>
       children: [
         Image.asset(
           Assets.logo,
-          height: MediaQuery.of(context).size.height * 0.2,
+          height: MediaQuery.of(context).size.height * 0.15,
           fit: BoxFit.contain,
         ),
         const SizedBox(
-          height: 4,
+          height: 8,
         ),
         sliding_Animation(),
       ],

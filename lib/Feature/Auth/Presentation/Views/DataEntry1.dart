@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parkify/Core/utlis/api_class.dart';
 import 'package:parkify/Feature/Auth/Presentation/View_Model/Setup_User_Data_Cubit/setup_user_data_cubit.dart';
-import 'package:parkify/Feature/Auth/Presentation/View_Model/User_Register_New_Account_cubit/user_register_new_account_cubit.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/Widgets/Dateentry1body.dart';
 import 'package:parkify/Feature/Auth/data/Repos/Home_Repo_impl.dart';
 

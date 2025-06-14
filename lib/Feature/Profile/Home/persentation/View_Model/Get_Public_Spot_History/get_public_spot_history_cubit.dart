@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:parkify/Feature/Profile/Home/data/Model/history_data_modal/history_data_modal.dart';
+import 'package:parkify/Feature/Profile/Home/data/History_model/history_data_modal/history_data_modal.dart';
 import 'package:parkify/Feature/Profile/Home/data/Repos/Home_Repo.dart';
 
 part 'get_public_spot_history_state.dart';
