@@ -1,15 +1,18 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:parkify/Core/errors/failure.dart';
 import 'package:parkify/Core/utlis/Token_Functions.dart';
 import 'package:parkify/Core/utlis/api_class.dart';
 import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
+import 'package:path/path.dart';
 
 import 'package:parkify/Feature/Auth/data/Repos/Home_Repo.dart';
 
-class HomeRepoImpl extends HomeRepo {
+class AuthHomeRepoImpl extends AuthHomeRepo {
   final ApiClass apiClass;
-  HomeRepoImpl(this.apiClass);
+  AuthHomeRepoImpl(this.apiClass);
   @override
   Future<Either<Failure, UserModel>> postLogin(
       {required String email, required String password}) async {
@@ -95,11 +98,30 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<Failure, String>> postlogout() async {
+  Future<Either<Failure, String>> postlogout({required String token}) async {
+    try {
+      var response =
+          await apiClass.post(endpoint: 'user/logout', body: {}, token: token);
+
+      // ناخد الماسدج من الريسبونس
+      String message = response['message'];
+
+      return right(message);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(e));
+      }
+      return left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> postaddlicenseplate(
+      {required String plate, required String token}) async {
     try {
       var response = await apiClass.post(
-        endpoint: 'user/logout',
-        body: {}, // أو ابعته null لو مش محتاج body أصلا
+        endpoint: 'user/addLicensePlate',
+        body: {'plate': plate},
       );
 
       // ناخد الماسدج من الريسبونس
@@ -110,6 +132,45 @@ class HomeRepoImpl extends HomeRepo {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));
       }
+      return left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> postgetlicenseplate(
+      {required File image}) async {
+    try {
+      Dio dio = Dio();
+
+      String fileName = basename(image.path);
+      FormData formData = FormData.fromMap({
+        "file": await MultipartFile.fromFile(
+          image.path,
+          filename: fileName,
+        ),
+      });
+
+      Response response = await dio.post(
+        "https://e412-156-205-61-135.ngrok-free.app/extract-text/",
+        data: formData,
+        options: Options(
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        print("added successfully");
+        print(response.data);
+        return Right(response.data['plate'].toString());
+      } else {
+        print("Error: ${response.statusCode}");
+        print(response.data);
+        return Right(response.data.toString());
+      }
+    } catch (e) {
+      print("Upload failed: $e");
       return left(ServerFailure(e.toString()));
     }
   }

@@ -8,7 +8,7 @@ part 'user_register_new_account_state.dart';
 class UserRegisterNewAccountCubit extends Cubit<UserRegisterNewAccountState> {
   UserRegisterNewAccountCubit(this.homeRepo)
       : super(UserRegisterNewAccountInitial());
-  final HomeRepo homeRepo;
+  final AuthHomeRepo homeRepo;
   Future<void> UserRegister(
       {required String email,
       required String password,

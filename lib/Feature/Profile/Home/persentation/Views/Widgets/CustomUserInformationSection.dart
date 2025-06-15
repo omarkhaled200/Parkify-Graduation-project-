@@ -1,7 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:parkify/Core/utlis/App_Router.dart';
+import 'package:parkify/Core/utlis/api_class.dart';
+import 'package:parkify/Feature/Auth/Presentation/View_Model/User_Logout_Account_Cubit/user_logout_account_cubit.dart';
+import 'package:parkify/Feature/Auth/data/Repos/Home_Repo_impl.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/CustomLogOutbutton.dart';
 import 'package:parkify/Feature/Profile/Home/persentation/Views/Widgets/CustomViewHistoryBtn.dart';
 
@@ -67,7 +72,14 @@ class CustomUserInformationSection extends StatelessWidget {
         SizedBox(
           height: heaight * 0.01,
         ),
-        CustomLogOutbutton(heaight: heaight),
+        BlocProvider(
+          create: (context) =>
+              UserLogoutAccountCubit(AuthHomeRepoImpl(ApiClass(Dio()))),
+          child: CustomLogOutbutton(
+            heaight: heaight,
+            token: token,
+          ),
+        ),
       ],
     );
   }

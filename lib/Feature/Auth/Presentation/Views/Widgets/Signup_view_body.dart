@@ -45,8 +45,8 @@ class _SignupviewbodyState extends State<Signupviewbody> {
           if (state.user.userData == null) {
             CustomScaffoldMessenger(context, "We need some data Please 🤦‍♂️",
                 Icons.warning, Colors.red);
-            GoRouter.of(context).push(AppRouter.dataentry1view,
-                extra: {'userdata': state.user.token, 'location': null});
+            GoRouter.of(context)
+                .push(AppRouter.dataentry1view, extra: state.user);
           }
         }
       },

@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:parkify/Core/errors/failure.dart';
 import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
 
-abstract class HomeRepo {
+abstract class AuthHomeRepo {
   Future<Either<Failure, UserModel>> postLogin(
       {required String email, required String password});
 
@@ -17,6 +19,9 @@ abstract class HomeRepo {
       required String phone,
       required String plate,
       required String token});
+  Future<Either<Failure, String>> postgetlicenseplate({required File image});
+  Future<Either<Failure, String>> postaddlicenseplate(
+      {required String plate, required String token});
 
-  Future<Either<Failure, String>> postlogout();
+  Future<Either<Failure, String>> postlogout({required String token});
 }

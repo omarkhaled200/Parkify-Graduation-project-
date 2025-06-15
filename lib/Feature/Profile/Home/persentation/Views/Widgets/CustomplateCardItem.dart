@@ -38,7 +38,7 @@ class CustomplateCardItem extends StatelessWidget {
             ),
             BlocProvider(
               create: (context) =>
-                  DeletUserPlateCubit(HomeRepoImpl(ApiClass(Dio()))),
+                  DeletUserPlateCubit(profileHomeRepoImpl(ApiClass(Dio()))),
               child: BlocListener<DeletUserPlateCubit, DeletUserPlateState>(
                 listener: (context, state) {
                   if (state is DeletUserPlateFailure) {
@@ -59,7 +59,6 @@ class CustomplateCardItem extends StatelessWidget {
                   builder: (context, state) {
                     return IconButton(
                       onPressed: () {
-                        print('the id of plate is ${plate.id}');
                         context
                             .read<DeletUserPlateCubit>()
                             .deleteuserplate(id: '${plate.id}', token: token);

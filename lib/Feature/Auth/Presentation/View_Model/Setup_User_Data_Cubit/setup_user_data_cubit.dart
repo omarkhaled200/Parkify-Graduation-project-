@@ -8,7 +8,7 @@ part 'setup_user_data_state.dart';
 
 class SetupUserDataCubit extends Cubit<SetupUserDataState> {
   SetupUserDataCubit(this.homeRepo) : super(SetupUserDataInitial());
-  final HomeRepo homeRepo;
+  final AuthHomeRepo homeRepo;
   Future<void> UserSetup(
       {required String National,
       required String Phone,

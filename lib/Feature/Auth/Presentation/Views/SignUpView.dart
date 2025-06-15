@@ -14,7 +14,7 @@ class Signupview extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          UserRegisterNewAccountCubit(HomeRepoImpl(ApiClass(Dio()))),
+          UserRegisterNewAccountCubit(AuthHomeRepoImpl(ApiClass(Dio()))),
       child: const Signupviewbody(),
     );
   }

@@ -18,15 +18,15 @@ class HistoryView extends StatelessWidget {
         BlocProvider(
           create: (context) {
             final cubit =
-                GetPublicSpotHistoryCubit(HomeRepoImpl(ApiClass(Dio())));
+                GetPublicSpotHistoryCubit(profileHomeRepoImpl(ApiClass(Dio())));
             cubit.GetPublicspot(token: token);
             return cubit;
           },
         ),
         BlocProvider(
           create: (context) {
-            final cubit =
-                GetReservedSpotHistoryCubit(HomeRepoImpl(ApiClass(Dio())));
+            final cubit = GetReservedSpotHistoryCubit(
+                profileHomeRepoImpl(ApiClass(Dio())));
             cubit.GetREservedspot(token: token);
             return cubit;
           },

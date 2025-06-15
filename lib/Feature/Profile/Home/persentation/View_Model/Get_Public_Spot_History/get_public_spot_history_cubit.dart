@@ -9,7 +9,7 @@ part 'get_public_spot_history_state.dart';
 class GetPublicSpotHistoryCubit extends Cubit<GetPublicSpotHistoryState> {
   GetPublicSpotHistoryCubit(this.homeRepo)
       : super(GetPublicSpotHistoryInitial());
-  final HomeRepo homeRepo;
+  final prfileHomeRepo homeRepo;
   Future<void> GetPublicspot({required String token}) async {
     emit(GetPublicSpotHistoryLoading());
     var result = await homeRepo.getPublicSpotHistory(token: token);

@@ -41,7 +41,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             CustomScaffoldMessenger(context, "We need some data Please 🤦‍♂️",
                 Icons.warning, Colors.red);
             GoRouter.of(context)
-                .push(AppRouter.dataentry1view, extra: state.user.token);
+                .push(AppRouter.dataentry1view, extra: state.user);
           } else {
             CustomScaffoldMessenger(
                 context, 'Success', Icons.check_circle_outline, Colors.green);

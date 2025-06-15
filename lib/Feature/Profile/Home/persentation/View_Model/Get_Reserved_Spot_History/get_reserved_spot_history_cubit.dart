@@ -8,7 +8,7 @@ part 'get_reserved_spot_history_state.dart';
 class GetReservedSpotHistoryCubit extends Cubit<GetReservedSpotHistoryState> {
   GetReservedSpotHistoryCubit(this.homeRepo)
       : super(GetReservedSpotHistoryInitial());
-  final HomeRepo homeRepo;
+  final prfileHomeRepo homeRepo;
   Future<void> GetREservedspot({required String token}) async {
     emit(GetReservedSpotHistoryLoading());
     var result = await homeRepo.getReservedSpotHistory(token: token);

@@ -7,7 +7,7 @@ part 'get_user_plates_state.dart';
 
 class GetUserPlatesCubit extends Cubit<GetUserPlatesState> {
   GetUserPlatesCubit(this.homeRepo) : super(GetUserPlatesInitial());
-  final HomeRepo homeRepo;
+  final prfileHomeRepo homeRepo;
   Future<void> getuserplate({required String token}) async {
     emit(GetUserPlatesLoading());
     var result = await homeRepo.getUserPlate(token: token);

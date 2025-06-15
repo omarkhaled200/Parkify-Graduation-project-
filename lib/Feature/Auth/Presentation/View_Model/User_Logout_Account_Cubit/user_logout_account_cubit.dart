@@ -8,11 +8,11 @@ part 'user_logout_account_state.dart';
 
 class UserLogoutAccountCubit extends Cubit<UserLogoutAccountState> {
   UserLogoutAccountCubit(this.homeRepo) : super(UserLogoutAccountInitial());
-  final HomeRepo homeRepo;
-  Future<void> logout() async {
+  final AuthHomeRepo homeRepo;
+  Future<void> logout({required String token}) async {
     emit(UserLogoutAccountLoading()); // حالة تحميل لو بتحب تعمل لودينج
 
-    final result = await homeRepo.postlogout();
+    final result = await homeRepo.postlogout(token: token);
 
     result.fold(
       (failure) {

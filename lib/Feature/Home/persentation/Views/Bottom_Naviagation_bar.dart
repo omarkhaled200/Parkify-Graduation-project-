@@ -58,16 +58,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       }
     }
 
-    // if (userData == null || userData is! UserModel) {
-    //   return const Scaffold(body: Center(child: Text("User data is missing")));
-    // }
-
-    // final user = userData;
-    // if (user.token == null || user.token!.isEmpty) {
-    //   return const Scaffold(body: Center(child: Text("Invalid user token")));
-    // }
-
-    // --------- ✅ 2. Pages definitions ---------
     final otherPages = [
       GiftView(
         userdata: user,

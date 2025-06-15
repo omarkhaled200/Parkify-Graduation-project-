@@ -6,7 +6,7 @@ part 'delet_user_plate_state.dart';
 
 class DeletUserPlateCubit extends Cubit<DeletUserPlateState> {
   DeletUserPlateCubit(this.homeRepo) : super(DeletUserPlateInitial());
-  final HomeRepo homeRepo;
+  final prfileHomeRepo homeRepo;
   Future<void> deleteuserplate({
     required String id,
     required String token,

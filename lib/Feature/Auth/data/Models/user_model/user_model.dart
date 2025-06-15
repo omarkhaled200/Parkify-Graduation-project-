@@ -26,6 +26,19 @@ class UserModel extends Equatable {
         'userData': userData?.toJson(),
       };
 
+  // ✅ هنا copyWith
+  UserModel copyWith({
+    String? token,
+    User? user,
+    UserData? userData,
+  }) {
+    return UserModel(
+      token: token ?? this.token,
+      user: user ?? this.user,
+      userData: userData ?? this.userData,
+    );
+  }
+
   @override
   List<Object?> get props => [token, user, userData];
 }

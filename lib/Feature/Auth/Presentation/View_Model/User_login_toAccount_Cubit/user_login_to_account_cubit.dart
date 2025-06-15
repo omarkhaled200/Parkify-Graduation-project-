@@ -7,7 +7,7 @@ part 'user_login_to_account_state.dart';
 
 class UserLoginToAccountCubit extends Cubit<UserLoginToAccountState> {
   UserLoginToAccountCubit(this.homeRepo) : super(UserLoginToAccountInitial());
-  final HomeRepo homeRepo;
+  final AuthHomeRepo homeRepo;
   Future<void> UserLogin(
       {required String email, required String password}) async {
     emit(UserLoginToAccountLoading());
