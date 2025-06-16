@@ -58,6 +58,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       }
     }
 
+    print('user data is ${user.user!.email}');
+    print('user data is ${user.user!.name}');
+    print('user data is ${user.userData!.phone}');
     final otherPages = [
       GiftView(
         userdata: user,

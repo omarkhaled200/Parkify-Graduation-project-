@@ -85,56 +85,60 @@ class _Homepage2bodyState extends State<Homepage2body> {
             ),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
                 children: [
-                  Text(
-                    'Welcome ${userdata.user!.name}',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: Assets.textfamily,
-                    ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Welcome ${userdata.user!.name}',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: Assets.textfamily,
+                        ),
+                      ),
+                      SizedBox(
+                        height: heaight * 0.01,
+                      ),
+                      Text(
+                        'Let’s start our journey together my friend!🚀',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: Assets.textfamily,
+                        ),
+                      ),
+                      SizedBox(
+                        height: heaight * 0.02,
+                      ),
+                      Currentloationcard(
+                        loc: location,
+                      ),
+                      SizedBox(
+                        height: heaight * 0.01,
+                      ),
+                      FreePublicParking(
+                        numberSpot: state.message,
+                      ),
+                      SizedBox(
+                        height: heaight * 0.01,
+                      ),
+                      PremiumReserveSpotParking(
+                        numberSpot: state.message,
+                      ),
+                      SizedBox(
+                        height: heaight * 0.02,
+                      ),
+                      CustomReserveNowButton(
+                        loc: location,
+                        width: width,
+                        heaight: heaight,
+                        userdata: userdata,
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    height: heaight * 0.01,
-                  ),
-                  Text(
-                    'Let’s start our journey together my friend!🚀',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: Assets.textfamily,
-                    ),
-                  ),
-                  SizedBox(
-                    height: heaight * 0.02,
-                  ),
-                  Currentloationcard(
-                    loc: location,
-                  ),
-                  SizedBox(
-                    height: heaight * 0.01,
-                  ),
-                  FreePublicParking(
-                    numberSpot: state.message,
-                  ),
-                  SizedBox(
-                    height: heaight * 0.01,
-                  ),
-                  PremiumReserveSpotParking(
-                    numberSpot: state.message,
-                  ),
-                  SizedBox(
-                    height: heaight * 0.02,
-                  ),
-                  CustomReserveNowButton(
-                    loc: location,
-                    width: width,
-                    heaight: heaight,
-                    userdata: userdata,
-                  )
                 ],
               ),
             ),

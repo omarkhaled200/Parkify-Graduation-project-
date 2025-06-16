@@ -6,6 +6,8 @@ import 'package:parkify/Core/utlis/App_Router.dart';
 import 'package:parkify/Core/utlis/Functions/CustomScaffoldMessenger.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Auth/Presentation/View_Model/User_Logout_Account_Cubit/user_logout_account_cubit.dart';
+import 'package:parkify/Feature/Home/persentation/View_Model/BottomNavCubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomLogOutbutton extends StatelessWidget {
   const CustomLogOutbutton({
@@ -16,18 +18,25 @@ class CustomLogOutbutton extends StatelessWidget {
 
   final double heaight;
   final String token;
+  Future<void> clearUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear(); // يمسح كل البيانات المحفوظة
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserLogoutAccountCubit, UserLogoutAccountState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is UserLogoutAccountFailure) {
           CustomScaffoldMessenger(context, "Error is : ${state.errmessage}",
               FontAwesomeIcons.circleXmark, Colors.red);
         } else if (state is UserLogoutAccountSuccess) {
+          await clearUserData();
           CustomScaffoldMessenger(
               context, 'Success', Icons.check_circle_outline, Colors.green);
-          GoRouter.of(context).push(AppRouter.loginview);
+          context.read<BottomNavCubit>().setPage(0);
+
+          GoRouter.of(context).go(AppRouter.loginview);
         }
       },
       builder: (context, state) {

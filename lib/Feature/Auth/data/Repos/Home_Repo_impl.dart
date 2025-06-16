@@ -100,13 +100,29 @@ class AuthHomeRepoImpl extends AuthHomeRepo {
   @override
   Future<Either<Failure, String>> postlogout({required String token}) async {
     try {
-      var response =
+      var data =
           await apiClass.post(endpoint: 'user/logout', body: {}, token: token);
 
-      // ناخد الماسدج من الريسبونس
-      String message = response['message'];
+      // الحالة 1: فيه success
+      if (data.containsKey('success')) {
+        String message = data['success'] ?? 'Success but no message';
+        return right(message);
+      }
 
-      return right(message);
+      // الحالة 2: فيه error
+      if (data.containsKey('error')) {
+        String errorMessage = data['error'] ?? 'Unknown error';
+        return left(ServerFailure(errorMessage));
+      }
+
+      // الحالة 3: فيه message (بس مش success)
+      if (data.containsKey('message')) {
+        String message = data['message'] ?? 'Unknown message';
+        return right(message);
+      }
+
+      // الحالة 4: مفيش حاجة مفهومة
+      return left(ServerFailure('Unexpected API response'));
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));
@@ -151,7 +167,7 @@ class AuthHomeRepoImpl extends AuthHomeRepo {
       });
 
       Response response = await dio.post(
-        "https://e412-156-205-61-135.ngrok-free.app/extract-text/",
+        "https://72cf-156-205-61-135.ngrok-free.app/extract-text/",
         data: formData,
         options: Options(
           headers: {

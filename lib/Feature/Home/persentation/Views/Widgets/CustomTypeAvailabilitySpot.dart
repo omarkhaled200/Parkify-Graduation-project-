@@ -25,7 +25,7 @@ class CustomTypeAvailabilitySpot extends StatelessWidget {
         Text(
           ' $text',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: FontWeight.w600,
             fontFamily: Assets.textfamily,
           ),

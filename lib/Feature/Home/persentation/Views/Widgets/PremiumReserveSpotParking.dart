@@ -39,20 +39,27 @@ class PremiumReserveSpotParking extends StatelessWidget {
                         color: Colors.red,
                         text: 'Premium Reserve',
                       ),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Row(
                         children: [
                           Icon(
                             Icons.location_on_outlined,
                             color: Colors.grey.shade800,
                           ),
-                          Text(
-                            '$freeReservable Available',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: Assets.textfamily,
-                              fontSize: 16,
+                          SizedBox(
+                            width: width * 0.2,
+                            child: Text(
+                              '$freeReservable Available',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: Assets.textfamily,
+                                fontSize: 16,
+                              ),
                             ),
-                            overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),
@@ -112,14 +119,19 @@ class PremiumReserveSpotParking extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text(
-                        '${state.spot[1].timeRestriction} min before',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: Assets.textfamily,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600),
-                        overflow: TextOverflow.ellipsis,
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Text(
+                          '${state.spot[1].timeRestriction} min before',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: Assets.textfamily,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600),
+                        ),
                       ),
                     ],
                   ),

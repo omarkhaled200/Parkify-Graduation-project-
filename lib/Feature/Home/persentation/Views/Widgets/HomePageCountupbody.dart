@@ -63,182 +63,192 @@ class _HomePageCountupbodyState extends State<HomePageCountupbody> {
           if (state is GetActiverReservatioSuccess) {
             return Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
                 children: [
-                  Text(
-                    'Welcome Omar Khaled',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: Assets.textfamily,
-                    ),
-                  ),
-                  SizedBox(
-                    height: heaight * 0.02,
-                  ),
-                  BlocProvider(
-                    create: (context) =>
-                        GetLocationByIdCubit(HomeRepoImpl(ApiClass(Dio())))
-                          ..getlocationbyid(
-                              token: widget.userdata.token!,
-                              id: state.reservation.reservableSpotId!),
-                    child: Currentloationcardbyid(
-                      user: widget.userdata,
-                    ),
-                  ),
-                  SizedBox(
-                    height: heaight * 0.01,
-                  ),
-                  Countdowndetailsdata(reservtionModel: state.reservation),
-                  SizedBox(
-                    height: heaight * 0.03,
-                  ),
-                  BlocBuilder<GetCountUpDataCubit, GetCountUpDataState>(
-                    builder: (context, state) {
-                      if (state is GetCountUpDataSuccess) {
-                        return ProgressiveTimer(
-                          second: state.countupdata.sec!,
-                          minute: state.countupdata.min!,
-                          hour: state.countupdata.hour!,
-                        );
-                      } else if (state is GetCountUpDataFailure) {
-                        CustomScaffoldMessenger(
-                            context,
-                            "Error is : ${state.errmessage}",
-                            FontAwesomeIcons.circleXmark,
-                            Colors.red);
-                        return SizedBox.shrink();
-                      } else {
-                        return const SpinKitFadingCircle(
-                          color: Colors.black,
-                        );
-                      }
-                    },
-                  ),
-                  SizedBox(
-                    height: heaight * 0.03,
-                  ),
-                  BlocProvider(
-                    create: (context) =>
-                        GetLocationByIdCubit(HomeRepoImpl(ApiClass(Dio())))
-                          ..getlocationbyid(
-                              token: widget.userdata.token!,
-                              id: state.reservation.reservableSpotId!),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Column(
-                            children: [
-                              BlocBuilder<GetLocationByIdCubit,
-                                      GetLocationByIdState>(
-                                  builder: (context, state) {
-                                final locationState =
-                                    context.watch<GetLocationByIdCubit>().state;
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Welcome Omar Khaled',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: Assets.textfamily,
+                        ),
+                      ),
+                      SizedBox(
+                        height: heaight * 0.02,
+                      ),
+                      BlocProvider(
+                        create: (context) =>
+                            GetLocationByIdCubit(HomeRepoImpl(ApiClass(Dio())))
+                              ..getlocationbyid(
+                                  token: widget.userdata.token!,
+                                  id: state.reservation.reservableSpotId!),
+                        child: Currentloationcardbyid(
+                          user: widget.userdata,
+                        ),
+                      ),
+                      SizedBox(
+                        height: heaight * 0.01,
+                      ),
+                      Countdowndetailsdata(reservtionModel: state.reservation),
+                      SizedBox(
+                        height: heaight * 0.03,
+                      ),
+                      BlocBuilder<GetCountUpDataCubit, GetCountUpDataState>(
+                        builder: (context, state) {
+                          if (state is GetCountUpDataSuccess) {
+                            return ProgressiveTimer(
+                              second: state.countupdata.sec!,
+                              minute: state.countupdata.min!,
+                              hour: state.countupdata.hour!,
+                            );
+                          } else if (state is GetCountUpDataFailure) {
+                            CustomScaffoldMessenger(
+                                context,
+                                "Error is : ${state.errmessage}",
+                                FontAwesomeIcons.circleXmark,
+                                Colors.red);
+                            return SizedBox.shrink();
+                          } else {
+                            return const SpinKitFadingCircle(
+                              color: Colors.black,
+                            );
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: heaight * 0.03,
+                      ),
+                      BlocProvider(
+                        create: (context) =>
+                            GetLocationByIdCubit(HomeRepoImpl(ApiClass(Dio())))
+                              ..getlocationbyid(
+                                  token: widget.userdata.token!,
+                                  id: state.reservation.reservableSpotId!),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  BlocBuilder<GetLocationByIdCubit,
+                                          GetLocationByIdState>(
+                                      builder: (context, state) {
+                                    final locationState = context
+                                        .watch<GetLocationByIdCubit>()
+                                        .state;
 
-                                if (locationState is GetLocationByIdSuccess) {
-                                  locationName = locationState.location;
-                                  return SizedBox.shrink();
-                                } else if (state is GetLocationByIdFailure) {
-                                  return Text("Failed to load location");
-                                } else {
-                                  return SizedBox.shrink();
-                                }
-                              }),
-                              BlocConsumer<DeactivateBlockerCubit,
-                                  DeactivateBlockerState>(
-                                listener: (context, state) {
-                                  if (state is DeactivateBlockerFailure) {
-                                    CustomScaffoldMessenger(
-                                      context,
-                                      "Error is : ${state.errmessage}",
-                                      FontAwesomeIcons.circleXmark,
-                                      Colors.red,
-                                    );
-                                  } else if (state
-                                      is DeactivateBlockerSuccess) {
-                                    CustomScaffoldMessenger(
-                                      context,
-                                      state.output,
-                                      Icons.check_circle_outline,
-                                      Colors.green,
-                                    );
-                                  }
-                                },
-                                builder: (context, state) {
-                                  return state is DeactivateBlockerLoading
-                                      ? const SpinKitFadingCircle(
-                                          color: Colors.black)
-                                      : CustomButton(
-                                          width: width,
-                                          heaight: heaight,
-                                          text: 'Blocker ⬇',
-                                          onPressed: () {
-                                            context
-                                                .read<DeactivateBlockerCubit>()
-                                                .deactivateReservationBlocker(
-                                                  location: locationName.name!,
-                                                  token: widget.userdata.token!,
-                                                );
-                                          },
+                                    if (locationState
+                                        is GetLocationByIdSuccess) {
+                                      locationName = locationState.location;
+                                      return SizedBox.shrink();
+                                    } else if (state
+                                        is GetLocationByIdFailure) {
+                                      return Text("Failed to load location");
+                                    } else {
+                                      return SizedBox.shrink();
+                                    }
+                                  }),
+                                  BlocConsumer<DeactivateBlockerCubit,
+                                      DeactivateBlockerState>(
+                                    listener: (context, state) {
+                                      if (state is DeactivateBlockerFailure) {
+                                        CustomScaffoldMessenger(
+                                          context,
+                                          "Error is : ${state.errmessage}",
+                                          FontAwesomeIcons.circleXmark,
+                                          Colors.red,
                                         );
-                                },
-                              )
-                            ],
-                          ),
+                                      } else if (state
+                                          is DeactivateBlockerSuccess) {
+                                        CustomScaffoldMessenger(
+                                          context,
+                                          state.output,
+                                          Icons.check_circle_outline,
+                                          Colors.green,
+                                        );
+                                      }
+                                    },
+                                    builder: (context, state) {
+                                      return state is DeactivateBlockerLoading
+                                          ? const SpinKitFadingCircle(
+                                              color: Colors.black)
+                                          : CustomButton(
+                                              width: width,
+                                              heaight: heaight,
+                                              text: 'Blocker ⬇',
+                                              onPressed: () {
+                                                context
+                                                    .read<
+                                                        DeactivateBlockerCubit>()
+                                                    .deactivateReservationBlocker(
+                                                      location:
+                                                          locationName.name!,
+                                                      token: widget
+                                                          .userdata.token!,
+                                                    );
+                                              },
+                                            );
+                                    },
+                                  )
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                                flex: 1,
+                                child: BlocConsumer<CancelReserveCubit,
+                                    CancelReserveState>(
+                                  listener: (context, state) async {
+                                    if (state is CancelReserveFailure) {
+                                      CustomScaffoldMessenger(
+                                          context,
+                                          "Error is : ${state.errmessage}",
+                                          FontAwesomeIcons.circleXmark,
+                                          Colors.red);
+                                    } else if (state is CancelReserveSuccess) {
+                                      await context
+                                          .read<ManagePageCubit>()
+                                          .cancel();
+                                      CustomScaffoldMessenger(
+                                          context,
+                                          state.reserve,
+                                          Icons.check_circle_outline,
+                                          Colors.green);
+                                      GoRouter.of(context).pushReplacement(
+                                          AppRouter.bottomNaviagationBar,
+                                          extra: widget.userdata);
+                                      context.read<BottomNavCubit>().setPage(0);
+                                    }
+                                  },
+                                  builder: (context, state) {
+                                    return state is CancelReserveLoading
+                                        ? const SpinKitFadingCircle(
+                                            color: Colors.black,
+                                          )
+                                        : CustomButton(
+                                            width: width,
+                                            heaight: heaight,
+                                            text: 'Cancel',
+                                            onPressed: () {
+                                              context
+                                                  .read<CancelReserveCubit>()
+                                                  .cancelReservation(
+                                                      token: widget
+                                                          .userdata.token!);
+                                            },
+                                          );
+                                  },
+                                )),
+                          ],
                         ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                            flex: 1,
-                            child: BlocConsumer<CancelReserveCubit,
-                                CancelReserveState>(
-                              listener: (context, state) async {
-                                if (state is CancelReserveFailure) {
-                                  CustomScaffoldMessenger(
-                                      context,
-                                      "Error is : ${state.errmessage}",
-                                      FontAwesomeIcons.circleXmark,
-                                      Colors.red);
-                                } else if (state is CancelReserveSuccess) {
-                                  await context
-                                      .read<ManagePageCubit>()
-                                      .cancel();
-                                  CustomScaffoldMessenger(
-                                      context,
-                                      state.reserve,
-                                      Icons.check_circle_outline,
-                                      Colors.green);
-                                  GoRouter.of(context).pushReplacement(
-                                      AppRouter.bottomNaviagationBar,
-                                      extra: widget.userdata);
-                                  context.read<BottomNavCubit>().setPage(0);
-                                }
-                              },
-                              builder: (context, state) {
-                                return state is CancelReserveLoading
-                                    ? const SpinKitFadingCircle(
-                                        color: Colors.black,
-                                      )
-                                    : CustomButton(
-                                        width: width,
-                                        heaight: heaight,
-                                        text: 'Cancel',
-                                        onPressed: () {
-                                          context
-                                              .read<CancelReserveCubit>()
-                                              .cancelReservation(
-                                                  token:
-                                                      widget.userdata.token!);
-                                        },
-                                      );
-                              },
-                            )),
-                      ],
-                    ),
-                  )
+                      )
+                    ],
+                  ),
                 ],
               ),
             );

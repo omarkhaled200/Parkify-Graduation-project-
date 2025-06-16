@@ -76,8 +76,26 @@ class profileHomeRepoImpl extends prfileHomeRepo {
     try {
       var data = await apiClass.post(
           endpoint: 'user/deleteLicensePlate', token: token, body: {'id': id});
-      String message = data['success'];
-      return right(message);
+      // الحالة 1: فيه success
+      if (data.containsKey('success')) {
+        String message = data['success'] ?? 'Success but no message';
+        return right(message);
+      }
+
+      // الحالة 2: فيه error
+      if (data.containsKey('error')) {
+        String errorMessage = data['error'] ?? 'Unknown error';
+        return left(ServerFailure(errorMessage));
+      }
+
+      // الحالة 3: فيه message (بس مش success)
+      if (data.containsKey('message')) {
+        String errorMessage = data['message'] ?? 'Unknown message';
+        return left(ServerFailure(errorMessage));
+      }
+
+      // الحالة 4: مفيش حاجة مفهومة
+      return left(ServerFailure('Unexpected API response'));
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));
@@ -90,14 +108,31 @@ class profileHomeRepoImpl extends prfileHomeRepo {
   Future<Either<Failure, String>> postaddlicenseplate(
       {required String plate, required String token}) async {
     try {
-      var response = await apiClass.post(
+      var data = await apiClass.post(
         endpoint: 'user/addLicensePlate',
         body: {'plate': plate},
       );
 
-      String message = response['success'];
+      // الحالة 1: فيه success
+      if (data.containsKey('success')) {
+        String message = data['success'] ?? 'Success but no message';
+        return right(message);
+      }
 
-      return right(message);
+      // الحالة 2: فيه error
+      if (data.containsKey('error')) {
+        String errorMessage = data['error'] ?? 'Unknown error';
+        return left(ServerFailure(errorMessage));
+      }
+
+      // الحالة 3: فيه message (بس مش success)
+      if (data.containsKey('message')) {
+        String errorMessage = data['message'] ?? 'Unknown message';
+        return left(ServerFailure(errorMessage));
+      }
+
+      // الحالة 4: مفيش حاجة مفهومة
+      return left(ServerFailure('Unexpected API response'));
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));

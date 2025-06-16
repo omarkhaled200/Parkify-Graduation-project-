@@ -256,17 +256,16 @@ class _Dateentry1bodyState extends State<Dateentry1body> {
                                   ),
                                 ),
                                 SizedBox(height: heaight * 0.02),
-                                if (plateText != null) ...[
-                                  if (isExtractingPlate)
-                                    const SpinKitFadingCircle(
-                                      color: Colors.black,
-                                    )
-                                  else if (plateText != null)
-                                    CustomDisplayContent(
-                                      width: width,
-                                      heaight: heaight,
-                                      text: plateText!,
-                                    ),
+                                if (isExtractingPlate) ...[
+                                  const SpinKitFadingCircle(
+                                    color: Colors.black,
+                                  ),
+                                ] else if (plateText != null) ...[
+                                  CustomDisplayContent(
+                                    width: width,
+                                    heaight: heaight,
+                                    text: plateText!,
+                                  ),
                                 ],
                                 SizedBox(height: heaight * 0.02),
                                 CustomCheckbox(

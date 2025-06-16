@@ -125,224 +125,231 @@ class _ReservationViewbodyState extends State<ReservationViewbody> {
                 return Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  child: Column(
+                  child: ListView(
                     children: [
-                      Currentloationcard(
-                        loc: location,
-                      ),
-                      SizedBox(height: heaight * 0.02),
-                      SizedBox(
-                        height: heaight * 0.3,
-                        child: BlocConsumer<MqttCubit, MqttState>(
-                          listener: (context, mqttState) {
-                            // هنا بنسمع للتغييرات وبنحفظ الداتا في الـ state
-                            if (mqttState is MqttMessageReceived) {
-                              setState(() {
-                                _mqttMessage = mqttState.message;
-                                _mqttLoading = false;
-                                _mqttError = false;
-                              });
-                            } else if (mqttState is MqttDisconnected) {
-                              setState(() {
-                                _mqttError = true;
-                                _mqttLoading = false;
-                              });
-                              CustomScaffoldMessenger(
-                                context,
-                                "Error is : Mqtt Disconnected",
-                                FontAwesomeIcons.circleXmark,
-                                Colors.red,
-                              );
-                            } else if (mqttState is MqttError) {
-                              setState(() {
-                                _mqttError = true;
-                                _mqttLoading = false;
-                              });
-                            }
-                          },
-                          builder: (context, mqttState) {
-                            // هنا بنعرض الداتا المحفوظة مش الـ state الحالي
-                            if (_mqttMessage != null && !_mqttError) {
-                              return Column(
-                                children: [
-                                  PremiumReserveSpotParking(
-                                    numberSpot: _mqttMessage!,
-                                  ),
-                                ],
-                              );
-                            } else if (_mqttError) {
-                              return const Center(
-                                child: Text('Failed to connect'),
-                              );
-                            } else if (_mqttLoading) {
-                              return const Center(
-                                child: SpinKitFadingCircle(color: Colors.black),
-                              );
-                            } else {
-                              return const Center(
-                                child: Text('Failed to load data'),
-                              );
-                            }
-                          },
-                        ),
-                      ),
-                      SizedBox(height: heaight * 0.01),
-                      BlocBuilder<GetUserPlatesCubit, GetUserPlatesState>(
-                        builder: (context, state) {
-                          if (state is GetUserPlatesSuccess) {
-                            if (_selectedPlate == null &&
-                                state.plate.isNotEmpty) {
-                              _selectedPlate = state.plate[0].plate;
-                            }
-                            return CustomDrowdown(
-                              list: state.plate
-                                  .map((plate) => plate.plate!)
-                                  .toList(),
-                              selectedPlate: _selectedPlate!,
-                              text: 'Select License Plate',
-                              onChanged: (selectedValue) {
-                                setState(() {
-                                  _selectedPlate = selectedValue;
-                                });
+                      Column(
+                        children: [
+                          Currentloationcard(
+                            loc: location,
+                          ),
+                          SizedBox(height: heaight * 0.02),
+                          SizedBox(
+                            height: heaight * 0.35,
+                            child: BlocConsumer<MqttCubit, MqttState>(
+                              listener: (context, mqttState) {
+                                // هنا بنسمع للتغييرات وبنحفظ الداتا في الـ state
+                                if (mqttState is MqttMessageReceived) {
+                                  setState(() {
+                                    _mqttMessage = mqttState.message;
+                                    _mqttLoading = false;
+                                    _mqttError = false;
+                                  });
+                                } else if (mqttState is MqttDisconnected) {
+                                  setState(() {
+                                    _mqttError = true;
+                                    _mqttLoading = false;
+                                  });
+                                  CustomScaffoldMessenger(
+                                    context,
+                                    "Error is : Mqtt Disconnected",
+                                    FontAwesomeIcons.circleXmark,
+                                    Colors.red,
+                                  );
+                                } else if (mqttState is MqttError) {
+                                  setState(() {
+                                    _mqttError = true;
+                                    _mqttLoading = false;
+                                  });
+                                }
                               },
-                            );
-                          } else if (state is GetUserPlatesFailure) {
-                            CustomScaffoldMessenger(
-                                context,
-                                "Error is : ${state.errmessage}",
-                                FontAwesomeIcons.circleXmark,
-                                Colors.red);
-                            return const Center(
-                              child: Text('Failed to load data'),
-                            );
-                          } else {
-                            return const SpinKitFadingCircle(
-                                color: Colors.black);
-                          }
-                        },
-                      ),
-                      SizedBox(height: heaight * 0.01),
-                      CustomTimeOfDay(
-                        onTimeChanged: (TimeOfDay newTime) {
-                          setState(() {
-                            _selectedTime = newTime;
-                          });
-                        },
-                      ),
-                      SizedBox(height: heaight * 0.01),
-                      if (_selectedTime != null) ...[
-                        Builder(builder: (context) {
-                          final now = DateTime.now();
-                          final nowTrimmed = DateTime(now.year, now.month,
-                              now.day, now.hour, now.minute); // حذف الثواني
+                              builder: (context, mqttState) {
+                                // هنا بنعرض الداتا المحفوظة مش الـ state الحالي
+                                if (_mqttMessage != null && !_mqttError) {
+                                  return Column(
+                                    children: [
+                                      PremiumReserveSpotParking(
+                                        numberSpot: _mqttMessage!,
+                                      ),
+                                    ],
+                                  );
+                                } else if (_mqttError) {
+                                  return const Center(
+                                    child: Text('Failed to connect'),
+                                  );
+                                } else if (_mqttLoading) {
+                                  return const Center(
+                                    child: SpinKitFadingCircle(
+                                        color: Colors.black),
+                                  );
+                                } else {
+                                  return const Center(
+                                    child: Text('Failed to load data'),
+                                  );
+                                }
+                              },
+                            ),
+                          ),
+                          SizedBox(height: heaight * 0.01),
+                          BlocBuilder<GetUserPlatesCubit, GetUserPlatesState>(
+                            builder: (context, state) {
+                              if (state is GetUserPlatesSuccess) {
+                                if (_selectedPlate == null &&
+                                    state.plate.isNotEmpty) {
+                                  _selectedPlate = state.plate[0].plate;
+                                }
+                                return CustomDrowdown(
+                                  list: state.plate
+                                      .map((plate) => plate.plate!)
+                                      .toList(),
+                                  selectedPlate: _selectedPlate!,
+                                  text: 'Select License Plate',
+                                  onChanged: (selectedValue) {
+                                    setState(() {
+                                      _selectedPlate = selectedValue;
+                                    });
+                                  },
+                                );
+                              } else if (state is GetUserPlatesFailure) {
+                                CustomScaffoldMessenger(
+                                    context,
+                                    "Error is : ${state.errmessage}",
+                                    FontAwesomeIcons.circleXmark,
+                                    Colors.red);
+                                return const Center(
+                                  child: Text('Failed to load data'),
+                                );
+                              } else {
+                                return const SpinKitFadingCircle(
+                                    color: Colors.black);
+                              }
+                            },
+                          ),
+                          SizedBox(height: heaight * 0.01),
+                          CustomTimeOfDay(
+                            onTimeChanged: (TimeOfDay newTime) {
+                              setState(() {
+                                _selectedTime = newTime;
+                              });
+                            },
+                          ),
+                          SizedBox(height: heaight * 0.01),
+                          if (_selectedTime != null) ...[
+                            Builder(builder: (context) {
+                              final now = DateTime.now();
+                              final nowTrimmed = DateTime(now.year, now.month,
+                                  now.day, now.hour, now.minute); // حذف الثواني
 
-                          final selectedTime = _selectedTime!;
-                          DateTime selectedDateTime = DateTime(
-                            now.year,
-                            now.month,
-                            now.day,
-                            selectedTime.hour,
-                            selectedTime.minute,
-                          );
+                              final selectedTime = _selectedTime!;
+                              DateTime selectedDateTime = DateTime(
+                                now.year,
+                                now.month,
+                                now.day,
+                                selectedTime.hour,
+                                selectedTime.minute,
+                              );
 
-                          // لو الوقت المختار أقل من دلوقتي → نزوده يوم
-                          if (selectedDateTime.isBefore(nowTrimmed)) {
-                            selectedDateTime =
-                                selectedDateTime.add(const Duration(days: 1));
-                          }
+                              // لو الوقت المختار أقل من دلوقتي → نزوده يوم
+                              if (selectedDateTime.isBefore(nowTrimmed)) {
+                                selectedDateTime = selectedDateTime
+                                    .add(const Duration(days: 1));
+                              }
 
-                          final duration =
-                              selectedDateTime.difference(nowTrimmed);
-                          final totalMinutes = duration.inMinutes;
-                          final totalHours = totalMinutes ~/ 60;
-                          final remainingMinutes = totalMinutes % 60;
+                              final duration =
+                                  selectedDateTime.difference(nowTrimmed);
+                              final totalMinutes = duration.inMinutes;
+                              final totalHours = totalMinutes ~/ 60;
+                              final remainingMinutes = totalMinutes % 60;
 
-                          // ✅ Debug output - ممكن تحذفها بعدين
-                          print('الآن (trimmed): $nowTrimmed');
-                          print('الوقت المختار: $selectedDateTime');
-                          print(
-                              'الفرق: $totalMinutes دقيقة ($totalHours ساعة و $remainingMinutes دقيقة)');
+                              // ✅ Debug output - ممكن تحذفها بعدين
+                              print('الآن (trimmed): $nowTrimmed');
+                              print('الوقت المختار: $selectedDateTime');
+                              print(
+                                  'الفرق: $totalMinutes دقيقة ($totalHours ساعة و $remainingMinutes دقيقة)');
 
-                          final pricePerHour = (state.spot.length > 1
-                                  ? state.spot[1].reservationFees
-                                  : null) ??
-                              50;
-                          final totalPrice =
-                              ((totalMinutes / 60).ceil()) * pricePerHour;
-                          print('selected time ${_selectedTime}');
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Time difference: $totalHours hours and $remainingMinutes minutes",
-                                  style: TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: 16,
-                                    fontFamily: Assets.textfamily,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Text(
-                                  "Total price: $totalPrice EGP",
-                                  style: TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: 16,
-                                    fontFamily: Assets.textfamily,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                if (totalMinutes < 60)
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
-                                    child: Text(
-                                      "You must book at least 1 hour in advance.",
+                              final pricePerHour = (state.spot.length > 1
+                                      ? state.spot[1].reservationFees
+                                      : null) ??
+                                  50;
+                              final totalPrice =
+                                  ((totalMinutes / 60).ceil()) * pricePerHour;
+                              print('selected time ${_selectedTime}');
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Time difference: $totalHours hours and $remainingMinutes minutes",
                                       style: TextStyle(
-                                        color: Colors.redAccent,
-                                        fontSize: 14,
+                                        color: Colors.black87,
+                                        fontSize: 16,
                                         fontFamily: Assets.textfamily,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                  ),
-                              ],
-                            ),
-                          );
-                        }),
-                      ],
-                      SizedBox(height: heaight * 0.01),
-                      CustomButton(
-                        width: width,
-                        heaight: heaight,
-                        text: 'Submit',
-                        onPressed: () {
-                          if (_selectedTime == null) {
-                            CustomScaffoldMessenger(
-                              context,
-                              'Please select time first',
-                              FontAwesomeIcons.circleInfo,
-                              Colors.red,
-                            );
-                            return;
-                          }
-
-                          final DateTime unifiedNow = DateTime.now();
-
-                          final String reserveat =
-                              formatDateTimeWithSelectedTime(
-                            _selectedTime!,
-                            unifiedNow,
-                          );
-                          print('reserveat time is  $reserveat');
-
-                          context.read<ReserveSpotCubit>().reservespot(
-                                id: location.id.toString(),
-                                plate: _selectedPlate!,
-                                reserve_at: reserveat,
-                                token: userdata.token!,
+                                    Text(
+                                      "Total price: $totalPrice EGP",
+                                      style: TextStyle(
+                                        color: Colors.black87,
+                                        fontSize: 16,
+                                        fontFamily: Assets.textfamily,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    if (totalMinutes < 60)
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 8.0),
+                                        child: Text(
+                                          "You must book at least 1 hour in advance.",
+                                          style: TextStyle(
+                                            color: Colors.redAccent,
+                                            fontSize: 14,
+                                            fontFamily: Assets.textfamily,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
                               );
-                        },
+                            }),
+                          ],
+                          SizedBox(height: heaight * 0.01),
+                          CustomButton(
+                            width: width,
+                            heaight: heaight,
+                            text: 'Submit',
+                            onPressed: () {
+                              if (_selectedTime == null) {
+                                CustomScaffoldMessenger(
+                                  context,
+                                  'Please select time first',
+                                  FontAwesomeIcons.circleInfo,
+                                  Colors.red,
+                                );
+                                return;
+                              }
+
+                              final DateTime unifiedNow = DateTime.now();
+
+                              final String reserveat =
+                                  formatDateTimeWithSelectedTime(
+                                _selectedTime!,
+                                unifiedNow,
+                              );
+                              print('reserveat time is  $reserveat');
+
+                              context.read<ReserveSpotCubit>().reservespot(
+                                    id: location.id.toString(),
+                                    plate: _selectedPlate!,
+                                    reserve_at: reserveat,
+                                    token: userdata.token!,
+                                  );
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),

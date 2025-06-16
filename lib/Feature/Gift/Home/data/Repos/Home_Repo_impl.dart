@@ -33,9 +33,27 @@ class HomeRepoImpl extends HomeRepo {
     try {
       var data = await apiClass.post(
           endpoint: 'user/deactivateGift', token: token, body: {'gift_id': id});
-      String message = data['success'];
-      print(">>> DeactivateGift API response: ${message}");
-      return right(message);
+      // الحالة 1: فيه success
+      if (data.containsKey('success')) {
+        String message = data['success'] ?? 'Success but no message';
+        print(">>> DeactivateGift API response: ${message}");
+        return right(message);
+      }
+
+      // الحالة 2: فيه error
+      if (data.containsKey('error')) {
+        String errorMessage = data['error'] ?? 'Unknown error';
+        return left(ServerFailure(errorMessage));
+      }
+
+      // الحالة 3: فيه message (بس مش success)
+      if (data.containsKey('message')) {
+        String errorMessage = data['message'] ?? 'Unknown message';
+        return left(ServerFailure(errorMessage));
+      }
+
+      // الحالة 4: مفيش حاجة مفهومة
+      return left(ServerFailure('Unexpected API response'));
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));
@@ -45,14 +63,39 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<Failure, String>> ActviateGift(
-      {required String token, required String id}) async {
+  Future<Either<Failure, String>> ActviateGift({
+    required String token,
+    required String id,
+  }) async {
     try {
       var data = await apiClass.post(
-          endpoint: 'user/activateGift', token: token, body: {'gift_id': id});
-      String message = data['success'];
-      print(">>> activateGift API response: ${message}");
-      return right(message);
+        endpoint: 'user/activateGift',
+        token: token,
+        body: {'gift_id': id},
+      );
+
+      print(">>> activateGift API response: $data");
+
+      // الحالة 1: فيه success
+      if (data.containsKey('success')) {
+        String message = data['success'] ?? 'Success but no message';
+        return right(message);
+      }
+
+      // الحالة 2: فيه error
+      if (data.containsKey('error')) {
+        String errorMessage = data['error'] ?? 'Unknown error';
+        return left(ServerFailure(errorMessage));
+      }
+
+      // الحالة 3: فيه message (بس مش success)
+      if (data.containsKey('message')) {
+        String errorMessage = data['message'] ?? 'Unknown message';
+        return left(ServerFailure(errorMessage));
+      }
+
+      // الحالة 4: مفيش حاجة مفهومة
+      return left(ServerFailure('Unexpected API response'));
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));

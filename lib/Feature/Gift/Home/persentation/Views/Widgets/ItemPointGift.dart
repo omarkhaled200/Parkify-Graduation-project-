@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:parkify/Core/utlis/Functions/CustomScaffoldMessenger.dart';
+
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
 import 'package:parkify/Feature/Gift/Home/data/gift_model/gift_model.dart';
-import 'package:parkify/Feature/Gift/Home/persentation/View_Model/Activate_Gift/activate_gift_cubit.dart';
-import 'package:parkify/Feature/Gift/Home/persentation/View_Model/DeActivate_Gift/de_activate_gift_cubit.dart';
+
 import 'package:parkify/constant.dart';
 
 class ItemPointGift extends StatefulWidget {
@@ -14,21 +11,22 @@ class ItemPointGift extends StatefulWidget {
     super.key,
     required this.user,
     required this.gift,
+    required this.isActivated,
+    required this.hasAnotherActivated,
+    required this.onGiftToggle,
   });
   final UserModel user;
   final GiftModel gift;
+  final bool isActivated;
+  final bool hasAnotherActivated;
+  final Function(int giftId, bool shouldActivate) onGiftToggle;
   @override
   State<ItemPointGift> createState() => _ItemPointGiftState();
 }
 
 class _ItemPointGiftState extends State<ItemPointGift> {
-  static int? _currentlyActivatedGiftId; // <-- ده بقى المتغير المشترك
-  bool get isSelected => _currentlyActivatedGiftId == widget.gift.id;
-
   void _showdialog() {
     final scaffoldContext = context;
-    final activateGiftCubit = context.read<ActivateGiftCubit>();
-    final deActivateGiftCubit = context.read<DeActivateGiftCubit>();
 
     showDialog(
       context: context,
@@ -43,11 +41,11 @@ class _ItemPointGiftState extends State<ItemPointGift> {
                 fontWeight: FontWeight.w600),
           ),
           content: Text(
-            isSelected
+            widget.isActivated
                 ? 'Are you sure you want to de-activate this gift?'
-                : (_currentlyActivatedGiftId == null
-                    ? 'Do you want to activate this gift?'
-                    : 'Another gift is already activated. Please deactivate it first.'),
+                : (widget.hasAnotherActivated
+                    ? 'Another gift is already activated. Please deactivate it first.'
+                    : 'Do you want to activate this gift?'),
             style: TextStyle(
               fontFamily: Assets.textfamily,
               fontSize: 20,
@@ -55,48 +53,23 @@ class _ItemPointGiftState extends State<ItemPointGift> {
             ),
           ),
           actions: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: kprimaryColor),
-              onPressed: () {
-                if (isSelected) {
-                  // Deactivate current
-                  deActivateGiftCubit.deactivateGift(
-                    token: widget.user.token!,
-                    id: '${widget.gift.id}',
-                  );
-                  setState(() {
-                    _currentlyActivatedGiftId = null;
-                  });
-                } else {
-                  if (_currentlyActivatedGiftId == null) {
-                    // Activate
-                    activateGiftCubit.activateGift(
-                      token: widget.user.token!,
-                      id: "${widget.gift.id}",
-                    );
-                    setState(() {
-                      _currentlyActivatedGiftId = widget.gift.id;
-                    });
-                  } else {
-                    CustomScaffoldMessenger(
-                        scaffoldContext,
-                        "Another gift is already activated.\n Please deactivate it first.",
-                        FontAwesomeIcons.circleExclamation,
-                        Colors.red);
-                  }
-                }
-
-                Navigator.of(dialogContext).pop();
-              },
-              child: Text(
-                'Ok',
-                style: TextStyle(
-                    fontFamily: Assets.textfamily,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black),
+            if (!widget.hasAnotherActivated || widget.isActivated)
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: kprimaryColor),
+                onPressed: () {
+                  // استدعاء الـ callback function
+                  widget.onGiftToggle(widget.gift.id!, !widget.isActivated);
+                  Navigator.of(dialogContext).pop();
+                },
+                child: Text(
+                  'Ok',
+                  style: TextStyle(
+                      fontFamily: Assets.textfamily,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black),
+                ),
               ),
-            ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: kprimaryColor),
               onPressed: () {
@@ -129,9 +102,18 @@ class _ItemPointGiftState extends State<ItemPointGift> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 '${widget.gift.discountPercentage}% off your next park',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: Assets.textfamily,
+                ),
+              ),
+              Text(
+                'Cost: ${widget.gift.cost}pts',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -150,7 +132,7 @@ class _ItemPointGiftState extends State<ItemPointGift> {
                       height: 25,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: isSelected ? Colors.green : Colors.red,
+                        color: widget.isActivated ? Colors.green : Colors.red,
                       ),
                     ),
                   ],

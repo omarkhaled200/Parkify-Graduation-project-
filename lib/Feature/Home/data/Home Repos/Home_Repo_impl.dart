@@ -40,8 +40,26 @@ class HomeRepoImpl extends HomeRepo {
     try {
       var data = await apiClass.post(
           endpoint: 'user/cancelReservation', token: token, body: null);
-      String message = data['success'];
-      return right(message);
+      // الحالة 1: فيه success
+      if (data.containsKey('success')) {
+        String message = data['success'] ?? 'Success but no message';
+        return right(message);
+      }
+
+      // الحالة 2: فيه error
+      if (data.containsKey('error')) {
+        String errorMessage = data['error'] ?? 'Unknown error';
+        return left(ServerFailure(errorMessage));
+      }
+
+      // الحالة 3: فيه message (بس مش success)
+      if (data.containsKey('message')) {
+        String errorMessage = data['message'] ?? 'Unknown message';
+        return left(ServerFailure(errorMessage));
+      }
+
+      // الحالة 4: مفيش حاجة مفهومة
+      return left(ServerFailure('Unexpected API response'));
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));
@@ -58,8 +76,26 @@ class HomeRepoImpl extends HomeRepo {
           endpoint: 'user/deactivateReservationBlocker',
           token: token,
           body: {'location': location});
-      String message = data['success'];
-      return right(message);
+      // الحالة 1: فيه success
+      if (data.containsKey('success')) {
+        String message = data['success'] ?? 'Success but no message';
+        return right(message);
+      }
+
+      // الحالة 2: فيه error
+      if (data.containsKey('error')) {
+        String errorMessage = data['error'] ?? 'Unknown error';
+        return left(ServerFailure(errorMessage));
+      }
+
+      // الحالة 3: فيه message (بس مش success)
+      if (data.containsKey('message')) {
+        String errorMessage = data['message'] ?? 'Unknown message';
+        return left(ServerFailure(errorMessage));
+      }
+
+      // الحالة 4: مفيش حاجة مفهومة
+      return left(ServerFailure('Unexpected API response'));
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));
@@ -85,7 +121,6 @@ class HomeRepoImpl extends HomeRepo {
       ReservationModel? user;
       try {
         user = ReservationModel.fromJson(data);
-        print(user);
       } catch (e) {
         print("Error parsing JSON: $e");
       }

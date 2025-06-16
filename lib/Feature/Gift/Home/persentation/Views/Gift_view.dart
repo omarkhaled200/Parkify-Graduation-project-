@@ -5,6 +5,7 @@ import 'package:parkify/Core/Get%20user%20point%20and%20balance/User_Balance_Poi
 import 'package:parkify/Core/Get%20user%20point%20and%20balance/User_Balance_point_Repo/User_Balance_Point_Home_Repo_impl.dart';
 import 'package:parkify/Core/utlis/api_class.dart';
 import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
+import 'package:parkify/Feature/Gift/Home/persentation/View_Model/handel%20gift/handel_gift_cubit.dart';
 import 'package:parkify/Feature/Gift/Home/persentation/Views/Widgets/GiftViewBody.dart';
 
 class GiftView extends StatelessWidget {
@@ -12,10 +13,17 @@ class GiftView extends StatelessWidget {
   final UserModel userdata;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          UserBalancePointCubit(UserBalancePointHomeRepoImpl(ApiClass(Dio())))
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => UserBalancePointCubit(
+              UserBalancePointHomeRepoImpl(ApiClass(Dio())))
             ..getbalanceandpoints(token: userdata.token!),
+        ),
+        BlocProvider(
+          create: (context) => GiftSelectionCubit(),
+        ),
+      ],
       child: GiftViewBody(
         user: userdata,
       ),
