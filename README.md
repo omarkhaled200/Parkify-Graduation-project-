@@ -41,7 +41,7 @@ link videos
 
 Omar Khaled  
 Flutter Developer  
-[LinkedIn Profile](www.linkedin.com/in/omar-khaled-mahmoud-ali) *(replace with your actual link)*
+[LinkedIn Profile](www.linkedin.com/in/omar-khaled-mahmoud-ali) 
 
 ---
 
