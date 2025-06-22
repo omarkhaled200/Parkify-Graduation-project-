@@ -6,8 +6,8 @@ import 'package:parkify/Feature/Home/persentation/View_Model/BottomNavCubit.dart
 import 'package:parkify/Feature/Home/persentation/View_Model/Manage_Page/manage_page_cubit.dart';
 
 void main() {
-  // runApp(DevicePreview(builder: (context) => const Parkify()));
-  runApp(const Parkify());
+  runApp(DevicePreview(builder: (context) => const Parkify()));
+  // runApp(const Parkify());
 }
 
 class Parkify extends StatelessWidget {

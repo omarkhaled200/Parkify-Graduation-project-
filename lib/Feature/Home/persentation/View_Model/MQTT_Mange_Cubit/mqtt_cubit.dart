@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:parkify/Core/utlis/Functions/MQTT%20Service.dart';
@@ -34,8 +36,16 @@ class MqttCubit extends Cubit<MqttState> {
         final recMess = c[0].payload as MqttPublishMessage;
         final pt =
             MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
-        if (!isClosed) {
-          emit(MqttMessageReceived(pt));
+
+        print('📥 MQTT Message: $pt'); // لازم تتأكد من شكل الرسالة هنا
+
+        try {
+          // ✅ decode JSON أولًا
+          final parsedJson = jsonDecode(pt); // pt لازم يكون: {"message":"2 2"}
+          final message = parsedJson["message"]; // = "2 2"
+          emit(MqttMessageReceived(message));
+        } catch (e) {
+          emit(MqttError("JSON parse error: $e"));
         }
       });
     } catch (e) {
@@ -43,29 +53,3 @@ class MqttCubit extends Cubit<MqttState> {
     }
   }
 }
-
-// class MqttState {
-//   final String? receivedValue;
-
-//   MqttState({this.receivedValue});
-// }
-
-// class MqttCubit extends Cubit<MqttState> {
-//   MqttCubit() : super(MqttState());
-
-//   final _mqtt = MqttService();
-
-//   Future<void> connectAndSubscribe(String topic) async {
-//     await _mqtt.connect();
-
-//     _mqtt.client.updates!.listen((List<MqttReceivedMessage<MqttMessage>> c) {
-//       final recMess = c[0].payload as MqttPublishMessage;
-//       final pt = MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
-
-//       print('🚀 Received: $pt');
-//       emit(MqttState(receivedValue: pt)); // نحفظ القيمة الجديدة
-//     });
-
-//     _mqtt.subscribeToTopic(topic);
-//   }
-// }

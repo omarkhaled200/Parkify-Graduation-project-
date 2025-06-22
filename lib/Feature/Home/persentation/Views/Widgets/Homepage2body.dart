@@ -53,6 +53,8 @@ class _Homepage2bodyState extends State<Homepage2body> {
     return BlocBuilder<MqttCubit, MqttState>(
       builder: (context, state) {
         if (state is MqttMessageReceived) {
+          print('📥 MQTT Message: ${state.message}');
+
           return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
@@ -144,18 +146,18 @@ class _Homepage2bodyState extends State<Homepage2body> {
             ),
           );
         } else if (state is MqttDisconnected) {
-          CustomScaffoldMessenger(
-            context,
-            "Error is : Mqtt Disconnected",
-            FontAwesomeIcons.circleXmark,
-            Colors.red,
-          );
+          // CustomScaffoldMessenger(
+          //   context,
+          //   "Error is : Mqtt Disconnected",
+          //   FontAwesomeIcons.circleXmark,
+          //   Colors.red,
+          // );
           return const Center(
             child: Text('Failed to connect'),
           );
         } else if (state is MqttError) {
-          CustomScaffoldMessenger(context, "Error is : ${state.error}",
-              FontAwesomeIcons.circleXmark, Colors.red);
+          // CustomScaffoldMessenger(context, "Error is : ${state.error}",
+          //     FontAwesomeIcons.circleXmark, Colors.red);
           return const Center(
             child: Text('Failed to load data'),
           );
