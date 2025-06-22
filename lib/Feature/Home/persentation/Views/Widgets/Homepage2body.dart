@@ -8,7 +8,7 @@ import 'package:parkify/Core/utlis/Functions/CustomScaffoldMessenger.dart';
 import 'package:parkify/Core/utlis/Icon_All_app.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
-import 'package:parkify/Feature/Home/data/Model/location_model/location_model.dart';
+import 'package:parkify/Feature/Home/data/Model/LocationModel/LocatiomModel.dart';
 import 'package:parkify/Feature/Home/persentation/View_Model/MQTT_Mange_Cubit/mqtt_cubit.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/Currentloationcard.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Widgets/CustomReserveNowButton.dart';

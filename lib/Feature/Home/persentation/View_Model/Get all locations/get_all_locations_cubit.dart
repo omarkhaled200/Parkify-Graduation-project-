@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:parkify/Feature/Home/data/Home%20Repos/Home_Repo.dart';
-import 'package:parkify/Feature/Home/data/Model/location_model/location_model.dart';
+import 'package:parkify/Feature/Home/data/Model/LocationModel/LocatiomModel.dart';
 
 part 'get_all_locations_state.dart';
 

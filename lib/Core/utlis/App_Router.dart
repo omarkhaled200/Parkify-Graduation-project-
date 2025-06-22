@@ -6,7 +6,6 @@ import 'package:parkify/Feature/Auth/Presentation/Views/DataEntry1.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/LoginView.dart';
 import 'package:parkify/Feature/Auth/Presentation/Views/SignUpView.dart';
 import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
-import 'package:parkify/Feature/Home/data/Model/location_model/location_model.dart';
 import 'package:parkify/Feature/Home/persentation/View_Model/Manage_Page/manage_page_cubit.dart';
 import 'package:parkify/Feature/Home/persentation/Views/Bottom_Naviagation_bar.dart';
 import 'package:parkify/Feature/Home/persentation/Views/HomePage1.dart';

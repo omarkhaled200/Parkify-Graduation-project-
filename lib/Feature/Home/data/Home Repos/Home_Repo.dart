@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:parkify/Core/errors/failure.dart';
+import 'package:parkify/Feature/Home/data/Model/LocationModel/LocatiomModel.dart';
 import 'package:parkify/Feature/Home/data/Model/active_reservtion_model/active_reservtion_model.dart';
 import 'package:parkify/Feature/Home/data/Model/countdown_model.dart';
 import 'package:parkify/Feature/Home/data/Model/countup_model.dart';
-import 'package:parkify/Feature/Home/data/Model/location_model/location_model.dart';
 import 'package:parkify/Feature/Home/data/Model/reservation_model/reservation_model.dart';
 import 'package:parkify/Feature/Home/data/Model/spotdetialsmodel/spotdetialsmodel.dart';
 import 'package:parkify/Feature/Profile/Home/data/plate_model/plate_model.dart';

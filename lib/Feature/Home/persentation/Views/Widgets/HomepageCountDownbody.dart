@@ -11,7 +11,7 @@ import 'package:parkify/Core/utlis/api_class.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
 import 'package:parkify/Feature/Home/data/Home%20Repos/Home_Repo_impl.dart';
-import 'package:parkify/Feature/Home/data/Model/location_model/location_model.dart';
+import 'package:parkify/Feature/Home/data/Model/LocationModel/LocatiomModel.dart';
 import 'package:parkify/Feature/Home/persentation/View_Model/BottomNavCubit.dart';
 import 'package:parkify/Feature/Home/persentation/View_Model/Cancel%20Reserve%20Cubit/cancel_reserve_cubit.dart';
 import 'package:parkify/Feature/Home/persentation/View_Model/Deactivate_Blocker_Cubit/deactivate_blocker_cubit.dart';
@@ -38,7 +38,6 @@ class HomepageCountDownbody extends StatefulWidget {
 
 LocationModel locationName = LocationModel();
 
-// Ek1jASSbPhdj4vMXJz7ZyY7sM15f6VW0xJWFkVHA5129eee7
 class _HomepageCountDownbodyState extends State<HomepageCountDownbody> {
   @override
   Widget build(BuildContext context) {
@@ -83,7 +82,8 @@ class _HomepageCountDownbodyState extends State<HomepageCountDownbody> {
                             GetLocationByIdCubit(HomeRepoImpl(ApiClass(Dio())))
                               ..getlocationbyid(
                                   token: widget.userdata.token!,
-                                  id: state.reservation.reservableSpotId!),
+                                  id: state
+                                      .reservation.reservableSpot!.locationId!),
                         child: Currentloationcardbyid(
                           user: widget.userdata,
                         ),
@@ -110,7 +110,8 @@ class _HomepageCountDownbodyState extends State<HomepageCountDownbody> {
                             GetLocationByIdCubit(HomeRepoImpl(ApiClass(Dio())))
                               ..getlocationbyid(
                                   token: widget.userdata.token!,
-                                  id: state.reservation.reservableSpotId!),
+                                  id: state
+                                      .reservation.reservableSpot!.locationId!),
                         child: Row(
                           children: [
                             Expanded(

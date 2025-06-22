@@ -156,7 +156,7 @@ class profileHomeRepoImpl extends prfileHomeRepo {
       });
 
       Response response = await dio.post(
-        "https://1262-156-205-61-135.ngrok-free.app/extract-text/",
+        "https://53b5-156-205-61-135.ngrok-free.app/extract-text/",
         data: formData,
         options: Options(
           headers: {

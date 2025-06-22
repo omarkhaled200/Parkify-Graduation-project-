@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:parkify/Feature/Home/data/Home%20Repos/Home_Repo.dart';
-import 'package:parkify/Feature/Home/data/Model/location_model/location_model.dart';
+import 'package:parkify/Feature/Home/data/Model/LocationModel/LocatiomModel.dart';
 
 part 'get_location_by_id_state.dart';
 

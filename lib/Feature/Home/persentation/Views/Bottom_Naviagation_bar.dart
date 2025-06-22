@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
 import 'package:parkify/Feature/Gift/Home/persentation/Views/Gift_view.dart';
-import 'package:parkify/Feature/Home/data/Model/location_model/location_model.dart';
+import 'package:parkify/Feature/Home/data/Model/LocationModel/LocatiomModel.dart';
 import 'package:parkify/Feature/Home/persentation/View_Model/BottomNavCubit.dart';
 import 'package:parkify/Feature/Home/persentation/View_Model/Manage_Page/manage_page_cubit.dart';
 import 'package:parkify/Feature/Home/persentation/Views/HomePage1.dart';

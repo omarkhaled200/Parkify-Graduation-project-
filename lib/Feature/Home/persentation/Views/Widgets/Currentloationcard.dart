@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:parkify/Core/utlis/Functions/custom_lunch_url.dart';
 import 'package:parkify/Core/utlis/assets.dart';
-import 'package:parkify/Feature/Home/data/Model/location_model/location_model.dart';
+import 'package:parkify/Feature/Home/data/Model/LocationModel/LocatiomModel.dart';
 
 class Currentloationcard extends StatelessWidget {
   const Currentloationcard({super.key, required this.loc});

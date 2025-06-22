@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parkify/Core/utlis/assets.dart';
-import 'package:parkify/Feature/Home/data/Model/location_model/location_model.dart';
+import 'package:parkify/Feature/Home/data/Model/LocationModel/LocatiomModel.dart';
 import 'package:parkify/constant.dart';
 
 class CustomLocationCard extends StatelessWidget {

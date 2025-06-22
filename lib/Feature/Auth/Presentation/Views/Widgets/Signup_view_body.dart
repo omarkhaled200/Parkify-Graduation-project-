@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:parkify/Core/utlis/App_Router.dart';
@@ -186,29 +187,34 @@ class _SignupviewbodyState extends State<Signupviewbody> {
                             ),
                             SizedBox(height: heaight * 0.015),
                             Center(
-                              child: CustomButton(
-                                width: width,
-                                heaight: heaight,
-                                text: 'Register',
-                                onPressed: () {
-                                  if (formkey.currentState!.validate()) {
-                                    if (password == confirm_password &&
-                                        valdiate()
-                                            .valdiateemail(email: email) &&
-                                        valdiate().valdiatepassword(
-                                            password: password)) {
-                                      context
-                                          .read<UserRegisterNewAccountCubit>()
-                                          .UserRegister(
-                                              email: email!,
-                                              password: password!,
-                                              name: fullname!,
-                                              confirmpassword:
-                                                  confirm_password!);
-                                    }
-                                  }
-                                },
-                              ),
+                              child: state is UserRegisterNewAccountLoading
+                                  ? const SpinKitFadingCircle(
+                                      color: Colors.black,
+                                    )
+                                  : CustomButton(
+                                      width: width,
+                                      heaight: heaight,
+                                      text: 'Register',
+                                      onPressed: () {
+                                        if (formkey.currentState!.validate()) {
+                                          if (password == confirm_password &&
+                                              valdiate().valdiateemail(
+                                                  email: email) &&
+                                              valdiate().valdiatepassword(
+                                                  password: password)) {
+                                            context
+                                                .read<
+                                                    UserRegisterNewAccountCubit>()
+                                                .UserRegister(
+                                                    email: email!,
+                                                    password: password!,
+                                                    name: fullname!,
+                                                    confirmpassword:
+                                                        confirm_password!);
+                                          }
+                                        }
+                                      },
+                                    ),
                             ),
                           ],
                         ),

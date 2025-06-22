@@ -13,7 +13,7 @@ import 'package:parkify/Core/utlis/api_class.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
 import 'package:parkify/Feature/Home/data/Home%20Repos/Home_Repo_impl.dart';
-import 'package:parkify/Feature/Home/data/Model/location_model/location_model.dart';
+import 'package:parkify/Feature/Home/data/Model/LocationModel/LocatiomModel.dart';
 
 import 'package:parkify/Feature/Home/persentation/View_Model/BottomNavCubit.dart';
 import 'package:parkify/Feature/Home/persentation/View_Model/Cancel%20Reserve%20Cubit/cancel_reserve_cubit.dart';
@@ -84,7 +84,8 @@ class _HomePageCountupbodyState extends State<HomePageCountupbody> {
                             GetLocationByIdCubit(HomeRepoImpl(ApiClass(Dio())))
                               ..getlocationbyid(
                                   token: widget.userdata.token!,
-                                  id: state.reservation.reservableSpotId!),
+                                  id: state
+                                      .reservation.reservableSpot!.locationId!),
                         child: Currentloationcardbyid(
                           user: widget.userdata,
                         ),
@@ -126,7 +127,8 @@ class _HomePageCountupbodyState extends State<HomePageCountupbody> {
                             GetLocationByIdCubit(HomeRepoImpl(ApiClass(Dio())))
                               ..getlocationbyid(
                                   token: widget.userdata.token!,
-                                  id: state.reservation.reservableSpotId!),
+                                  id: state
+                                      .reservation.reservableSpot!.locationId!),
                         child: Row(
                           children: [
                             Expanded(

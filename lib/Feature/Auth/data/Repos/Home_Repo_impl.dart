@@ -167,7 +167,7 @@ class AuthHomeRepoImpl extends AuthHomeRepo {
       });
 
       Response response = await dio.post(
-        "https://72cf-156-205-61-135.ngrok-free.app/extract-text/",
+        "https://53b5-156-205-61-135.ngrok-free.app/extract-text/",
         data: formData,
         options: Options(
           headers: {

@@ -12,8 +12,7 @@ import 'package:parkify/Core/utlis/Icon_All_app.dart';
 import 'package:parkify/Core/utlis/assets.dart';
 
 import 'package:parkify/Feature/Auth/data/Models/user_model/user_model.dart';
-
-import 'package:parkify/Feature/Home/data/Model/location_model/location_model.dart';
+import 'package:parkify/Feature/Home/data/Model/LocationModel/LocatiomModel.dart';
 
 import 'package:parkify/Feature/Home/persentation/View_Model/Get_User_Plates/get_user_plates_cubit.dart';
 import 'package:parkify/Feature/Home/persentation/View_Model/MQTT_Mange_Cubit/mqtt_cubit.dart';
@@ -73,7 +72,7 @@ class _ReservationViewbodyState extends State<ReservationViewbody> {
   Widget build(BuildContext context) {
     var heaight = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-
+    print('the location id is : ${location.id}');
     return BlocConsumer<ReserveSpotCubit, ReserveSpotState>(
       listener: (context, state) async {
         if (state is ReserveSpotFailure) {

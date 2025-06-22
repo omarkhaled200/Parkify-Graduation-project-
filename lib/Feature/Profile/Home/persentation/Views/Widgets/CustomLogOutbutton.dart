@@ -18,10 +18,10 @@ class CustomLogOutbutton extends StatelessWidget {
 
   final double heaight;
   final String token;
-  Future<void> clearUserData() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear(); // يمسح كل البيانات المحفوظة
-  }
+  // Future<void> clearUserData() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.clear(); // يمسح كل البيانات المحفوظة
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class CustomLogOutbutton extends StatelessWidget {
           CustomScaffoldMessenger(context, "Error is : ${state.errmessage}",
               FontAwesomeIcons.circleXmark, Colors.red);
         } else if (state is UserLogoutAccountSuccess) {
-          await clearUserData();
+          // await clearUserData();
           CustomScaffoldMessenger(
               context, 'Success', Icons.check_circle_outline, Colors.green);
           context.read<BottomNavCubit>().setPage(0);
