@@ -1,16 +1,50 @@
-# parkify
+# 🚗 Parkify – Smart Parking System (User App)
 
-A new Flutter project.
+**Parkify** is a smart parking mobile application designed to simplify and automate the parking experience for users.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 👤 User Panel Features
 
-A few resources to get you started if this is your first Flutter project:
+- 🔍 Select Parking Locations: Users can view a list of available parking spots (public and premium).
+- 📍 Location View: Each parking location shows real-time availability and location information.
+- 🕒 Reservation System: Users can reserve a parking spot in advance by selecting:
+  - License plate
+  - Desired entry time (must be at least 1 hour before arrival)
+- ⏱ Countdown Timer: Displays time remaining before the reservation begins.
+- ⏳ Count-up Timer: Tracks time after the user has arrived and parked.
+- 🎁 Gifts & Discounts: Users can view available discounts and activate/deactivate them as needed.
+- 💳 Payment Integration: Users can add balance and view transaction history.
+- 🚗 Plate Management: Add, view, and manage multiple license plates.
+- 📜 History Page: Shows reservation records for both public and reservable parking spots.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📱 Built With
+
+- Flutter & Dart
+- MVVM Architecture
+- BLoC & Cubit State Management
+- REST API Integration
+
+---
+
+## 📸 UI Preview
+
+![image](https://github.com/user-attachments/assets/29c66aff-c6c0-470e-87c3-37ed944903fc)
+
+---
+link videos
+(https://drive.google.com/drive/folders/11eh6QYlDj93tCQoBidV0Z55gNJsBqdSG)
+---
+## 🙋‍♂️ Developed By
+
+Omar Khaled  
+Flutter Developer  
+[LinkedIn Profile](www.linkedin.com/in/omar-khaled-mahmoud-ali) *(replace with your actual link)*
+
+---
+
+## 🏷️ Tags
+
+`#Flutter` `#MVVM` `#SmartParking` `#MobileApp` `#BLoC` `#RESTAPI` `#GraduationProject`
